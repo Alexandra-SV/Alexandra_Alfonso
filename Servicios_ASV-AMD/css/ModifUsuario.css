@@ -1,0 +1,31 @@
+/*Distribucion de la página*/
+body{
+max-height: 100vh;
+max-width: 100vh;
+    & header{
+        & a{ align-self:flex-start}
+        & h1{text-align: center;}
+    }
+    & main{
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 20px;
+        flex-wrap: wrap-reverse;
+        & :first-child{
+            flex-grow: 1;
+            justify-self: center;
+            align-self: start;
+        }
+        & :last-child{
+            justify-self: center;
+            align-self:center;
+            & label{margin: 2px;padding: 2px;}
+            & img{margin: 2px;width: 200px; height: 200px; border-radius: 3px;}
+            & input{margin: 2px;padding: 2px;} 
+        }
+    }
+
+}
+
+
+/*Estilo de la página*/
