@@ -15,31 +15,26 @@ function pintaCheck(array $valores, string $campo){
     }
 }
 function pintaSelect(array $valores,string $name){
-    echo "<label for=\"$name\">$name";
-    echo "<select name=\"$name\"  multiple=\"multiple\" id=\"$name\">";
+    echo "<select name=\"".$name."[]\"id=\"$name\" multiple>";
     for ($i=0; $i < count($valores); $i++) {
-        echo "<option value=\"$valores[$i]\" >". $valores[$i] ."</option";
+        echo "<option value=\"$valores[$i]\" >". $valores[$i] ."</option>";
     }
     echo "</select>";
-    echo "</label>";
 }
 function pintaServicios($usuario){
-    foreach ($_SESSION['Usuario'] as $infoUser) {
-         if (in_array($usuario,$infoUser.['nombre'])) {
-            if ($infoUser.['servicios']){
-                foreach ($infoUser['servicios']  as $allServices) {
-                    echo "<section id=\"".$allServices['name']."\">";
-                    echo "<h2>".$allServices['name']."</h2><br>";
-                    echo "<p>Category: ".$allServices['category']."</p><br>";
-                    echo "<p>Type: ".$allServices['type']."</p><br>";
-                    echo "<p>Price : ".$allServices['price']." per hour</p>";
-                    echo "<img src=\"".$allServices['image']."\" alt=\"".$allServices['image']."\">";
-                    echo "</section>";
-                }
-            }else
-                echo"<span>Sin Servicios</span>";
-        }else
-            return false;
-    }
+    if (!empty($_SESSION['usuarios'][$usuario]['services'])){
+        foreach ($_SESSION['usuarios'][$usuario] as $infoUser) {
+            foreach ($infoUser['services'] as $service) {
+                echo "<section id=\"".$service['name']."\">";
+                echo "<h2>".$service['name']."</h2><br>";
+                echo "<p>Category: ".$service['category']."</p><br>";
+                echo "<p>Type: ".$service['type']."</p><br>";
+                echo "<p>Price : ".$service['price']." per hour</p>";
+                echo "<img src=\"".$service['image']."\" alt=\"".$allServices['image']."\">";
+                echo "</section>";
+            }
+        }
+    }else
+        echo"<span>Sin Servicios</span>";
 }
 ?>

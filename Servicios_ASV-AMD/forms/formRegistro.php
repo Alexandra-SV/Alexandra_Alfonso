@@ -1,6 +1,9 @@
 <?php
+    //Iniciar session
+    if(!isset($_SESSION)) session_start();
     //Librerias
-    include('../../libs/bGeneral.php');
+    include('../libs/bGeneral.php');
+    include('../libs/bComponentes.php');
     //Datos y array de errores
     $errores = [];
     $fullName = "";
@@ -10,8 +13,9 @@
     $languages = "";
     $description = "";
 
+    $languagesArray = ["Italian","Spanish","German","Chinese"];
     //Imagen
-    $dir = "../../img/imgPerfil/";
+    $dir = "../img/imgPerfil/";
     $max_file_size = "2000000";
     $extensionesValidas = array(
         "jpeg",
@@ -19,15 +23,12 @@
         "png",
         "gif",
     );
-    //Iniciar session
-    session_start();
     //Ver que existe el array de usuarios, si no se crea
     if(!isset($_SESSION['usuarios'])){
         $_SESSION['usuarios'] = array();
     }
-
     if(!isset($_REQUEST['bRegister'])){
-        include("../../templates/registro.php");
+        include("../templates/registro.php");
     }else{ //Clic a iniciar sesion
         //Sanitizar
         $fullName = recoge('fullName');
@@ -40,6 +41,7 @@
         cTexto($fullName,'fullName',$errores);
         cEmail($email,'email',$errores);
         cDate($dateOfBirth,'dateOfBirth',$errores);
+        cCheck($languages,'languages',$errores, $languagesArray);
         cTexto($description,'description',$errores);
         //Pasar a correcto
         if(empty($errores)){
@@ -54,9 +56,13 @@
                 "profilePicture"=>$profilePicture,
                 "languages"=>$languages,
                 "description"=>$description,
+                "services"=>[
+                ]
             );
             $_SESSION['usuarios'][$email] = $usuario;
-            //header('location:form_mainpage.php?&imagen=$imagen');
+            header("location:form_mainpage.php?user=$email");
+        }else{
+            include("../templates/registro.php");
         }
     }
 ?>
