@@ -1,0 +1,22 @@
+*{
+    font-family: sans-serif;
+}
+body{
+    display: grid;
+    min-height: 100vh;
+    background: radial-gradient(ellipse at right bottom, rgba(171, 60, 175, 1), transparent),
+    radial-gradient(ellipse at left top, rgba(229, 78, 126, 1), transparent);
+}
+h1{
+    text-align: center;
+    font-family: serif;
+    background: linear-gradient(180deg, rgba(136,136,136,0.4625) 0%, rgba(91,0,29,0.4875) 0.5%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 72px;
+    font-weight: 400;
+}
+form{
+    display: flex;
+    flex-direction: column;
+}
