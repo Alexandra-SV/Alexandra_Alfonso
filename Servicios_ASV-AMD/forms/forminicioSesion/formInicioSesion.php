@@ -5,16 +5,22 @@
     $errores = [];
     $email = "";
     $password = "";
-    if(!isset($_REQUEST['bSignIn'])){
+    //Iniciar session
+    session_start();
+    if(!isset($_REQUEST['bEnter'])){
         include("../../templates/inicioSesion.php");
     }else{
         //Sanitizar
+        $email = recoge('email');
+        $password = recoge('password');
+        //Validar con la session
+        if(in_array($email,$_SESSION['usuarios'])){
 
-        //Validar
+        }
 
         //Pasar a correcto
         if(empty($errores)){
-            header('location:formLoggedIn.php');
+            header('location:formPrincipal.php');
         }
     }
 ?>
