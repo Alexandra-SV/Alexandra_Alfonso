@@ -150,7 +150,22 @@ function cTexto(string $text, string $campo, array &$errores, int $max = 30, int
     $errores[$campo] = "Error en el campo $campo";
     return false;
 }
+function cEmail(String $email, string $campo, array &$errores): bool{
+    if(preg_match("/^[a-z][\w._]{2,}@([a-z]+[a-z\.]+\.[a-z]{2,})$/i",$email))
+        return true;
 
+    $errores[$campo] = "Error en el campo $campo";
+    return false;
+}
+function cDate(String $fecha, string $campo, array &$errores): string{
+    //separar en array para validar
+    $fechaArray = explode("-",$fecha);
+    if(checkdate($fechaArray[1],$fechaArray[0],$fechaArray[2]))//validar con checkdate()
+        return true;
+
+    $errores[$campo] = "Error en el campo $campo";
+    return false;
+}
 /**
  * Funcion cNum
  *

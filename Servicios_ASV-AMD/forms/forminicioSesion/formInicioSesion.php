@@ -9,18 +9,17 @@
     session_start();
     if(!isset($_REQUEST['bEnter'])){
         include("../../templates/inicioSesion.php");
-    }else{
+    }else{ //Clic a iniciar sesion
         //Sanitizar
         $email = recoge('email');
         $password = recoge('password');
         //Validar con la session
-        if(in_array($email,$_SESSION['usuarios'])){
-
+        if(isset($_SESSION['usuarios'][$email])){
+            echo "olee";
         }
-
         //Pasar a correcto
         if(empty($errores)){
-            header('location:formPrincipal.php');
+            //header('location:form_mainpage.php');
         }
     }
 ?>
