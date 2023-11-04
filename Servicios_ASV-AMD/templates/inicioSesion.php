@@ -1,8 +1,12 @@
 <?php
     //Encabezado
     $titulo = "Welcome to Services";
-    $css = "../../css/inicioSesion.css";
+    $css = "../css/inicioSesion.css";
     include("pl_encabezado.php");
+    //Errores
+    foreach ($errores as $key => $value) {
+        echo "Error en el campo $key <br>";
+    }
 ?>
 <style>
     .div-popup--mostrar{
@@ -34,8 +38,7 @@
             <label for="bSignIn"></label>
             <input type="submit" id="bSignIn" value="Sign in" name="bSignIn">
 
-            <label for="bSignUp"></label>
-            <input type="button" id="bSignUp" value="Sign Up" name="bSignUp">
+            <a href="formRegistro.php">Sign Up</a>
             </div>
         <div class="div-popup div-popup--ocultar">
             <div id="div-email">
@@ -45,10 +48,10 @@
 
             <div id="div-password">
                 <label for="password"></label>
-                Password <input type="text" id="password" name=""><br>
+                Password <input type="password" id="password" name="password"><br>
             </div>
             <label for="bEnter"></label>
-            <input type="button" id="bEnter" value="Enter" name="bEnter">
+            <input type="submit" id="bEnter" value="Enter" name="bEnter">
         </div>
     </form>
 <?php
