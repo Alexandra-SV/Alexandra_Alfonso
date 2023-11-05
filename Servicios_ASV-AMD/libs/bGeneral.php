@@ -154,7 +154,27 @@ function cTexto(string $text, string $campo, array &$errores, int $max = 30, int
     $errores[$campo] = "Error en el campo $campo";
     return false;
 }
+function cEmail(String $email, string $campo, array &$errores): bool{
+    if(preg_match("/^[a-z][\w._]{2,}@([a-z]+[a-z\.]+\.[a-z]{2,})$/i",$email))
+        return true;
 
+    $errores[$campo] = "Error en el campo $campo";
+    return false;
+}
+//da las fechas en formato yyyy-mm-dd
+function cDate(String $fecha, string $campo, array &$errores): string{
+    if($fecha != ""){
+        //separar en array para validar
+        $fechaArray = explode("-",$fecha);
+        if(checkdate($fechaArray[1],$fechaArray[2],$fechaArray[0]))//validar con checkdate()
+            return true;
+        $errores[$campo] = "Error en el campo $campo";
+        return false;
+    }else{
+        $errores[$campo] = "Error en el campo $campo";
+        return false;
+    }
+}
 /**
  * Funcion cNum
  *
@@ -233,6 +253,14 @@ function cCheck(array $text, string $campo, array &$errores, array $valores, boo
         }
     }
     return true;
+}
+function cUser(string $email,string $pass, string $campo, array &$errores){
+    if(isset($_SESSION['usuarios'][$email]) && $_SESSION['usuarios'][$email]['password'] == $pass){
+        return true;
+    }else{
+        $errores[$campo] = "Error en el campo $campo";
+        return false;
+    }
 }
 
 /**
