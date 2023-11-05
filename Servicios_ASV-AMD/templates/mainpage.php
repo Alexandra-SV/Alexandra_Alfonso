@@ -19,9 +19,9 @@
 <span>Welcome, <?=$_SESSION['usuarios'][$user]['fullName']?></span>
 <?php
     if($_SESSION['usuarios'][$user]['profilePicture'] != 1){
-        echo "<a href=\"./form_usuario.php\"><img height=\"100\"width=\"100\"src=\"".$_SESSION['usuarios'][$user]['profilePicture']."\" alt=\"profPicture\"></a>";
+        echo "<a href=\"../forms/form_usuario.php\"><img height=\"100\"width=\"100\"src=\"".$_SESSION['usuarios'][$user]['profilePicture']."\" alt=\"profPicture\"></a>";
     }else{
-        echo "<a href=\"./form_usuario.php\"><img height=\"100\"width=\"100\"src=\"../img/imgPerfil/default_picture_donotdelete.jpg\" alt=\"profPicture\"></a>";
+        echo "<a href=\"../forms/form_usuario.php\"><img height=\"100\"width=\"100\"src=\"../img/imgPerfil/default_picture_donotdelete.jpg\" alt=\"profPicture\"></a>";
     }
 ?>
 </header>

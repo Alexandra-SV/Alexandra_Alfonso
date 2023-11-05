@@ -5,7 +5,7 @@
     include("pl_encabezado.php");
     //Errores
     foreach ($errores as $key) {
-        echo "Error en el campo $key <br>";
+        echo " $key <br>";//se repite error en el campo por eso lo he borrado
     }
 ?>
     <h1>Services</h1>
