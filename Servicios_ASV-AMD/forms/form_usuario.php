@@ -15,8 +15,8 @@ $description;
 $newImage;
 $dir="../img/imgPerfil/";
 //recojo usario
-/*$user = recoge('user');
-if($user == ""){
+$user = recoge('user');
+/*if($user == ""){
   header('location:../forms/formInicioSesion.php');
 }*/
 

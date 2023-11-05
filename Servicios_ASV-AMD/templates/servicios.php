@@ -1,5 +1,8 @@
-<?php $titulo="Add Service ";
-$css="Servicios_ASV-AMD\css\ModifUsuario.css";
+<?php 
+if(!isset($_SESSION)) session_start();
+$titulo="Add Service ";
+$css="../css/servicios.css";
+
 include("../templates/pl_encabezado.php");
 include("../libs/bComponentes.php");
 ?>
@@ -10,19 +13,20 @@ include("../libs/bComponentes.php");
             <label for="titulo">Title*</label>
             <input type="text" name="titulo" id="titulo" />
         </div>
-        <div><?= pintaSelect($category,"category");?></div><!--Para de ejecutar el codigo aqui Undefined variable $category -->
-        <div><?= pintaRadio($type, "tipo");?></div>
+        <div>Category<?= pintaSelect($category,"category");?></div><!--Para de ejecutar el codigo aqui Undefined variable $category -->
+        <div id="radio">Type<?= pintaRadio($type, "tipo");?></div>
         <div>
             <label for="ubicacion">Location*</label>
             <input type="text" name="ubicacion" id="ubicacion" >
         </div>
-        <div><?= pintaSelect($Availability,"Availability");?></div>
+        <div>Availability<?= pintaSelect($Availability,"Availability");?></div>
         <div>
             <label for="precioH">Price per hour</label>
             <input type="text" name="precioH" id="precioH">
         </div>
-        <div>
-            <label for="servicePicture">Service Picture</label>
+        <div id="addfile">
+            <span>Service picture</span>
+            <label for="servicePicture">Choose file</label>
             <input type="file" id="servicePicture" name="servicePicture">
         </div>
         <div>

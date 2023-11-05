@@ -28,9 +28,9 @@ $dir="../../imgs/imgPerfil";
 $descripcion;
 
 $user = recoge('user');
-if($user == ""){
+/*if($user == ""){
   header('location:../forms/formInicioSesion.php');
-}
+}*/
 
     if (!isset($_REQUEST['bSave'])) {
         include ('../templates/servicios.php');
@@ -47,7 +47,7 @@ if($user == ""){
         
     //Validamos
     cTexto( $titulo,"titulo",$errores,50,8);
-    cCheck( $categoria,"categoria",$errores,$category);
+    cCheck( $categoria,"categoria",$errores,$category); //comprobar si se han elegido mas de una opcion para que no de error
     radio( $tipo,"tipo",$errores,$type);
     cTexto( $ubicacion,"ubicacion",$errores,50,10);
     cCheck( $disponibilidad,"disponibilidad",$errores,$Availability);

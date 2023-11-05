@@ -2,8 +2,7 @@
     font-family: sans-serif;
 }
 body{
-height: 100vh;
-width: 100vh;
+min-height: 100vh;
 background: radial-gradient(ellipse at right bottom, #E55AA9, transparent),
 radial-gradient(ellipse at left top,#ee54ab, transparent);
 
@@ -12,13 +11,22 @@ radial-gradient(ellipse at left top,#ee54ab, transparent);
             background: linear-gradient(#ff26a1, #b61671 );
             -webkit-background-clip: text;
             color: transparent;
-            margin-left: 260px;}
-        & a{ text-decoration: none;
-            background: linear-gradient(to right, rgba(128, 14, 71, 0.438) 5%,rgba(180, 13, 116, 0.377)  );
-            padding: 3px 8px;
-            border-radius: 10px;
-            color: #fff;
-            margin-left: 25%;}
+            margin-left: 260px;
+            font-size: 72px;
+            font-weight: 400;
+        }
+        & a{background: linear-gradient(to right, rgba(229, 78, 126, 1)  5%,  rgba(252, 174, 226, 0.438));
+            border: none;
+            border-radius: 30px;
+            color: white;
+            padding: 10px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
     }
     & main{
         display: flex;
@@ -27,8 +35,8 @@ radial-gradient(ellipse at left top,#ee54ab, transparent);
         gap: 60px;
         & #form-usuario{
             justify-content: center;
-            background-color:#ee54abc4 ;
-            border-radius: 10px;
+            background: linear-gradient(to right, rgba(229, 78, 126, 1)  5%,  rgba(252, 174, 226, 0.438));
+            border-radius: 30px;
             & div{
                 padding: 3px;
                 color: #fff;
@@ -63,7 +71,7 @@ radial-gradient(ellipse at left top,#ee54ab, transparent);
                     border-radius: 5px;
                 }
                 
-                & #date{
+                & #Languages{
                     height: 20px;
                     width: 138px;
                     border: none;
@@ -89,8 +97,8 @@ radial-gradient(ellipse at left top,#ee54ab, transparent);
             }
         }
         & #form-image{
-            background-color:#ee54abc4 ;
-            border-radius: 20px;
+            background: linear-gradient(to right, rgba(229, 78, 126, 1)  5%,  rgba(252, 174, 226, 0.438));
+            border-radius: 30px;
             height: 300px;
             margin-top: 50px;
             & span{color: #fff;font-size: 1.7em;padding: 10px;}
@@ -100,7 +108,8 @@ radial-gradient(ellipse at left top,#ee54ab, transparent);
                 padding: 3px 8px;
                 border-radius: 10px;
                 border: none;
-                margin-top: 15px;                margin-left: 110px;
+                margin-top: 15px;                
+                margin-left: 110px;
                 width: 129px;
                 color: #fff; 
             }

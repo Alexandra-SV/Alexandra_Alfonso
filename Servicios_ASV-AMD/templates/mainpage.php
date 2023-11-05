@@ -13,7 +13,7 @@
     }
 ?>
 <form action="">
-  <input type="submit" name="bLogOut" id="bLogOut" value="Log Out">
+  <input type="submit" name="bLogOut" id="bLogOut" value="&#60; Log Out">
 </form>
 <header>
 <h1>Services</h1>
@@ -22,16 +22,16 @@
   <span>Welcome, <?=$_SESSION['usuarios'][$user]['fullName']?></span>
   <?php
       if($_SESSION['usuarios'][$user]['profilePicture'] != 1){
-          echo "<a href=\"./form_usuario.php\"><img height=\"50\"width=\"50\"src=\"".$_SESSION['usuarios'][$user]['profilePicture']."\" alt=\"profPicture\"></a>";
+          echo "<a href=\"../forms/form_usuario.php\"><img height=\"50\"width=\"50\"src=\"".$_SESSION['usuarios'][$user]['profilePicture']."\" alt=\"profPicture\"></a>";
       }else{
-          echo "<a href=\"./form_usuario.php\"><img height=\"50\"width=\"50\"src=\"../img/imgPerfil/default_picture_donotdelete.jpg\" alt=\"profPicture\"></a>";
+          echo "<a href=\"../forms/form_usuario.php\"><img height=\"50\"width=\"50\"src=\"../img/imgPerfil/default_picture_donotdelete.jpg\" alt=\"profPicture\"></a>";
       }
   ?>
 </nav>
 <main>
      <?=pintaServicios($user);?>
 </main>
-<a href="form_servicios.php" id="bAddService">+ add more services</a>
+<a href="../forms/form_servicios.php" id="bAddService">+ add more services</a>
 <?php
 include("pl_pie.html");
 ?>
