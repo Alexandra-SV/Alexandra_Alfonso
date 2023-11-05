@@ -15,13 +15,11 @@ function pintaCheck(array $valores, string $campo){
     }
 }
 function pintaSelect(array $valores,string $name){
-    echo "<label for=\"$name\">$name";
-    echo "<select name=\"$name\"  multiple=\"multiple\" id=\"$name\">";
+    echo "<select name=\"".$name."[]\"id=\"$name\" multiple>";
     for ($i=0; $i < count($valores); $i++) {
-        echo "<option value=\"$valores[$i]\" >". $valores[$i] ."</option";
+        echo "<option value=\"$valores[$i]\" >". $valores[$i] ."</option>";
     }
     echo "</select>";
-    echo "</label>";
 }
 function pintaServicios($usuario){
     foreach ($_SESSION['Usuario'] as $infoUser) {
