@@ -6,7 +6,7 @@
  */
  function pintaRadio(array $valores, string $campo){
     for ($i=0; $i < count($valores); $i++) {
-        echo "<input type=\"radio\" name=\"$campo\" VALUE=\"$valores[$i]\"> $valores[$i] <br>";
+        echo "<input type=\"radio\" name=\"$campo\" VALUE=\"$valores[$i]\"> $valores[$i] ";
     }
 }
 function pintaCheck(array $valores, string $campo){

@@ -1,0 +1,119 @@
+*{
+    font-family: sans-serif;
+}
+body{
+min-height: 100vh;
+background: radial-gradient(ellipse at right bottom, #6f5ae5, transparent),
+radial-gradient(ellipse at left top,#a954ee, transparent);
+
+    & header{
+        & h1{text-align:center; font-family:sans;margin-top: -20px;
+            background: linear-gradient(#daa3ff, #6e16b6 );
+            -webkit-background-clip: text;
+            color: transparent;
+            font-size: 72px;
+            font-weight: 400;
+        }
+        & a{background: linear-gradient(to right, rgb(169, 78, 229)  5%,  rgba(201, 174, 252, 0.438));
+            border: none;
+            border-radius: 30px;
+            color: white;
+            padding: 10px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    }
+    & main{
+        display: flex;
+
+        & form{
+            margin-left: auto;
+            margin-right: auto;
+            background: linear-gradient(to right, rgb(143, 78, 229)  5%,  rgba(188, 174, 252, 0.438));
+            border-radius: 30px;
+            flex-basis: 350px;
+            & div{
+                padding: 3px;
+                color: #fff;
+                margin: 20px;
+                
+                & #titulo{
+                    height: 20px;
+                    width: 137px;
+                    border: none;
+                    margin-left: 102px;
+                    border-radius: 5px;
+                }
+                & #category{
+                    height: 30px;
+                    width: 134px;
+                    border: none;
+                    margin-left: 82px;
+                    border-radius: 5px;
+                }
+
+                & #ubicacion{
+                    height: 20px;
+                    width: 134px;
+                    border: none;
+                    margin-left: 72px;
+                    border-radius: 5px;
+                }
+                & #Availability{
+                    height: 30px;
+                    width: 134px;
+                    border: none;
+                    margin-left:70px;
+                    border-radius: 5px;
+                }
+                
+                & #precioH{
+                    height: 20px;
+                    width: 130px;
+                    border: none;
+                    margin-left: 40px;
+                    border-radius: 5px;
+                }
+                & #servicedescription{
+                    height: 70px;
+                    width: 270px;
+                    border: none;
+                    margin-top: 10px;
+                    border-radius: 5px;
+                    margin-left: 10px;
+                }
+            }
+            & #radio{
+                & input{margin-left: 40px;}
+            }
+            & #addfile{
+                & label{ 
+                background: linear-gradient(to right, #9a37d3e1  5%,  rgba(204, 174, 252, 0.438));
+                padding: 3px 8px;
+                border-radius: 10px;
+                border: none;              
+                margin-left: 75px;
+                width: 129px;
+                color: #fff; 
+            }
+                & input{
+                display: none;
+            }
+            }
+
+            & #bSave{text-decoration: none;
+                background: linear-gradient(to right, #9a37d3e1  5%,  rgba(204, 174, 252, 0.438));
+                padding: 3px 10px;
+                border-radius: 10px;
+                color: #fff;
+                border: none;
+                margin-left: 240px;
+                margin-bottom: 20px;
+            }
+        }     
+    }
+}

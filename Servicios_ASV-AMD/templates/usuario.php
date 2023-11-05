@@ -1,12 +1,14 @@
-<?php $titulo="ModifyUser";
-$css="../css/ModifUsuario.css";
+<?php 
+if(!isset($_SESSION)) session_start();
+$titulo="ModifyUser";
+$css="../css/modifUsuario.css";
 include("../templates/pl_encabezado.php");
 include("../libs/bComponentes.php");
 
 $user = recoge('user');
-if($user == ""){
-    header('location:../forms/formInicioSesion.php');//devuelve a inicio cuando le das a la foto
-  }
+    if($user == ""){
+        header('location:../forms/formInicioSesion.php');//devuelve a inicio cuando le das a la foto
+    }
 
 ?>
 
@@ -29,7 +31,7 @@ if($user == ""){
             <label for="date">Date of Birth*</label>
             <input type="text" name="date" id="date" value="<?=$_SESSION['usuarios'][$user]['dateOfBirth']?>" readonly>
         </div>
-        <div><?=pintaSelect($languages,"Languages");?></div>
+        <div><? pintaSelect($languages,"Languages");?></div>
         <div>
             <label for="descripcionPersonal"> Personal  Personal description</label>
             <textarea name="descripcionPersonal" id="descripcionPersonal"><?=$_SESSION['usuarios'][$user]['description']?></textarea>
