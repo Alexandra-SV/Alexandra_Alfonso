@@ -1,15 +1,16 @@
-<?$titulo="ModifyUserForm";
+<?php $titulo="Add Service ";
 $css="Servicios_ASV-AMD\css\ModifUsuario.css";
-include("./pl_encabezado.php");
-include("../libs/bComponentes.php");?>
-    <header><a href="..\forms\formpaginaPrincipal\form_mainpage.php"> &#60; To main page</a><h1>Services</h1></header>
+include("../templates/pl_encabezado.php");
+include("../libs/bComponentes.php");
+?>
+    <header><a href="../forms/form_mainpage.php"> &#60; To main page</a><h1>Services-services</h1></header><!--Redirige a inicio -->
     <main>
         <form action="" method="POST" enctype="multipart/form-data">   
         <div>
             <label for="titulo">Title*</label>
             <input type="text" name="titulo" id="titulo" />
         </div>
-        <div><?= pintaSelect($category,"category");?></div>
+        <div><?= pintaSelect($category,"category");?></div><!--Para de ejecutar el codigo aqui Undefined variable $category -->
         <div><?= pintaRadio($type, "tipo");?></div>
         <div>
             <label for="ubicacion">Location*</label>
@@ -25,10 +26,10 @@ include("../libs/bComponentes.php");?>
             <input type="file" id="servicePicture" name="servicePicture">
         </div>
         <div>
-            <label for="descripcionPersonal"> Personal</label>
-            <input type="textbox" name="descripcionPersonal" id="descripcionPersonal" >
+        <label for=" servicedescription"> Service description</label>
+            <textarea name="servicedescription" id="servicedescription"></textarea>
         </div>
             <input type="submit" name="bSave" id="bSave" value="S A V E">
         </form>
     </main>
-<?include("./templates/pl_tie.html");?>
+<?include("./pl_tie.html");?>

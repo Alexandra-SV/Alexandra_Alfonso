@@ -1,45 +1,50 @@
 <?php 
-session_start();
-include("../../templates/pl_encabezado.php");
-include("../../libs/bGeneral.php");
+if(!isset($_SESSION)) session_start();
+include("../templates/pl_encabezado.php");
+include("../libs/bGeneral.php");
 
-$Lenguages=["Español","Ingles","Aleman","Frances","Chino"];
+$languagesArray = ["Italian","Spanish","German","Chinese"];
 $extensionesValidas=["jpeg","jpg","png","gif"];
 $errores=[];
 $error=false;
 
-//variables que vamos a utilizar
-$pass;
-$idiomas;
-$descripcion;
-$nuevaImagen;
-$directorio="../../imgs/imgPerfil";
+//variables a utilizar
+$password;
+$languages;
+$description;
+$newImage;
+$dir="../img/imgPerfil/";
+//recojo usario
+/*$user = recoge('user');
+if($user == ""){
+  header('location:../forms/formInicioSesion.php');
+}*/
 
     if (!isset($_REQUEST['bSave'])) {
-        include ('../../templates/servicios.php');
+        include ('../templates/usuario.php');//para en este punto 
     }
-    else {
-    //sanitizamos    
-        $pass=recoge($_POST['Password']);
-        $idiomas=recoge($_POST['Lenguages']);
-        $descripcion=recoge($_POST['descripcionPersonal']);
-
+    else {   
+    //Sanitizamos
+        $password=recoge('Password');
+        $languages=recoge('Lenguages');
+        $description=recoge('descripcionPersonal',true);
         
     //Validamos
     cTexto( $pass,"Password",$errores,25,10);
-    cCheck( $idiomas,"Lenguages",$errores,$Lenguages);
-    cTexto( $descripcion,"descripcionPersonal",$errores,100);
-    $nuevaImagen=cFile($_POST['imagen'],$errores,$extensionesValidas,$directorio,20000,false);
+    cCheck( $languages,"Lenguages",$errores,$languagesArray);
+    cTexto( $description,"descripcionPersonal",$errores,100);
+    $newImage=cFile('imagen',$errores,$extensionesValidas,$dir,2000000,false);
    
-    //Comprobamos que no haya errores para crear el servicio
-    if (!$errores) {
-        $_SESSION['usuarios']['email']['lenguages']=$idiomas;
-        $_SESSION['usuarios']['email']['password']=$pass;
-        $_SESSION['usuarios']['email']['descripcion']=$descripcion;
-        $_SESSION['usuarios']['email']['image']=$nuevaImagen;
+    //Comprobamos que no haya errores para cactualizar los datos
+    if (empty($errores)){
+        $_SESSION['usuarios'][$user]['languages']= $languages;
+        $_SESSION['usuarios'][$user]['password']= $password;
+        $_SESSION['usuarios'][$user]['description']= $description;
+        $_SESSION['usuarios'][$user]['profilePicture']= $newImage;
+        header("location:form_mainpage.php?user=$user");
     }else
-        print_r($errores);
+        include("../templates/usuario.php");//va a la pag principal del usuario ?
     }
 ?>	  
 
-<?include("../../templates/pl_tie.html");?>
+<?include("../templates/pl_pie.html");?>

@@ -1,12 +1,18 @@
 <?php 
-session_start();
-include("../../templates/pl_encabezado.php");
-include("../../libs/bGeneral.php");
-$categoty=["Informática","Diseño Gráfico","Consultoría Empresarial","Salud y Bienestar","Reparación de Vehículos",
-"Enseñanza y Tutoría","Catering y Comida a Domicilio","Guía Turística","Carpintería y Ebanistería","Limpieza y Mantenimiento del Hogar"];
+if(!isset($_SESSION)) session_start();
+include("../templates/pl_encabezado.php");
+include("../libs/bGeneral.php");
+
+$category=["Informática","Diseño Gráfico","Consultoría Empresarial","Salud y Bienestar",
+"Reparación de Vehículos","Enseñanza y Tutoría","Catering y Comida a Domicilio","Guía Turística",
+"Carpintería y Ebanistería","Limpieza y Mantenimiento del Hogar"];
+
 $type=["Pago","intercambio"];
+
 $Availability=["mañanas","tardes","noches"];
+
 $extensionesValidas=["jpeg","jpg","png","gif"];
+
 $errores=[];
 $error=false;
 
@@ -18,33 +24,39 @@ $ubicacion;
 $disponibilidad;
 $precio;
 $imagen;
-$directorio="../../imgs/imgPerfil";
+$dir="../../imgs/imgPerfil";
 $descripcion;
-//pintaRadio(array $valores, string $campo);
+
+$user = recoge('user');
+if($user == ""){
+  header('location:../forms/formInicioSesion.php');
+}
+
     if (!isset($_REQUEST['bSave'])) {
-        include ('../../templates/servicios.php');
+        include ('../templates/servicios.php');
     }
     else {
     //sanitizamos    
-        $titulo=recoge($_POST['titulo']);
-        $categoria=recoge($_POST['category']);
-        $tipo=recoge($_POST['tipo']);
-        $ubicacion=recoge($_POST['ubicacion']);
-        $disponibilidad=recoge($_POST['Availability']);
+        $titulo=recoge('titulo',true);
+        $categoria=recoge('category');
+        $tipo=recoge('tipo');
+        $ubicacion=recoge('ubicacion',true);
+        $disponibilidad=recoge('Availability');
         $precio=recoge('precioH');
         $descripcion= recoge('descripcionPersonal',true); 
         
     //Validamos
     cTexto( $titulo,"titulo",$errores,50,8);
-    cCheck( $categoria,"categoria",$errores,$categoty);
+    cCheck( $categoria,"categoria",$errores,$category);
     radio( $tipo,"tipo",$errores,$type);
     cTexto( $ubicacion,"ubicacion",$errores,50,10);
     cCheck( $disponibilidad,"disponibilidad",$errores,$Availability);
     cNum( $precio,"precioH",$errores);
-    cTexto( $descripcion,"descripcionPersonal",$errores,100);
-    $imagen=cFile($_POST['servicePicture'],$errores,$extensionesValidas,$directorio,20000,false);
+    cTexto( $descripcion,"servicedescription",$errores,100);
+    $imagen=cFile('servicePicture',$errores,$extensionesValidas,$dir,20000,false);
+    
     //Comprobamos que no haya errores para crear el servicio
-    if (!$errores) {
+    if (empty($errores)) {
         $servicio = array(
             "titulo" => $titulo  ,
             "categoria" => $categoria  ,
@@ -53,22 +65,13 @@ $descripcion;
             "disponibilidad" => $disponibilidad  ,
             "precio" => $precio  ,
             "imagen" => $imagen  ,
-            "descripcion" => $descripcion ,
-            "services" => [] 
+            "descripcion" => $descripcion 
         ); 
-        $_SESSION['servicio'][$titulo]=$servicio;
+        $_SESSION['usuarios'][$user]["services"]=$servicio;
+        header("location:form_mainpage.php?user=$user");//va a la pag principal del usuario ?
     }else
-        print_r($errores);
+        include("../templates/servicios.php");
     }
 ?>	  
 
-<?include("../../templates/pl_tie.html");?>
-
-
-
-
-
-
-
-
-
+<?include("../templates/pl_pie.html");?>
