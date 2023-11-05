@@ -3,7 +3,7 @@
     if (!isset($_REQUEST['bAddService'])) {//Si se ha pulsado redirigimos al formulario deseado
         include("../templates/mainpage.php");
     }else{
-        include ('form_addService.php');//formulario de servicios
+        include ('../templates/servicios.php');//formulario de servicios
     }
     //Compruebo si se ha pulsado el botón de cerrar sesion
     if (isset($_REQUEST['bLogOut'])) {//Sino se ha pulsado volvemos al formulario
