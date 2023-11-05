@@ -1,0 +1,114 @@
+*{
+    font-family: sans-serif;
+}
+body{
+height: 100vh;
+width: 100vh;
+background: radial-gradient(ellipse at right bottom, #E55AA9, transparent),
+radial-gradient(ellipse at left top,#ee54ab, transparent);
+
+    & header{
+        & h1{text-align:center; font-family:sans;margin-top: -20px;
+            background: linear-gradient(#ff26a1, #b61671 );
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-left: 260px;}
+        & a{ text-decoration: none;
+            background: linear-gradient(to right, rgba(128, 14, 71, 0.438) 5%,rgba(180, 13, 116, 0.377)  );
+            padding: 3px 8px;
+            border-radius: 10px;
+            color: #fff;
+            margin-left: 25%;}}
+    }
+    & main{
+        display: flex;
+        flex-direction: row-reverse;
+        margin-top: 70px;
+        gap: 60px;
+        & #form-usuario{
+            justify-content: center;
+            background-color:#ee54abc4 ;
+            border-radius: 10px;
+            & div{
+                padding: 3px;
+                color: #fff;
+                margin: 20px;
+                
+                & #nombreCompleto{
+                    height: 20px;
+                    width: 134px;
+                    border: none;
+                    margin-left: 30px;
+                    border-radius: 5px;
+                }
+                & #email{
+                    height: 20px;
+                    width: 134px;
+                    border: none;
+                    margin-left: 63px;
+                    border-radius: 5px;
+                }
+                & #Password{
+                    height: 20px;
+                    width: 134px;
+                    border: none;
+                    margin-left: 33px;
+                    border-radius: 5px;
+                }
+                & #date{
+                    height: 20px;
+                    width: 134px;
+                    border: none;
+                    margin-left:14px;
+                    border-radius: 5px;
+                }
+                
+                & #ab{
+                    height: 20px;
+                    width: 138px;
+                    border: none;
+                    margin-left: 30px;
+                    border-radius: 5px;
+                }
+                & #descripcionPersonal{
+                    height: 70px;
+                    width: 250px;
+                    border: none;
+                    margin-top: 2;
+                    border-radius: 5px;
+                }
+            }
+            & #save{text-decoration: none;
+                background: linear-gradient(to right,  #d33790e1  5%,  rgba(252, 174, 226, 0.438));
+                padding: 3px 10px;
+                border-radius: 10px;
+                color: #fff;
+                border: none;
+                margin-left: 210px;
+                margin-bottom: 20px;
+            }
+        }
+        & #form-image{
+            background-color:#ee54abc4 ;
+            border-radius: 20px;
+            height: 300px;
+            margin-top: 50px;
+            & span{color: #fff;font-size: 1.7em;padding: 10px;}
+            & img{height: 200px;width: 200px;border-radius: 10px;margin: 6px 10px;}
+            & label{ 
+                background: linear-gradient(to right, #d33790e1  5%,  rgba(252, 174, 226, 0.438));
+                padding: 3px 8px;
+                border-radius: 10px;
+                border: none;
+                margin-top: 15px;                margin-left: 110px;
+                width: 129px;
+                color: #fff; 
+            }
+            & input{
+                display: none;
+            }
+        } 
+    }
+}
+
+

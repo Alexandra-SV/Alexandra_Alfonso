@@ -92,10 +92,14 @@ function sinEspacios($frase)
  * @return string
  */
 
-function recoge(string $var)
+function recoge(string $var,$espacios=false)
 {
     if (isset($_REQUEST[$var]) && (!is_array($_REQUEST[$var]))) {
-        $tmp = sinEspacios($_REQUEST[$var]);
+        if ($espacios) 
+            $tmp = $_REQUEST[$var];
+        else
+            $tmp = sinEspacios($_REQUEST[$var]);
+
         $tmp = strip_tags($tmp);
     } else
         $tmp = "";
