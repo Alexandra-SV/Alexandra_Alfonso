@@ -1,22 +1,80 @@
 *{
     font-family: sans-serif;
 }
+.error{
+    color: red;
+}
 body{
-    display: grid;
+    display: flex;
+    justify-content: space-between;
     min-height: 100vh;
     background: radial-gradient(ellipse at right bottom, rgba(171, 60, 175, 1), transparent),
     radial-gradient(ellipse at left top, rgba(229, 78, 126, 1), transparent);
 }
+body > div,form{
+    width: 36vh;
+}
 h1{
+    align-self: center;
     text-align: center;
     font-family: serif;
-    background: linear-gradient(180deg, rgba(136,136,136,0.4625) 0%, rgba(91,0,29,0.4875) 0.5%);
+    background: linear-gradient(to bottom, rgba(129, 46, 126, 0.463) 0%, rgba(91,0,29,0.4875) 100%);
     background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 72px;
     font-weight: 400;
 }
 form{
+    align-self:flex-start;
+}
+#bSignIn, a, #bEnter{
+    border: none;
+    border-radius: 30px;
+    color: white;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+#bSignIn{
+    background: linear-gradient(to right, rgba(229, 78, 126, 1)  5%,  rgba(252, 174, 226, 0.438));
+}
+a{
+    background: linear-gradient(to right, rgb(161, 78, 229)  5%,  rgba(252, 174, 226, 0.438));
+}
+#bEnter{
+    background: linear-gradient(to right, rgb(201, 54, 101)  5%,  rgba(252, 174, 226, 0.438));
+}
+.div-popup{
+    color: white;
     display: flex;
-    flex-direction: column;
+    flex-flow: column wrap;
+    background: linear-gradient(to right, rgba(229, 78, 126, 1)  5%,  rgba(252, 174, 226, 0.438));
+    border-radius: 30px;
+    padding: 20px 15px;
+    & #div-email, #div-password{
+        padding-left: 10px;
+    }
+    & #bEnter{
+        margin-bottom: -10px;
+    }
+    & #email{
+        margin-left:30px;
+    }
+    & input{
+        border-radius: 30px;
+        border: none;
+    }
+}
+.div-popup--mostrar{
+    display: block;
+}
+.div-popup--ocultar{
+    display: none;
+}
+footer{
+    display: none;
 }

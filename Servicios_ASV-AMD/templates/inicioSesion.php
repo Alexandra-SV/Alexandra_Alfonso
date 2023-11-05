@@ -5,17 +5,8 @@
     include("pl_encabezado.php");
     //Errores
     foreach ($errores as $key => $value) {
-        echo "Error en el campo $key <br>";
     }
 ?>
-<style>
-    .div-popup--mostrar{
-        display: block;
-    }
-    .div-popup--ocultar{
-        display: none;
-    }
-</style>
     <script>
     function mostrarOcultar(){
         event.preventDefault();
@@ -32,6 +23,7 @@
         document.getElementById("bSignIn").addEventListener("click", mostrarOcultar, false);
     }
     </script>
+    <div></div>
     <h1>Services</h1>
     <form action="" method="POST">
         <div id="div-signInUp">
@@ -43,16 +35,19 @@
         <div class="div-popup div-popup--ocultar">
             <div id="div-email">
                 <label for="email"></label>
-                Email <input type="text" id="email" name="email"><br>
+                Email <input type="text" id="email" name="email" size="14"><br>
             </div>
 
             <div id="div-password">
                 <label for="password"></label>
-                Password <input type="password" id="password" name="password"><br>
+                Password <input type="password" id="password" name="password" size="14"><br>
             </div>
             <label for="bEnter"></label>
             <input type="submit" id="bEnter" value="Enter" name="bEnter">
         </div>
+            <?php
+                echo (isset($errores['usuario'])) ? "<span class=\"error\">".$errores['usuario']."</span><br>" : "";
+            ?>
     </form>
 <?php
     //Pie
