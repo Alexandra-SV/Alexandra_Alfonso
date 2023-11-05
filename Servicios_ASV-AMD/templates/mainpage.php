@@ -1,10 +1,8 @@
 <?php
-    //$nombre=$_SESSION["usuarios"][$email]["fullName"];
-    //$imagen=$_SESSION["usuarios"][$email]["profilePicture"];
     if(!isset($_SESSION)) session_start();
     //Encabezado
     $titulo = "Welcome to Services";
-    $css = "../css/inicioSesion.css";
+    $css = "../css/mainpage.css";
     include("../templates/pl_encabezado.php");
     include("../libs/bGeneral.php");
     include("../libs/bComponentes.php");
@@ -14,24 +12,26 @@
       header('location:../forms/formInicioSesion.php');
     }
 ?>
+<form action="">
+  <input type="submit" name="bLogOut" id="bLogOut" value="Log Out">
+</form>
 <header>
 <h1>Services</h1>
-<span>Welcome, <?=$_SESSION['usuarios'][$user]['fullName']?></span>
-<?php
-    if($_SESSION['usuarios'][$user]['profilePicture'] != 1){
-        echo "<a href=\"./form_usuario.php\"><img height=\"100\"width=\"100\"src=\"".$_SESSION['usuarios'][$user]['profilePicture']."\" alt=\"profPicture\"></a>";
-    }else{
-        echo "<a href=\"./form_usuario.php\"><img height=\"100\"width=\"100\"src=\"../img/imgPerfil/default_picture_donotdelete.jpg\" alt=\"profPicture\"></a>";
-    }
-?>
 </header>
+<nav>
+  <span>Welcome, <?=$_SESSION['usuarios'][$user]['fullName']?></span>
+  <?php
+      if($_SESSION['usuarios'][$user]['profilePicture'] != 1){
+          echo "<a href=\"./form_usuario.php\"><img height=\"50\"width=\"50\"src=\"".$_SESSION['usuarios'][$user]['profilePicture']."\" alt=\"profPicture\"></a>";
+      }else{
+          echo "<a href=\"./form_usuario.php\"><img height=\"50\"width=\"50\"src=\"../img/imgPerfil/default_picture_donotdelete.jpg\" alt=\"profPicture\"></a>";
+      }
+  ?>
+</nav>
 <main>
-   <form action="" method="">
      <?=pintaServicios($user);?>
-     <input type="submit" name="bAddService" value="+ add more services">
-     <input type="submit" name="bLogOut" value="Log Out">
-   </form>
 </main>
-<?
-include("../templates/pl_pie.html");
+<a href="form_servicios.php" id="bAddService">+ add more services</a>
+<?php
+include("pl_pie.html");
 ?>

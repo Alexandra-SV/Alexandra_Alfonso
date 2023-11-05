@@ -95,7 +95,7 @@ function sinEspacios($frase)
 function recoge(string $var,$espacios=false)
 {
     if (isset($_REQUEST[$var]) && (!is_array($_REQUEST[$var]))) {
-        if ($espacios) 
+        if ($espacios)
             $tmp = $_REQUEST[$var];
         else
             $tmp = sinEspacios($_REQUEST[$var]);
@@ -144,12 +144,16 @@ function recogeArray(string $var): array
  * @return bool
  */
 
-function cTexto(string $text, string $campo, array &$errores, int $max = 30, int $min = 1, bool $espacios = TRUE, bool $case = TRUE): bool
+function cTexto(string $text, string $campo, array &$errores, int $max = 30, int $min = 1, bool $espacios = TRUE, bool $case = TRUE, bool $required=true): bool
 {
-    $case = ($case === TRUE) ? "i" : "";
-    $espacios = ($espacios === TRUE) ? " " : "";
-    if ((preg_match("/^[a-zñ$espacios]{" . $min . "," . $max . "}$/u$case", sinTildes($text)))) {
+    if(!$required && $text == ""){
         return true;
+    }else{
+        $case = ($case === TRUE) ? "i" : "";
+        $espacios = ($espacios === TRUE) ? " " : "";
+        if ((preg_match("/^[a-zñ$espacios]{" . $min . "," . $max . "}$/u$case", sinTildes($text)))) {
+            return true;
+        }
     }
     $errores[$campo] = "Error en el campo $campo";
     return false;
@@ -260,6 +264,14 @@ function cUser(string $email,string $pass, string $campo, array &$errores){
     }else{
         $errores[$campo] = "Error en el campo $campo";
         return false;
+    }
+}
+function cPassword(string $pass, string $campo, array &$errores, bool $required=true){
+    if($required && $pass == ""){
+        $errores[$campo] = "Error en el campo $campo";
+        return false;
+    }else{
+        return true;
     }
 }
 

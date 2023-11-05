@@ -40,9 +40,10 @@
         //Validar
         cTexto($fullName,'fullName',$errores);
         cEmail($email,'email',$errores);
+        cPassword($password,'password',$errores,true);
         cDate($dateOfBirth,'dateOfBirth',$errores);
-        cCheck($languages,'languages',$errores, $languagesArray);
-        cTexto($description,'description',$errores);
+        cCheck($languages,'languages',$errores, $languagesArray, false);
+        cTexto($description,'description',$errores, 30, 1, TRUE, TRUE, false);
         //Pasar a correcto
         if(empty($errores)){
             //Imagen
