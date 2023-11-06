@@ -1,7 +1,7 @@
 <?php 
 if(!isset($_SESSION)) session_start();
 $titulo="ModifyUser";
-$css="../css/modifUsuario.css";
+$css="../css/ModifUsuario.css";
 include("../templates/pl_encabezado.php");
 include("../libs/bComponentes.php");
 
@@ -25,16 +25,22 @@ $user = recoge('user');
         </div>
         <div> 
             <label for="Password">Password*</label>
-            <input type="text" name="Password" id="Password">
+            <input type="text" name="password" id="Password">
+            <?php
+                echo (isset($errores['password'])) ? "<span class=\"error\">".$errores['password']."</span><br>" : "";
+            ?>
         </div>
         <div>
             <label for="date">Date of Birth*</label>
             <input type="text" name="date" id="date" value="<?=$_SESSION['usuarios'][$user]['dateOfBirth']?>" readonly>
         </div>
-        <div><? pintaSelect($languages,"Languages");?></div>
+        <div><?=pintaSelect($languages,"languages");?></div>
         <div>
             <label for="descripcionPersonal"> Personal  Personal description</label>
             <textarea name="descripcionPersonal" id="descripcionPersonal"><?=$_SESSION['usuarios'][$user]['description']?></textarea>
+            <?php
+                echo (isset($errores['descripcionPersonal'])) ? "<span class=\"error\">".$errores['imagdescripcionPersonalen']."</span><br>" : "";
+            ?>
         </div>
             <input type="submit" name="bSave" id="save" value="S A V E">
         </form>
@@ -45,6 +51,9 @@ $user = recoge('user');
             <br>
             <label for="boton">Select a file</label>
             <input type="file" name="imagen" value="imagen-prfil" id="boton">
+            <?php
+                echo (isset($errores['imagen'])) ? "<span class=\"error\">".$errores['imagen']."</span><br>" : "";
+            ?>
         </form>
     </main>
     
