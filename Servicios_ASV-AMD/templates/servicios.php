@@ -1,4 +1,4 @@
-<?php 
+<?php
 if(!isset($_SESSION)) session_start();
 $titulo="Add Service ";
 $css="../css/servicios.css";
@@ -6,9 +6,9 @@ $css="../css/servicios.css";
 include("../templates/pl_encabezado.php");
 include("../libs/bComponentes.php");
 ?>
-    <header><a href="../forms/form_mainpage.php"> &#60; To main page</a><h1>Services-services</h1></header><!--Redirige a inicio -->
+    <header><a href="../forms/form_mainpage.php?user=<?=$user?>"> &#60; To main page</a><h1>Services-services</h1></header><!--Redirige a inicio -->
     <main>
-        <form action="" method="POST" enctype="multipart/form-data">   
+        <form action="" method="POST" enctype="multipart/form-data">
         <div>
             <label for="titulo">Title*</label>
             <input type="text" name="titulo" id="titulo" />
@@ -19,31 +19,31 @@ include("../libs/bComponentes.php");
         <div>Category<?= pintaSelect($category,"category");?>
             <?php
                 echo (isset($errores['category'])) ? "<span class=\"error\">".$errores['category']."</span><br>" : "";
-            ?>   
+            ?>
         </div>
         <div id="radio">Type<?= pintaRadio($type, "tipo");?>
             <?php
                 echo (isset($errores['tipo'])) ? "<span class=\"error\">".$errores['tipo']."</span><br>" : "";
-            ?> 
+            ?>
         </div>
         <div>
             <label for="ubicacion">Location*</label>
             <input type="text" name="ubicacion" id="ubicacion" >
             <?php
                 echo (isset($errores['ubicacion'])) ? "<span class=\"error\">".$errores['ubicacion']."</span><br>" : "";
-            ?> 
+            ?>
         </div>
         <div>Availability<?= pintaSelect($Availability,"Availability");?>
             <?php
                 echo (isset($errores['Availability'])) ? "<span class=\"error\">".$errores['Availability']."</span><br>" : "";
-            ?> 
+            ?>
         </div>
         <div>
             <label for="precioH">Price per hour</label>
             <input type="text" name="precioH" id="precioH">
             <?php
                 echo (isset($errores['precioH'])) ? "<span class=\"error\">".$errores['precioH']."</span><br>" : "";
-            ?> 
+            ?>
         </div>
         <div id="addfile">
             <span>Service picture</span>
@@ -51,14 +51,14 @@ include("../libs/bComponentes.php");
             <input type="file" id="servicePicture" name="servicePicture">
             <?php
                 echo (isset($errores['servicePicture'])) ? "<span class=\"error\">".$errores['servicePicture']."</span><br>" : "";
-            ?> 
+            ?>
         </div>
         <div>
         <label for=" servicedescription"> Service description</label>
             <textarea name="servicedescription" id="servicedescription"></textarea>
             <?php
                 echo (isset($errores['servicedescription'])) ? "<span class=\"error\">".$errores['servicedescription']."</span><br>" : "";
-            ?> 
+            ?>
         </div>
             <input type="submit" name="bSave" id="bSave" value="S A V E">
         </form>
