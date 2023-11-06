@@ -12,26 +12,30 @@ $error=false;
 $password;
 $languages;
 $description;
+//imagen
 $newImage;
 $dir="../img/imgPerfil/";
+$max_file_size = "2000000";
+
 //recojo usario
 $user = recoge('user');
 /*if($user == ""){
   header('location:../forms/formInicioSesion.php');
 }*/
+//$email=$_SESSION['usuarios'][$user]['email'];
 
     if (!isset($_REQUEST['bSave'])) {
         include ('../templates/usuario.php');//para en este punto 
     }
     else {   
     //Sanitizamos
-        $password=recoge('Password');
-        $languages=recoge('Lenguages');
+        $password=recoge('password');
+        $languages=recogeArray('languages');
         $description=recoge('descripcionPersonal',true);
         
     //Validamos
-    cTexto( $pass,"Password",$errores,25,10);
-    cCheck( $languages,"Lenguages",$errores,$languagesArray);
+    cTexto( $pass,"password",$errores,25,10);
+    cCheck( $languages,"languages",$errores,$languagesArray);
     cTexto( $description,"descripcionPersonal",$errores,100);
     $newImage=cFile('imagen',$errores,$extensionesValidas,$dir,2000000,false);
    
@@ -41,7 +45,7 @@ $user = recoge('user');
         $_SESSION['usuarios'][$user]['password']= $password;
         $_SESSION['usuarios'][$user]['description']= $description;
         $_SESSION['usuarios'][$user]['profilePicture']= $newImage;
-        header("location:form_mainpage.php?user=$user");
+        header("location:form_mainpage.php?user=$email");
     }else
         include("../templates/usuario.php");//va a la pag principal del usuario ?
     }
