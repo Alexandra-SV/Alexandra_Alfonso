@@ -1,4 +1,4 @@
-<?php 
+<?php
 if(!isset($_SESSION)) session_start();
 $titulo="ModifyUser";
 $css="../css/ModifUsuario.css";
@@ -12,9 +12,9 @@ $user = recoge('user');
 
 ?>
 
-    <header><a href="forms\form_mainpage.php">&#60; To main page</a><h1>Services-Usuario</h1></header><!--Redirige a inicio -->
+    <header><a href="../forms\form_mainpage.php?user=<?=$user?>">&#60; To main page</a><h1>Services-Usuario</h1></header><!--Redirige a inicio -->
     <main>
-        <form action="" method="POST" id="form-usuario">   
+        <form action="" method="POST" id="form-usuario">
         <div>
             <label for="nombreCompleto">Full Name*</label>
             <input type="text" name="nombreCompleto" id="nombreCompleto" value="<?=$_SESSION['usuarios'][$user]['fullName']?>" readonly />
@@ -23,7 +23,7 @@ $user = recoge('user');
             <label for="email">Email*</label>
             <input type="text" name="email" id="email" value="<?=$_SESSION['usuarios'][$user]['email']?>" readonly>
         </div>
-        <div> 
+        <div>
             <label for="Password">Password*</label>
             <input type="text" name="password" id="Password">
             <?php
@@ -34,7 +34,7 @@ $user = recoge('user');
             <label for="date">Date of Birth*</label>
             <input type="text" name="date" id="date" value="<?=$_SESSION['usuarios'][$user]['dateOfBirth']?>" readonly>
         </div>
-        <div><?=pintaSelect($languages,"languages");?></div>
+        <div><?=pintaSelect($languagesArray,"languages");?></div>
         <div>
             <label for="descripcionPersonal"> Personal  Personal description</label>
             <textarea name="descripcionPersonal" id="descripcionPersonal"><?=$_SESSION['usuarios'][$user]['description']?></textarea>
@@ -56,5 +56,5 @@ $user = recoge('user');
             ?>
         </form>
     </main>
-    
+
 <?include("./pl_tie.html");?>
