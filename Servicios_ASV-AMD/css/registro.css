@@ -16,8 +16,8 @@ h1{
     text-align: center;
     font-family: serif;
     background: linear-gradient(to bottom, rgba(129, 46, 126, 0.463) 0%, rgba(91,0,29,0.4875) 100%);
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    color: transparent;
     font-size: 72px;
     font-weight: 400;
 }

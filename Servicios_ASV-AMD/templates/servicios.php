@@ -16,12 +16,12 @@ include("../libs/bComponentes.php");
                 echo (isset($errores['titulo'])) ? "<span class=\"error\">".$errores['titulo']."</span><br>" : "";
             ?>
         </div>
-        <div>Category<?= pintaSelect($category,"category");?>
+        <div><label for="category">Category</label><?= pintaSelect($category,"category");?>
             <?php
                 echo (isset($errores['category'])) ? "<span class=\"error\">".$errores['category']."</span><br>" : "";
             ?>
         </div>
-        <div id="radio">Type<?= pintaRadio($type, "tipo");?>
+        <div id="radio"><label for="tipo">Type</label><?= pintaRadio($type, "tipo");?>
             <?php
                 echo (isset($errores['tipo'])) ? "<span class=\"error\">".$errores['tipo']."</span><br>" : "";
             ?>
@@ -33,7 +33,7 @@ include("../libs/bComponentes.php");
                 echo (isset($errores['ubicacion'])) ? "<span class=\"error\">".$errores['ubicacion']."</span><br>" : "";
             ?>
         </div>
-        <div>Availability<?= pintaSelect($Availability,"Availability");?>
+        <div><label for="Availability">Availability</label><?= pintaSelect($Availability,"Availability");?>
             <?php
                 echo (isset($errores['Availability'])) ? "<span class=\"error\">".$errores['Availability']."</span><br>" : "";
             ?>
@@ -54,7 +54,7 @@ include("../libs/bComponentes.php");
             ?>
         </div>
         <div>
-        <label for=" servicedescription"> Service description</label>
+        <label for=" servicedescription"> Service description</label><br>
             <textarea name="servicedescription" id="servicedescription"></textarea>
             <?php
                 echo (isset($errores['servicedescription'])) ? "<span class=\"error\">".$errores['servicedescription']."</span><br>" : "";
