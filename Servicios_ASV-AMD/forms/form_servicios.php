@@ -52,16 +52,17 @@ $email=$_SESSION['usuarios'][$user]['email'];
     cTexto( $titulo,"titulo",$errores,50,8);
     cCheck( $categoria,"categoria",$errores,$category); 
     cRadio( $tipo,"tipo",$errores,$type);
-    cTexto( $ubicacion,"ubicacion",$errores,50,10);
+    cTexto( $ubicacion,"ubicacion",$errores,50);
     cCheck( $disponibilidad,"disponibilidad",$errores,$Availability);
     cNum( $precio,"precioH",$errores);
-    cTexto( $descripcion,"servicedescription",$errores,100,0);
-    $imagen=cFile('servicePicture',$errores,$extensionesValidas,$dir,$max_file_size,false);
-    if ($imagen==false) 
-        $imagen="..\img\imgServ\servdefaultdonotdelete.jpg";
+    cTextarea( $descripcion,"servicedescription",$errores,100,0);
     
     //Comprobamos que no haya errores para crear el servicio
     if (empty($errores)) {
+        $imagen=cFile('servicePicture',$errores,$extensionesValidas,$dir,$max_file_size,false);
+        if ($imagen==false) 
+            $imagen="..\img\imgServ\servdefaultdonotdelete.jpg";
+        
         $servicio = array(
             "titulo" => $titulo  ,
             "categoria" => $categoria  ,

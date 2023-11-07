@@ -29,7 +29,7 @@
   ?>
 </nav>
 <main>
-     <?=pintaServicios($user);?>
+     <?=pintaServicio($user);?><!--arreglar y cambiar a pintaServicios($user)-->
 </main>
 <a href="../forms/form_servicios.php?user=<?=$user?>" id="bAddService">+ add more services</a>
 <?php
