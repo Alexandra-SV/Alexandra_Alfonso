@@ -38,14 +38,15 @@ $user = recoge('user');
              <?=pintaSelect($languagesArray,"languages");?>
         </div>
         <div>
-            <label for="descripcionPersonal"> Personal  Personal description</label><br>
+            <label for="descripcionPersonal"> Personal description</label><br>
             <textarea name="descripcionPersonal" id="descripcionPersonal"><?=$_SESSION['usuarios'][$user]['description']?></textarea>
             <?php
-                echo (isset($errores['descripcionPersonal'])) ? "<span class=\"error\">".$errores['imagdescripcionPersonalen']."</span><br>" : "";
+                echo (isset($errores['descripcionPersonal'])) ? "<span class=\"error\">".$errores['descripcionPersonal']."</span><br>" : "";
             ?>
         </div>
             <input type="submit" name="bSave" id="save" value="S A V E">
         </form>
+
         <form action="" method="POST" enctype="multipart/form-data" id="form-image">
         <span>Profile picture</span>
             <br>
@@ -58,11 +59,12 @@ $user = recoge('user');
             ?>
             <br>
             <label for="boton">Select a file</label>
-            <input type="file" name="imagen" value="imagen-prfil" id="boton">
+            <input type="file" name="imagen" value="imagen-perfil" id="boton">
             <?php
                 echo (isset($errores['imagen'])) ? "<span class=\"error\">".$errores['imagen']."</span><br>" : "";
             ?>
         </form>
+
     </main>
 
 <?include("./pl_tie.html");?>

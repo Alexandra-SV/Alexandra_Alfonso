@@ -23,19 +23,34 @@ function pintaSelect(array $valores,string $name){
 }
 function pintaServicios($usuario){
     if (!empty($_SESSION['usuarios'][$usuario]['services'])){
-        foreach ($_SESSION['usuarios'][$usuario] as $infoUser) {
-            foreach ($infoUser['services'] as $service) {
-                echo "<section id=\"".$service['name']."\">";
-                echo "<h2>".$service['name']."</h2><br>";
-                echo "<p>Category: ".$service['category']."</p><br>";
-                echo "<p>Type: ".$service['type']."</p><br>";
-                echo "<p>Price : ".$service['price']." per hour</p>";
-                echo "<img src=\"".$service['image']."\" alt=\"".$allServices['image']."\">";
-                echo "</section>";
-            }
+        foreach ($_SESSION['usuarios'][$usuario]['services'] as  $service) {
+            $cat=implode(" ",$service['categoria']);
+            echo "<section id=\"".$service['titulo']."\">";
+            echo "<h2>".$service['titulo']."</h2><br>";
+            echo "<p>Category: ".$cat."</p><br>";
+            echo "<p>Type: ".$service['tipo']."</p><br>";
+            echo "<p>Price : ".$service['precio']." per hour</p>";
+            echo "<img src=\"".$service['imagen']."\" alt=\"".$service['imagen']."\">";
+            echo "</section>";
         }
     }else
         echo"<span>Sin Servicios</span>";
 }
 
+
+
+function pintaServicio($usuario){
+    if (!empty($_SESSION['usuarios'][$usuario]['services'])){
+        $cat=implode(" ",$_SESSION['usuarios'][$usuario]['services']['categoria']);
+        echo "<section id=\"".$_SESSION['usuarios'][$usuario]['services']['titulo']."\">";
+        echo "<div>";
+        echo "<h2>".$_SESSION['usuarios'][$usuario]['services']['titulo']."</h2><br>";
+        echo "<p>Category: ".$cat."</p><br>";
+        echo "<p>Type: ".$_SESSION['usuarios'][$usuario]['services']['tipo']."</p><br>";
+        echo "<p>Price : ".$_SESSION['usuarios'][$usuario]['services']['precio']." per hour</p>";
+        echo "</div>";
+        echo "<img src=\"".$_SESSION['usuarios'][$usuario]['services']['imagen']."\" alt=\"".$_SESSION['usuarios'][$usuario]['services']['imagen']."\">";
+        echo "</section>";
+    }
+}
 ?>

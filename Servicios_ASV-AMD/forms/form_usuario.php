@@ -12,10 +12,15 @@ $error=false;
 $password;
 $languages;
 $description;
-//imagen
-$newImage;
-$dir="../img/imgPerfil/";
+//Imagen
+$dir = "../img/imgPerfil/";
 $max_file_size = "2000000";
+$extensionesValidas = array(
+    "jpeg",
+    "jpg",
+    "png",
+    "gif",
+);
 
 //recojo usario
 $user = recoge('user');
@@ -34,18 +39,22 @@ $email=$_SESSION['usuarios'][$user]['email'];
         $description=recoge('descripcionPersonal',true);
         
     //Validamos
-    cTexto( $password,"password",$errores,25);
+    cPassword( $password,"password",$errores);
     cCheck( $languages,"languages",$errores,$languagesArray);
-    cTexto( $description,"descripcionPersonal",$errores,100);
-    $newImage=cFile('imagen',$errores,$extensionesValidas,$dir,2000000);
-   
+    cTextarea( $description,"descripcionPersonal",$errores,100,1,false); 
+
     //Comprobamos que no haya errores para cactualizar los datos
     if (empty($errores)){
+        $profilePicture = cFile('imagen',$errores,$extensionesValidas,$dir,$max_file_size,false);
+        if ($profilePicture==false) 
+            $profilePicture="../img/imgPerfil/default_picture_donotdelete.jpg";
+        
         $_SESSION['usuarios'][$user]['languages']= $languages;
         $_SESSION['usuarios'][$user]['password']= $password;
         $_SESSION['usuarios'][$user]['description']= $description;
-        $_SESSION['usuarios'][$user]['profilePicture']= $newImage;
+        $_SESSION['usuarios'][$user]['profilePicture']= $profilePicture;
         header("location:form_mainpage.php?user=$email");
+
     }else
         include("../templates/usuario.php");
     }

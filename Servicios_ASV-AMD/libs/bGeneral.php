@@ -158,6 +158,23 @@ function cTexto(string $text, string $campo, array &$errores, int $max = 30, int
     $errores[$campo] = "Error en el campo $campo";
     return false;
 }
+function cTextarea(string $text, string $campo, array &$errores, int $max = 30, int $min = 1, bool $required=true): bool
+{
+    if(!$required && $text == ""){
+        return true;
+    }else{
+        if ((preg_match("/[a-zñ1-9 ]{" . $min . "," . $max . "}$/ui", $text))) {
+            return true;
+        }
+    }
+    $errores[$campo] = "Error en el campo $campo";
+    return false;
+}
+
+
+
+
+
 function cEmail(String $email, string $campo, array &$errores): bool{
     if(preg_match("/^[a-z][\w._]{2,}@([a-z]+[a-z\.]+\.[a-z]{2,})$/i",$email))
         return true;
@@ -298,19 +315,19 @@ function cFile(string $nombre, array &$errores, array $extensionesValidas, strin
         $errores["$nombre"] = "Error al subir el archivo " . $nombre . ". Prueba de nuevo";
         return false;
     } else {
-        $nombreArchivo = strip_tags($_FILES["$nombre"]['name']);
+        $nombreArchivo = strip_tags($_FILES["$nombre"]['name']);//= ""
         /*
              * Guardamos nombre del fichero en el servidor
         */
-        $directorioTemp = $_FILES["$nombre"]['tmp_name'];
+        $directorioTemp = $_FILES["$nombre"]['tmp_name'];//= null
         /*
              * Calculamos el tamaño del fichero
             */
-        $tamanyoFile = filesize($directorioTemp);
+        $tamanyoFile = filesize($directorioTemp);//= false
         /*
             * Extraemos la extensión del fichero, desde el último punto.
         */
-        $extension = strtolower(pathinfo($nombreArchivo, PATHINFO_EXTENSION));
+        $extension = strtolower(pathinfo($nombreArchivo, PATHINFO_EXTENSION));//=""
         /*
             * Comprobamos la extensión del archivo dentro de la lista que hemos definido al principio
         */
