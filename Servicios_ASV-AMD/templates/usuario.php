@@ -7,7 +7,7 @@ include("../libs/bComponentes.php");
 
 $user = recoge('user');
     if($user == ""){
-        header('location:../forms/formInicioSesion.php');//devuelve a inicio cuando le das a la foto
+        header('location:../forms/formInicioSesion.php');
     }
 
 ?>
@@ -34,9 +34,11 @@ $user = recoge('user');
             <label for="date">Date of Birth*</label>
             <input type="text" name="date" id="date" value="<?=$_SESSION['usuarios'][$user]['dateOfBirth']?>" readonly>
         </div>
-        <div><?=pintaSelect($languagesArray,"languages");?></div>
+        <div><label for="languages">Languages</label>
+             <?=pintaSelect($languagesArray,"languages");?>
+        </div>
         <div>
-            <label for="descripcionPersonal"> Personal  Personal description</label>
+            <label for="descripcionPersonal"> Personal  Personal description</label><br>
             <textarea name="descripcionPersonal" id="descripcionPersonal"><?=$_SESSION['usuarios'][$user]['description']?></textarea>
             <?php
                 echo (isset($errores['descripcionPersonal'])) ? "<span class=\"error\">".$errores['imagdescripcionPersonalen']."</span><br>" : "";
@@ -44,10 +46,16 @@ $user = recoge('user');
         </div>
             <input type="submit" name="bSave" id="save" value="S A V E">
         </form>
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="" method="POST" enctype="multipart/form-data" id="form-image">
         <span>Profile picture</span>
             <br>
-            <img src="<?=$_SESSION['usuarios'][$user]['profilePicture']?>" alt="<?=$_SESSION['usuarios'][$user]['profilePicture']?>">
+            <?php
+                if($_SESSION['usuarios'][$user]['profilePicture'] != 1){
+                    echo "<img height=\"50\"width=\"50\"src=\"".$_SESSION['usuarios'][$user]['profilePicture']."\" alt=\"profPicture\">";
+                }else{
+                    echo "<img height=\"50\"width=\"50\"src=\"../img/imgPerfil/default_picture_donotdelete.jpg\" alt=\"profPicture\">";
+                }
+            ?>
             <br>
             <label for="boton">Select a file</label>
             <input type="file" name="imagen" value="imagen-prfil" id="boton">
