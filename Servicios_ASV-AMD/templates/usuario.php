@@ -25,7 +25,7 @@ $user = recoge('user');
         </div>
         <div>
             <label for="Password">Password*</label>
-            <input type="text" name="password" id="Password">
+            <input type="password" name="password" id="Password">
             <?php
                 echo (isset($errores['password'])) ? "<span class=\"error\">".$errores['password']."</span><br>" : "";
             ?>
@@ -36,6 +36,9 @@ $user = recoge('user');
         </div>
         <div><label for="languages">Languages</label>
              <?=pintaSelect($languagesArray,"languages");?>
+             <?php
+                echo (isset($errores['languages'])) ? "<span class=\"error\">".$errores['languages']."</span><br>" : "";
+            ?>
         </div>
         <div>
             <label for="descripcionPersonal"> Personal description</label><br>
@@ -59,12 +62,29 @@ $user = recoge('user');
             ?>
             <br>
             <label for="boton">Select a file</label>
-            <input type="file" name="imagen" value="imagen-perfil" id="boton">
+            <input type="file" name="imagen" value="imagen-perfil" id="boton" >
             <?php
                 echo (isset($errores['imagen'])) ? "<span class=\"error\">".$errores['imagen']."</span><br>" : "";
             ?>
         </form>
-
     </main>
 
 <?include("./pl_tie.html");?>
+<script>
+    window.onload = function () {
+        var addImagen = document.getElementById("boton");
+        addImagen.addEventListener("change", changePicture, false);
+    }
+
+    function changePicture(event) {
+        var input = event.target;
+        var img = input.previousElementSibling.previousElementSibling.previousElementSibling;
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                img.setAttribute("src", e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

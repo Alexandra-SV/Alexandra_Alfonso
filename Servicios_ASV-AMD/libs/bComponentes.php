@@ -23,21 +23,27 @@ function pintaSelect(array $valores,string $name){
 }
 function pintaServicios($usuario){
     if (!empty($_SESSION['usuarios'][$usuario]['services'])){
-        foreach ($_SESSION['usuarios'][$usuario]['services'] as  $service) {
-            $cat=implode(" ",$service['categoria']);
-            echo "<section id=\"".$service['titulo']."\">";
-            echo "<h2>".$service['titulo']."</h2><br>";
+
+        $servicios=$_SESSION['usuarios'][$usuario]['services'];
+        foreach ($servicios as $servicio) {
+            $cat=implode(" ",$servicio['categoria']);
+            echo "<section id=\"".$servicio['titulo']."\">";
+            echo "<div>";
+            echo "<h2>".$servicio['titulo']."</h2><br>";
             echo "<p>Category: ".$cat."</p><br>";
-            echo "<p>Type: ".$service['tipo']."</p><br>";
-            echo "<p>Price : ".$service['precio']." per hour</p>";
-            echo "<img src=\"".$service['imagen']."\" alt=\"".$service['imagen']."\">";
+            echo "<p>Type: ".$servicio['tipo']."</p><br>";
+            echo "<p>Price : ".$servicio['precio']." per hour</p>";
+            echo "</div>";
+            if($servicio["imagen"] != 1){
+                echo "<img src=\"".$servicio["imagen"]."\" alt=\"servPicture\">";
+            }else{
+                echo "<img src=\"../img/imgServ/servdefaultdonotdelete.jpg\" alt=\"servPicture\"></a>";
+            }
             echo "</section>";
         }
     }else
         echo"<span>Sin Servicios</span>";
 }
-
-
 
 function pintaServicio($usuario){
     if (!empty($_SESSION['usuarios'][$usuario]['services'])){
@@ -49,8 +55,14 @@ function pintaServicio($usuario){
         echo "<p>Type: ".$_SESSION['usuarios'][$usuario]['services']['tipo']."</p><br>";
         echo "<p>Price : ".$_SESSION['usuarios'][$usuario]['services']['precio']." per hour</p>";
         echo "</div>";
-        echo "<img src=\"".$_SESSION['usuarios'][$usuario]['services']['imagen']."\" alt=\"".$_SESSION['usuarios'][$usuario]['services']['imagen']."\">";
+        if($_SESSION['usuarios'][$usuario]['services']["imagen"] != 1){
+            echo "<img src=\"".$_SESSION['usuarios'][$usuario]['services']["imagen"]."\" alt=\"servPicture\">";
+        }else{
+            echo "<img src=\"../img/imgServ/servdefaultdonotdelete.jpg\" alt=\"servPicture\"></a>";
+        }
         echo "</section>";
-    }
+    }else
+        echo"<span>Sin Servicios</span>";
 }
+
 ?>

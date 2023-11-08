@@ -44,15 +44,21 @@ $email=$_SESSION['usuarios'][$user]['email'];
     cTextarea( $description,"descripcionPersonal",$errores,100,1,false); 
 
     //Comprobamos que no haya errores para cactualizar los datos
-    if (empty($errores)){
-        $profilePicture = cFile('imagen',$errores,$extensionesValidas,$dir,$max_file_size,false);
-        if ($profilePicture==false) 
-            $profilePicture="../img/imgPerfil/default_picture_donotdelete.jpg";
-        
+    if (empty($errores)) {
+        $imagen=cFile('imagen',$errores,$extensionesValidas,$dir,$max_file_size,false);
+        if($imagen != 1){
+            echo "<img src=\"".$imagen."\" alt=\"profPicture\"></a>";
+        }else{
+            echo "<img src=\"../img/imgPerfil/default_picture_donotdelete.jpg\" alt=\"profPicture\"></a>";
+            $imagen="../img/imgPerfil/default_picture_donotdelete.jpg";
+        }
+
+
+
         $_SESSION['usuarios'][$user]['languages']= $languages;
         $_SESSION['usuarios'][$user]['password']= $password;
         $_SESSION['usuarios'][$user]['description']= $description;
-        $_SESSION['usuarios'][$user]['profilePicture']= $profilePicture;
+        $_SESSION['usuarios'][$user]['profilePicture']= $imagen;
         header("location:form_mainpage.php?user=$email");
 
     }else
