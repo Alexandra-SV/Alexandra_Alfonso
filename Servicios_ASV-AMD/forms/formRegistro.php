@@ -57,8 +57,7 @@
                 "profilePicture"=>$profilePicture,
                 "languages"=>$languages,
                 "description"=>$description,
-                "services"=>[
-                ]
+                "services"=>[]
             );
             $_SESSION['usuarios'][$email] = $usuario;
             header("location:form_mainpage.php?user=$email");
