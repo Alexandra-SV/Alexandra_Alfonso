@@ -60,7 +60,7 @@ radial-gradient(ellipse at left top,#ee54ab, transparent);
                 margin-left:14px;
                 margin-left: 25px;
             }
-            
+
             & #languages{
                 border-radius: 20px;
                 border: none;
@@ -69,7 +69,7 @@ radial-gradient(ellipse at left top,#ee54ab, transparent);
                 margin-left: 50px;
                 font-size: 1em;
                 padding-left:10px;
-                
+
             }
             & #descripcionPersonal{
                 margin-top: 5px;
@@ -97,14 +97,14 @@ radial-gradient(ellipse at left top,#ee54ab, transparent);
 
 
 
-        & #form-image{
+        & #div-image{
             background: linear-gradient(to right, rgba(229, 78, 126, 1)  5%,  rgba(252, 174, 226, 0.438));
             border-radius: 30px;
             place-self: center;
             min-height: 450px;
             & span{color: #fff;font-size: 1.7em;padding: 10px;margin: 15px;}
             & img{height: 300px;width: 300px;border-radius: 10px;margin: 20px 30px;}
-            & label{ 
+            & label{
                 background: linear-gradient(to right, #d33790e1  5%,  rgba(252, 174, 226, 0.438));
                 padding: 3px 8px;
                 border-radius: 20px;
@@ -124,7 +124,7 @@ radial-gradient(ellipse at left top,#ee54ab, transparent);
 
 
             }
-            
+
         }
         & #form-image{
             background: linear-gradient(to right, rgba(229, 78, 126, 1)  5%,  rgba(252, 174, 226, 0.438));
@@ -132,15 +132,15 @@ radial-gradient(ellipse at left top,#ee54ab, transparent);
             height: 300px;
             & span{color: #fff;font-size: 1.7em;padding: 10px;}
             & img{height: 200px;width: 200px;border-radius: 10px;margin: 6px 10px;}
-            & label{ 
+            & label{
                 background: linear-gradient(to right, #d33790e1  5%,  rgba(252, 174, 226, 0.438));
                 padding: 3px 8px;
                 border-radius: 10px;
                 border: none;
-                margin-top: 15px;                
+                margin-top: 15px;
                 margin-left: 110px;
                 width: 129px;
-                color: #fff; 
+                color: #fff;
             }
             & input{
                 display: none;

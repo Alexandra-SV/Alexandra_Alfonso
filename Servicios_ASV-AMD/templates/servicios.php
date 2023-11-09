@@ -1,5 +1,5 @@
 <?php
-if(!isset($_SESSION)) session_start();
+session_start();
 $titulo="Add Service ";
 $css="../css/servicios.css";
 

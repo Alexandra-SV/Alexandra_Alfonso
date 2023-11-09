@@ -1,5 +1,5 @@
-<?php 
-if(!isset($_SESSION)) session_start();
+<?php
+session_start();
 include("../templates/pl_encabezado.php");
 include("../libs/bGeneral.php");
 
@@ -33,30 +33,30 @@ $user = recoge('user');
 if($user == ""){
   header('location:../forms/formInicioSesion.php');
 }
-$email=$_SESSION['usuarios'][$user]['email']; 
+$email=$_SESSION['usuarios'][$user]['email'];
 
     if (!isset($_REQUEST['bSave'])) {
         include ('../templates/servicios.php');
     }
     else {
-    //sanitizamos    
+    //sanitizamos
         $titulo=recoge('titulo',true);
-        $categoria=recogeArray('category'); 
+        $categoria=recogeArray('category');
         $tipo=recoge('tipo');
         $ubicacion=recoge('ubicacion',true);
-        $disponibilidad=recogeArray('Availability'); 
+        $disponibilidad=recogeArray('Availability');
         $precio=recoge('precioH');
         $descripcion= recoge('servicedescription',true); //=""
-        
+
     //Validamos
     cTexto( $titulo,"titulo",$errores,50,8);
-    cCheck( $categoria,"categoria",$errores,$category); 
+    cCheck( $categoria,"categoria",$errores,$category);
     cRadio( $tipo,"tipo",$errores,$type);
     cTexto( $ubicacion,"ubicacion",$errores,50);
     cCheck( $disponibilidad,"disponibilidad",$errores,$Availability);
     cNum( $precio,"precioH",$errores);
     cTextarea( $descripcion,"servicedescription",$errores,100,0);
-    
+
     //Comprobamos que no haya errores para crear el servicio
     if (empty($errores)) {
         $imagen=cFile('servicePicture',$errores,$extensionesValidas,$dir,$max_file_size,false);
@@ -75,13 +75,13 @@ $email=$_SESSION['usuarios'][$user]['email'];
             "disponibilidad" => $disponibilidad  ,
             "precio" => $precio  ,
             "imagen" => $imagen  ,
-            "descripcion" => $descripcion 
-        ); 
+            "descripcion" => $descripcion
+        );
         array_push($_SESSION['usuarios'][$user]["services"], $servicio);
         header("location:form_mainpage.php?user=$email");
     }else
         include("../templates/servicios.php");
     }
-?>	  
+?>
 
 <?include("../templates/pl_pie.html");?>

@@ -1,6 +1,6 @@
 <?php
     //Iniciar session
-    if(!isset($_SESSION)) session_start();
+    session_start();
     //Librerias
     include('../libs/bGeneral.php');
     include('../libs/bComponentes.php');
