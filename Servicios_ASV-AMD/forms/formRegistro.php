@@ -12,7 +12,7 @@
     $dateOfBirth = "";
     $languages = "";
     $description = "";
-
+//lib config
     $languagesArray = ["Italian","Spanish","German","Chinese"];
     //Imagen
     $dir = "../img/imgPerfil/";
@@ -48,7 +48,7 @@
         if(empty($errores)){
             //Imagen
             $profilePicture = cFile('profilePicture',$errores,$extensionesValidas,$dir,$max_file_size,false);
-            //Guarda el usuario en session con la id del email, si no hay errores
+            //Guarda el usuario en session con la id del email, si no hay errores hacr if para la foto
             $usuario = array(
                 "email"=>$email,
                 "password"=>$password,
@@ -60,7 +60,7 @@
                 "services"=>[]
             );
             $_SESSION['usuarios'][$email] = $usuario;
-            header("location:form_mainpage.php?user=$email");
+            header("location:form_mainpage.php?user=$email");//avisar cuando demos sesiones
         }else{
             include("../templates/registro.php");
         }

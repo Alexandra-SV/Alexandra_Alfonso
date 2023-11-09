@@ -69,7 +69,7 @@ $user = recoge('user');
         </form>
     </main>
 
-<?include("./pl_tie.html");?>
+<?include("./pl_pie.html");?>
 <script>
     window.onload = function () {
         var addImagen = document.getElementById("boton");

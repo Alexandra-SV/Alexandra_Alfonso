@@ -60,24 +60,23 @@ $email=$_SESSION['usuarios'][$user]['email'];
     //Comprobamos que no haya errores para crear el servicio
     if (empty($errores)) {
         $imagen=cFile('servicePicture',$errores,$extensionesValidas,$dir,$max_file_size,false);
-        if($imagen != 1){
-            echo "<img src=\"".$imagen."\" alt=\"profPicture\"></a>";
-        }else{
-            echo "<img src=\"../img/imgServ/servdefaultdonotdelete.jpg\" alt=\"profPicture\"></a>";
+        if(!empty($errores)){//cambiar luego para mostrar error directamente y no que introduzca la default
             $imagen="../img/imgServ/servdefaultdonotdelete.jpg";
+        }else{
+            $servicio = array(
+                "titulo" => $titulo  ,
+                "categoria" => $categoria  ,
+                "tipo" => $tipo  ,
+                "ubicacion" => $ubicacion  ,
+                "disponibilidad" => $disponibilidad  ,
+                "precio" => $precio  ,
+                "imagen" => $imagen  ,
+                "descripcion" => $descripcion 
+            ); 
+            array_push($_SESSION['usuarios'][$user]["services"], $servicio);//$_SESSION['usuarios'][$user]["services"][]=$servicio;
         }
+            
 
-        $servicio = array(
-            "titulo" => $titulo  ,
-            "categoria" => $categoria  ,
-            "tipo" => $tipo  ,
-            "ubicacion" => $ubicacion  ,
-            "disponibilidad" => $disponibilidad  ,
-            "precio" => $precio  ,
-            "imagen" => $imagen  ,
-            "descripcion" => $descripcion 
-        ); 
-        array_push($_SESSION['usuarios'][$user]["services"], $servicio);
         header("location:form_mainpage.php?user=$email");
     }else
         include("../templates/servicios.php");
