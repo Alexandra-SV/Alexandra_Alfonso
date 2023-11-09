@@ -175,7 +175,7 @@ function cTextarea(string $text, string $campo, array &$errores, int $max = 30, 
 
 
 
-function cEmail(String $email, string $campo, array &$errores): bool{
+function cEmail(String $email, string $campo, array &$errores): bool{//FILTER_VALIDATE_EMAIL
     if(preg_match("/^[a-z][\w._]{2,}@([a-z]+[a-z\.]+\.[a-z]{2,})$/i",$email))
         return true;
 

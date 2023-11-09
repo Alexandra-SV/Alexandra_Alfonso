@@ -63,4 +63,4 @@ include("../libs/bComponentes.php");
             <input type="submit" name="bSave" id="bSave" value="S A V E">
         </form>
     </main>
-<?include("./pl_tie.html");?>
+<?include("./pl_pie.html");?>

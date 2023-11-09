@@ -46,20 +46,15 @@ $email=$_SESSION['usuarios'][$user]['email'];
     //Comprobamos que no haya errores para cactualizar los datos
     if (empty($errores)) {
         $imagen=cFile('imagen',$errores,$extensionesValidas,$dir,$max_file_size,false);
-        if($imagen != 1){
-            echo "<img src=\"".$imagen."\" alt=\"profPicture\"></a>";
-        }else{
-            echo "<img src=\"../img/imgPerfil/default_picture_donotdelete.jpg\" alt=\"profPicture\"></a>";
+        if(!empty($errores)){//cambiar luego para mostrar error directamente y no que introduzca la default
             $imagen="../img/imgPerfil/default_picture_donotdelete.jpg";
+        }else{
+            $_SESSION['usuarios'][$user]['languages']= $languages;
+            $_SESSION['usuarios'][$user]['password']= $password;//solo comprobar aqui
+            $_SESSION['usuarios'][$user]['description']= $description;
+            $_SESSION['usuarios'][$user]['profilePicture']= $imagen;
+            header("location:form_mainpage.php?user=$email");  
         }
-
-
-
-        $_SESSION['usuarios'][$user]['languages']= $languages;
-        $_SESSION['usuarios'][$user]['password']= $password;
-        $_SESSION['usuarios'][$user]['description']= $description;
-        $_SESSION['usuarios'][$user]['profilePicture']= $imagen;
-        header("location:form_mainpage.php?user=$email");
 
     }else
         include("../templates/usuario.php");
