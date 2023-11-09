@@ -26,10 +26,10 @@ $precio;
 $descripcion;
 //imagen
 $imagen;
-$dir="../../imgs/imgServicios";
+$dir="../img/imgServ";
 $max_file_size = "2000000";
 
-$user = recoge('user');
+$user = $_SESSION['active'];
 if($user == ""){
   header('location:../forms/formInicioSesion.php');
 }
@@ -49,7 +49,7 @@ $email=$_SESSION['usuarios'][$user]['email'];
         $descripcion= recoge('servicedescription',true); //=""
 
     //Validamos
-    cTexto( $titulo,"titulo",$errores,50,8);
+    cTexto( $titulo,"titulo",$errores,50,4);
     cCheck( $categoria,"categoria",$errores,$category);
     cRadio( $tipo,"tipo",$errores,$type);
     cTexto( $ubicacion,"ubicacion",$errores,50);
@@ -71,11 +71,11 @@ $email=$_SESSION['usuarios'][$user]['email'];
                 "disponibilidad" => $disponibilidad  ,
                 "precio" => $precio  ,
                 "imagen" => $imagen  ,
-                "descripcion" => $descripcion 
-            ); 
+                "descripcion" => $descripcion
+            );
             array_push($_SESSION['usuarios'][$user]["services"], $servicio);//$_SESSION['usuarios'][$user]["services"][]=$servicio;
         }
-        header("location:form_mainpage.php?user=$email");
+        header("location:form_mainpage.php");
     }else
         include("../templates/servicios.php");
     }

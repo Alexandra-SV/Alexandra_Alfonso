@@ -23,7 +23,7 @@ $extensionesValidas = array(
 );
 
 //recojo usario
-$user = recoge('user');
+$user = $_SESSION['active'];
 if($user == ""){
   header('location:../forms/formInicioSesion.php');
 }
@@ -53,7 +53,7 @@ $email=$_SESSION['usuarios'][$user]['email'];
             $_SESSION['usuarios'][$user]['password']= $password;//solo comprobar aqui
             $_SESSION['usuarios'][$user]['description']= $description;
             $_SESSION['usuarios'][$user]['profilePicture']= $imagen;
-            header("location:form_mainpage.php?user=$email");  
+            header("location:form_mainpage.php");
         }
 
     }else

@@ -60,7 +60,9 @@
                 "services"=>[]
             );
             $_SESSION['usuarios'][$email] = $usuario;
-            header("location:form_mainpage.php?user=$email");//avisar cuando demos sesiones
+            //Creo la sesion activa
+            $_SESSION['active'] = $email;
+            header("location:form_mainpage.php?");//avisar cuando demos sesiones
         }else{
             include("../templates/registro.php");
         }

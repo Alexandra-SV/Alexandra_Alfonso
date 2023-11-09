@@ -1,12 +1,11 @@
 <?php
-session_start();
 $titulo="Add Service ";
 $css="../css/servicios.css";
 
 include("../templates/pl_encabezado.php");
 include("../libs/bComponentes.php");
 ?>
-    <header><a href="../forms/form_mainpage.php?user=<?=$user?>"> &#60; To main page</a><h1>Services-services</h1></header><!--Redirige a inicio -->
+    <header><a href="../forms/form_mainpage.php"> &#60; To main page</a><h1>Services-services</h1></header><!--Redirige a inicio -->
     <main>
         <form action="" method="POST" enctype="multipart/form-data">
         <div>
