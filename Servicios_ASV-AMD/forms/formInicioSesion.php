@@ -20,7 +20,7 @@
 
 
             //guardar en variable de sesion al user
-            header("location:form_mainpage.php?user=$email");
+            header("location:form_mainpage.php");
         }else{
             include("../templates/inicioSesion.php");
         }

@@ -2,9 +2,7 @@
 session_start();
 include("../templates/pl_encabezado.php");
 include("../libs/bGeneral.php");
-
-$languagesArray = ["Italian","Spanish","German","Chinese"];
-$extensionesValidas=["jpeg","jpg","png","gif"];
+include("../libs/bConfiguracion");
 $errores=[];
 $error=false;
 
@@ -12,15 +10,6 @@ $error=false;
 $password;
 $languages;
 $description;
-//Imagen
-$dir = "../img/imgPerfil/";
-$max_file_size = "2000000";
-$extensionesValidas = array(
-    "jpeg",
-    "jpg",
-    "png",
-    "gif",
-);
 
 //recojo usario
 $user = recoge('user');
