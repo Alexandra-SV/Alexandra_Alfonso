@@ -4,6 +4,7 @@
     //Librerias
     include('../libs/bGeneral.php');
     include('../libs/bComponentes.php');
+    include("../libs/bConfiguracion");
     //Datos y array de errores
     $errores = [];
     $fullName = "";
@@ -12,17 +13,7 @@
     $dateOfBirth = "";
     $languages = "";
     $description = "";
-//lib config
-    $languagesArray = ["Italian","Spanish","German","Chinese"];
-    //Imagen
-    $dir = "../img/imgPerfil/";
-    $max_file_size = "2000000";
-    $extensionesValidas = array(
-        "jpeg",
-        "jpg",
-        "png",
-        "gif",
-    );
+
     //Ver que existe el array de usuarios, si no se crea
     if(!isset($_SESSION['usuarios'])){
         $_SESSION['usuarios'] = array();
@@ -62,7 +53,7 @@
             $_SESSION['usuarios'][$email] = $usuario;
             //Creo la sesion activa
             $_SESSION['active'] = $email;
-            header("location:form_mainpage.php?");//avisar cuando demos sesiones
+            header("location:form_mainpage.php");//avisar cuando demos sesiones
         }else{
             include("../templates/registro.php");
         }

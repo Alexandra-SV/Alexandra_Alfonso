@@ -2,16 +2,7 @@
 session_start();
 include("../templates/pl_encabezado.php");
 include("../libs/bGeneral.php");
-
-$category=["Informática","Diseño Gráfico","Consultoría Empresarial","Salud y Bienestar",
-"Reparación de Vehículos","Enseñanza y Tutoría","Catering y Comida a Domicilio","Guía Turística",
-"Carpintería y Ebanistería","Limpieza y Mantenimiento del Hogar"];
-
-$type=["Pago","intercambio"];
-
-$Availability=["mañanas","tardes","noches"];
-
-$extensionesValidas=["jpeg","jpg","png","gif"];
+include("../libs/bConfiguracion");
 
 $errores=[];
 $error=false;
@@ -49,7 +40,7 @@ $email=$_SESSION['usuarios'][$user]['email'];
         $descripcion= recoge('servicedescription',true); //=""
 
     //Validamos
-    cTexto( $titulo,"titulo",$errores,50,4);
+    cTexto( $titulo,"titulo",$errores,50,3);
     cCheck( $categoria,"categoria",$errores,$category);
     cRadio( $tipo,"tipo",$errores,$type);
     cTexto( $ubicacion,"ubicacion",$errores,50);
