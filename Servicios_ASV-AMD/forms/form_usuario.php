@@ -1,5 +1,5 @@
-<?php 
-if(!isset($_SESSION)) session_start();
+<?php
+session_start();
 include("../templates/pl_encabezado.php");
 include("../libs/bGeneral.php");
 
@@ -32,16 +32,16 @@ $email=$_SESSION['usuarios'][$user]['email'];
     if (!isset($_REQUEST['bSave'])) {
         include ('../templates/usuario.php');
     }
-    else {   
+    else {
     //Sanitizamos
         $password=recoge('password');
         $languages=recogeArray('languages');
         $description=recoge('descripcionPersonal',true);
-        
+
     //Validamos
     cPassword( $password,"password",$errores);
     cCheck( $languages,"languages",$errores,$languagesArray);
-    cTextarea( $description,"descripcionPersonal",$errores,100,1,false); 
+    cTextarea( $description,"descripcionPersonal",$errores,100,1,false);
 
     //Comprobamos que no haya errores para cactualizar los datos
     if (empty($errores)) {
@@ -59,6 +59,6 @@ $email=$_SESSION['usuarios'][$user]['email'];
     }else
         include("../templates/usuario.php");
     }
-?>	  
+?>
 
 <?include("../templates/pl_pie.html");?>

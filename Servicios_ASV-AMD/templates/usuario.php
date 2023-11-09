@@ -1,5 +1,5 @@
 <?php
-if(!isset($_SESSION)) session_start();
+session_start();
 $titulo="ModifyUser";
 $css="../css/ModifUsuario.css";
 include("../templates/pl_encabezado.php");
@@ -14,7 +14,7 @@ $user = recoge('user');
 
     <header><a href="../forms\form_mainpage.php?user=<?=$user?>">&#60; To main page</a><h1>Services-Usuario</h1></header><!--Redirige a inicio -->
     <main>
-        <form action="" method="POST" id="form-usuario">
+        <form action="" method="POST" id="form-usuario" enctype="multipart/form-data">
         <div>
             <label for="nombreCompleto">Full Name*</label>
             <input type="text" name="nombreCompleto" id="nombreCompleto" value="<?=$_SESSION['usuarios'][$user]['fullName']?>" readonly />
@@ -48,9 +48,8 @@ $user = recoge('user');
             ?>
         </div>
             <input type="submit" name="bSave" id="save" value="S A V E">
-        </form>
 
-        <form action="" method="POST" enctype="multipart/form-data" id="form-image">
+        <div id="div-image">
         <span>Profile picture</span>
             <br>
             <?php
@@ -66,6 +65,7 @@ $user = recoge('user');
             <?php
                 echo (isset($errores['imagen'])) ? "<span class=\"error\">".$errores['imagen']."</span><br>" : "";
             ?>
+        </div>
         </form>
     </main>
 

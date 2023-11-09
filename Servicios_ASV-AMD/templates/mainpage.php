@@ -1,5 +1,5 @@
 <?php
-    if(!isset($_SESSION)) session_start();
+    session_start();
     //Encabezado
     $titulo = "Welcome to Services";
     $css = "../css/mainpage.css";
