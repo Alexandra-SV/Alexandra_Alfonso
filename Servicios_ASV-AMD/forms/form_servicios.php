@@ -2,7 +2,7 @@
 session_start();
 include("../templates/pl_encabezado.php");
 include("../libs/bGeneral.php");
-include("../libs/bConfiguracion");
+include("../libs/bConfiguracion.php");
 
 $errores=[];
 $error=false;
@@ -17,8 +17,7 @@ $precio;
 $descripcion;
 //imagen
 $imagen;
-$dir="../img/imgServ";
-$max_file_size = "2000000";
+
 
 $user = $_SESSION['active'];
 if($user == ""){
@@ -50,11 +49,9 @@ $email=$_SESSION['usuarios'][$user]['email'];
 
     //Comprobamos que no haya errores para crear el servicio
     if (empty($errores)) {
-        $imagen=cFile('servicePicture',$errores,$extensionesValidas,$dir,$max_file_size,false);
-        if(!empty($errores)){//cambiar luego para mostrar error directamente y no que introduzca la default
-            $imagen="../img/imgServ/servdefaultdonotdelete.jpg";
-        }else{
-            $servicio = array(
+        $imagen=cFile('servicePicture',$errores,$extensionesValidas,$dirSesion,$max_file_size,false);
+        if(empty($errores)){//cambiar luego para mostrar error directamente y no que introduzca la default
+           $servicio = array(
                 "titulo" => $titulo  ,
                 "categoria" => $categoria  ,
                 "tipo" => $tipo  ,
@@ -65,8 +62,12 @@ $email=$_SESSION['usuarios'][$user]['email'];
                 "descripcion" => $descripcion
             );
             array_push($_SESSION['usuarios'][$user]["services"], $servicio);//$_SESSION['usuarios'][$user]["services"][]=$servicio;
+            header("location:form_mainpage.php");
+        }else{
+            //$imagen="../img/imgServ/servdefaultdonotdelete.jpg";
+            include("../templates/servicios.php");
         }
-        header("location:form_mainpage.php");
+        
     }else
         include("../templates/servicios.php");
     }

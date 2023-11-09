@@ -14,13 +14,14 @@ $user = $_SESSION['active'];
     <header><a href="../forms\form_mainpage.php">&#60; To main page</a><h1>Services-Usuario</h1></header><!--Redirige a inicio -->
     <main>
         <form action="" method="POST" id="form-usuario" enctype="multipart/form-data">
+        <section id="s1">
         <div>
             <label for="nombreCompleto">Full Name*</label>
-            <input type="text" name="nombreCompleto" id="nombreCompleto" value="<?=$_SESSION['usuarios'][$user]['fullName']?>" readonly />
+            <span name="nombreCompleto" id="nombreCompleto"> <?=$_SESSION['usuarios'][$user]['fullName']?></span>
         </div>
         <div>
             <label for="email">Email*</label>
-            <input type="text" name="email" id="email" value="<?=$_SESSION['usuarios'][$user]['email']?>" readonly>
+            <span name="email" id="email" ><?=$_SESSION['usuarios'][$user]['email']?></span>
         </div>
         <div>
             <label for="Password">Password*</label>
@@ -31,9 +32,9 @@ $user = $_SESSION['active'];
         </div>
         <div>
             <label for="date">Date of Birth*</label>
-            <input type="text" name="date" id="date" value="<?=$_SESSION['usuarios'][$user]['dateOfBirth']?>" readonly>
+            <span name="date" id="date" ><?=$_SESSION['usuarios'][$user]['dateOfBirth']?></span>
         </div>
-        <div><label for="languages">Languages</label>
+        <div><label for="languages">Languages</label><br>
              <?=pintaSelect($languagesArray,"languages");?>
              <?php
                 echo (isset($errores['languages'])) ? "<span class=\"error\">".$errores['languages']."</span><br>" : "";
@@ -47,15 +48,15 @@ $user = $_SESSION['active'];
             ?>
         </div>
             <input type="submit" name="bSave" id="save" value="S A V E">
-
-        <div id="div-image">
+        </section>
+        <section id="div-image">
         <span>Profile picture</span>
             <br>
             <?php
                 if($_SESSION['usuarios'][$user]['profilePicture'] != 1){
-                    echo "<img height=\"50\"width=\"50\"src=\"".$_SESSION['usuarios'][$user]['profilePicture']."\" alt=\"profPicture\">";
+                    echo "<img src=\"".$_SESSION['usuarios'][$user]['profilePicture']."\" alt=\"profPicture\">";
                 }else{
-                    echo "<img height=\"50\"width=\"50\"src=\"../img/imgPerfil/default_picture_donotdelete.jpg\" alt=\"profPicture\">";
+                    echo "<img src=\"../img/imgPerfil/default_picture_donotdelete.jpg\" alt=\"profPicture\">";
                 }
             ?>
             <br>
@@ -64,7 +65,7 @@ $user = $_SESSION['active'];
             <?php
                 echo (isset($errores['imagen'])) ? "<span class=\"error\">".$errores['imagen']."</span><br>" : "";
             ?>
-        </div>
+        </section>
         </form>
     </main>
 

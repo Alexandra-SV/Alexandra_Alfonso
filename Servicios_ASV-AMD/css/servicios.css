@@ -30,76 +30,91 @@ radial-gradient(ellipse at left top,#a954ee, transparent);
     }
     & main{
         display: flex;
-
+        
         & form{
             margin-left: auto;
             margin-right: auto;
             background: linear-gradient(to right, rgb(143, 78, 229)  5%,  rgba(188, 174, 252, 0.438));
             border-radius: 30px;
-            flex-basis: 450px;
+            flex-basis: 500px;
             & div{
                 padding: 3px;
                 color: #fff;
                 margin: 20px;
                 font-size: 1.7em;
-                
                 & #titulo{
-                    font-size: 1.5em;
+                    font-size: 0.8em;
                     height: 35px;
-                    width: 170px;
+                    width: 190px;
                     border: none;
                     margin-left: 145px;
                     border-radius: 20px;
+                    color: #230939;
                 }
                 & #category{
                     font-size: 0.6em;
-                    padding-left: 10px;
-                    height: 34px;
-                    width: 170px;
+                    padding-left: 5px;
+                    height: 80px;
+                    width: 200px;
                     border: none;
-                    margin-left: 103px;
+                    margin-left:210px;
                     border-radius:20px;
+                    color: #230939;
+                    &  option:checked {
+                        background-color: rgb(232, 208, 255); 
+                      }
+                    &::-webkit-scrollbar {display: none;}
                 }
 
                 & #ubicacion{
                     height: 35px;
-                    width: 170px;
+                    width: 193px;
                     border: none;
                     margin-left:95px;
                     border-radius: 20px;
+                    font-size: 0.8em;
+                    color: #230939;
                 }
                 & #Availability{
                     font-size: 0.6em;
-                    padding-left: 15px;
-                    height: 35px;
-                    width: 170px;
+                    padding-left: 5px;
+                    height: 57px;
+                    width: 193px;
                     border: none;
-                    margin-left:90px;
+                    margin-left:220px;
                     border-radius: 20px;
+                    color: #230939;
+                    &  option:checked {
+                        background-color:  rgb(232, 208, 255); 
+                      }
+                    &::-webkit-scrollbar {display: none;}
                 }
                 
                 & #precioH{
                     height: 35px;
-                    width: 170px;
+                    width: 190px;
                     border: none;
                     margin-left: 40px;
                     border-radius: 20px;
+                    font-size: 0.8em;
+                    color: #230939;
                 }
                 & #servicedescription{
                     margin-top: 5px;
                     margin-left: 10px;
                     border-radius: 10px;
-                    width: 370px;
+                    width: 400px;
                     height: 150px;
                     border: none;
                     font-size: 1em;
-                    max-width: 370px;
+                    max-width: 400px;
                     max-height: 150px;
+                    color: #230939;
                 }
             }
             & #radio{
                 font-size: 1.6em;
-                & input{margin-left:220px;font-size: 1em;}
+                & input{margin-left:220px;font-size: 1em;accent-color: #7936b0;}
             }
             & #addfile{
                 & label{ 
@@ -108,8 +123,8 @@ radial-gradient(ellipse at left top,#a954ee, transparent);
                 border-radius: 30px;
                 border: none;              
                 margin-left: 28px;
-                letter-spacing: 2px;
-                color: #fff; 
+                letter-spacing: 4px;
+                color: #fff;
             }
                 & input{
                 display: none;
@@ -122,7 +137,7 @@ radial-gradient(ellipse at left top,#a954ee, transparent);
                 border-radius: 20px;
                 color: #fff;
                 border: none;
-                margin-left: 290px;
+                margin-left: 320px;
                 margin-bottom: 20px;
                 font-size: 1.5em;
                 letter-spacing: 2px;
