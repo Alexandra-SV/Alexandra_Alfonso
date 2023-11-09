@@ -17,6 +17,9 @@
         cUser($email,$password,'usuario',$errores);
         //Pasar a correcto
         if(empty($errores)){
+
+
+            //guardar en variable de sesion al user
             header("location:form_mainpage.php?user=$email");
         }else{
             include("../templates/inicioSesion.php");
