@@ -4,7 +4,7 @@
     //Librerias
     include('../libs/bGeneral.php');
     include('../libs/bComponentes.php');
-    include("../libs/bConfiguracion");
+    include("../libs/bConfiguracion.php");
     //Datos y array de errores
     $errores = [];
     $fullName = "";
@@ -38,7 +38,7 @@
         //Pasar a correcto
         if(empty($errores)){
             //Imagen
-            $profilePicture = cFile('profilePicture',$errores,$extensionesValidas,$dir,$max_file_size,false);
+            $profilePicture = cFile('profilePicture',$errores,$extensionesValidas,$dirPerfil,$max_file_size,false);
             //Guarda el usuario en session con la id del email, si no hay errores hacr if para la foto
             $usuario = array(
                 "email"=>$email,

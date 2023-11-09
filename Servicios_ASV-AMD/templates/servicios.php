@@ -4,6 +4,7 @@ $css="../css/servicios.css";
 
 include("../templates/pl_encabezado.php");
 include("../libs/bComponentes.php");
+
 ?>
     <header><a href="../forms/form_mainpage.php"> &#60; To main page</a><h1>Services-services</h1></header><!--Redirige a inicio -->
     <main>
@@ -15,7 +16,7 @@ include("../libs/bComponentes.php");
                 echo (isset($errores['titulo'])) ? "<span class=\"error\">".$errores['titulo']."</span><br>" : "";
             ?>
         </div>
-        <div><label for="category">Category</label><?= pintaSelect($category,"category");?>
+        <div><label for="category">Category</label><br><?= pintaSelect($category,"category");?>
             <?php
                 echo (isset($errores['category'])) ? "<span class=\"error\">".$errores['category']."</span><br>" : "";
             ?>
@@ -32,7 +33,7 @@ include("../libs/bComponentes.php");
                 echo (isset($errores['ubicacion'])) ? "<span class=\"error\">".$errores['ubicacion']."</span><br>" : "";
             ?>
         </div>
-        <div><label for="Availability">Availability</label><?= pintaSelect($Availability,"Availability");?>
+        <div><label for="Availability">Availability</label><br><?= pintaSelect($Availability,"Availability");?>
             <?php
                 echo (isset($errores['Availability'])) ? "<span class=\"error\">".$errores['Availability']."</span><br>" : "";
             ?>

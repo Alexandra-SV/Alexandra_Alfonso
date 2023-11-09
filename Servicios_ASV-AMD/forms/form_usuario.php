@@ -2,7 +2,7 @@
 session_start();
 include("../templates/pl_encabezado.php");
 include("../libs/bGeneral.php");
-include("../libs/bConfiguracion");
+include("../libs/bConfiguracion.php");
 $errores=[];
 $error=false;
 
@@ -28,23 +28,23 @@ $email=$_SESSION['usuarios'][$user]['email'];
         $description=recoge('descripcionPersonal',true);
 
     //Validamos
-    cPassword( $password,"password",$errores);
-    cCheck( $languages,"languages",$errores,$languagesArray);
-    cTextarea( $description,"descripcionPersonal",$errores,100,1,false);
+    cPassword( $password,"password",$errores,false);
+    cCheck( $languages,"languages",$errores,$languagesArray,false);
+    cTextarea( $description,"descripcionPersonal",$errores,100,0,false);
 
     //Comprobamos que no haya errores para cactualizar los datos
     if (empty($errores)) {
-        $imagen=cFile('imagen',$errores,$extensionesValidas,$dir,$max_file_size,false);
-        if(!empty($errores)){//cambiar luego para mostrar error directamente y no que introduzca la default
-            $imagen="../img/imgPerfil/default_picture_donotdelete.jpg";
-        }else{
-            $_SESSION['usuarios'][$user]['languages']= $languages;
-            $_SESSION['usuarios'][$user]['password']= $password;//solo comprobar aqui
-            $_SESSION['usuarios'][$user]['description']= $description;
-            $_SESSION['usuarios'][$user]['profilePicture']= $imagen;
+        $imagen=cFile('imagen',$errores,$extensionesValidas,$dirPerfil,$max_file_size,false);
+        if(empty($errores)){//cambiar luego para mostrar error directamente y no que introduzca la default
+           $_SESSION['usuarios'][$user]['languages']= ($languages)? $languages : $_SESSION['usuarios'][$user]['languages'];
+            $_SESSION['usuarios'][$user]['password']= ($password)? $password : $_SESSION['usuarios'][$user]['password'] ;
+            $_SESSION['usuarios'][$user]['description']= ($description)? $description : $_SESSION['usuarios'][$user]['description'] ;
+            $_SESSION['usuarios'][$user]['profilePicture']= ($imagen)? $imagen : $_SESSION['usuarios'][$user]['profilePicture'];
             header("location:form_mainpage.php");
+        }else{
+            //$imagen="../img/imgPerfil/default_picture_donotdelete.jpg";
+            include("../templates/usuario.php");
         }
-
     }else
         include("../templates/usuario.php");
     }

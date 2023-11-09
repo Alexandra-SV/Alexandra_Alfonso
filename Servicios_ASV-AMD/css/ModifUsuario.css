@@ -2,9 +2,9 @@
     font-family: sans-serif;
 }
 body{
-min-height: 100vh;
-background: radial-gradient(ellipse at right bottom, #E55AA9, transparent),
-radial-gradient(ellipse at left top,#ee54ab, transparent);
+    min-height: 100vh;
+    background: radial-gradient(ellipse at right bottom, #E55AA9, transparent),
+    radial-gradient(ellipse at left top,#ee54ab, transparent);
 
     & header{
         & h1{text-align:center; font-family:sans;margin-top: -20px;
@@ -30,22 +30,26 @@ radial-gradient(ellipse at left top,#ee54ab, transparent);
     }
 
     & main{
-        display: flex;
-        flex-direction: row-reverse;
-        align-content: center;
-        justify-content: center;
-        gap: 60px;
+        
         & #form-usuario{
-            background: linear-gradient(to right, rgba(229, 78, 126, 1)  5%,  rgba(252, 174, 226, 0.438));
-            border-radius: 30px;
-            flex-basis: 450px;
+            display: flex;
+            flex-direction: row-reverse;
+            align-content: center;
+            justify-content: center;
+            gap: 60px;
+            & #s1{
+                background: linear-gradient(to right, rgba(229, 78, 126, 1)  5%,  rgba(252, 174, 226, 0.438));
+                border-radius: 30px;
             & div{
                 padding: 3px;
                 color: #fff;
                 margin: 20px;
-                & label{font-size: 1.5em;}
+                & label{font-size: 1.5em; }
                 & input{ border-radius: 20px; border: none; height: 40px;width: 200px;font-size: 1em;padding-left:10px;}
-
+                & span{padding: 3px;
+                    color: #fff;
+                    margin: 10px;
+                    font-size: 1.5em;}
             }
             & #nombreCompleto{
                 margin-left: 48px;
@@ -60,16 +64,18 @@ radial-gradient(ellipse at left top,#ee54ab, transparent);
                 margin-left:14px;
                 margin-left: 25px;
             }
-
             & #languages{
                 border-radius: 20px;
                 border: none;
-                height: 40px;
+                height: 80px;
                 width: 210px;
-                margin-left: 50px;
+                margin-left: 170px;
                 font-size: 1em;
                 padding-left:10px;
-
+                &  option:checked {
+                    background-color: rgb(255, 208, 223); /* Ajusta el color de fondo de las opciones según tus preferencias */
+                  }
+                &::-webkit-scrollbar {display: none;}
             }
             & #descripcionPersonal{
                 margin-top: 5px;
@@ -81,6 +87,7 @@ radial-gradient(ellipse at left top,#ee54ab, transparent);
                 font-size: 1em;
                 max-width: 370px;
                 max-height: 150px;
+                font-size: 1.5em;
             }
             & #save{text-decoration: none;
                 background: linear-gradient(to right,  #d33790e1  5%,  rgba(252, 174, 226, 0.438));
@@ -93,59 +100,32 @@ radial-gradient(ellipse at left top,#ee54ab, transparent);
                 font-size: 1.5em;
                 letter-spacing: 2px;
             }
+            }
+            & #div-image{
+                background: linear-gradient(to right, #E75485  5%,  #EE7CB2);
+                border-radius: 30px;
+                place-self: center;
+                min-height: 450px;
+                margin-left: 10px;
+                & span{color: #fff;font-size: 1.7em;padding: 10px;margin: 15px;}
+                & img{height: 300px;width: 300px;border-radius: 10px;margin: 20px 30px;}
+                & label{
+                    background: linear-gradient(to right, #d33790e1  5%,  rgba(252, 174, 226, 0.438));
+                    padding: 3px 8px;
+                    border-radius: 20px;
+                    border: none;
+                    margin-left: 170px;
+                    margin-right: 20px;
+                    width: 129px;
+                    color: #fff;
+                    font-size: 1.5em;
+                    letter-spacing: 2px;
+                }
+                & input{
+                    display: none;
+                }
+            }
         }
-
-
-
-        & #div-image{
-            background: linear-gradient(to right, rgba(229, 78, 126, 1)  5%,  rgba(252, 174, 226, 0.438));
-            border-radius: 30px;
-            place-self: center;
-            min-height: 450px;
-            & span{color: #fff;font-size: 1.7em;padding: 10px;margin: 15px;}
-            & img{height: 300px;width: 300px;border-radius: 10px;margin: 20px 30px;}
-            & label{
-                background: linear-gradient(to right, #d33790e1  5%,  rgba(252, 174, 226, 0.438));
-                padding: 3px 8px;
-                border-radius: 20px;
-                border: none;
-                margin-left: 170px;
-                margin-right: 20px;
-                width: 129px;
-                color: #fff;
-                font-size: 1.5em;
-                letter-spacing: 2px;
-            }
-            & input{
-                display: none;
-            }
-        }
-        /*
-
-
-            }
-
-        }
-        & #form-image{
-            background: linear-gradient(to right, rgba(229, 78, 126, 1)  5%,  rgba(252, 174, 226, 0.438));
-            border-radius: 30px;
-            height: 300px;
-            & span{color: #fff;font-size: 1.7em;padding: 10px;}
-            & img{height: 200px;width: 200px;border-radius: 10px;margin: 6px 10px;}
-            & label{
-                background: linear-gradient(to right, #d33790e1  5%,  rgba(252, 174, 226, 0.438));
-                padding: 3px 8px;
-                border-radius: 10px;
-                border: none;
-                margin-top: 15px;
-                margin-left: 110px;
-                width: 129px;
-                color: #fff;
-            }
-            & input{
-                display: none;
-            }
-        } */
     }
 }
 
