@@ -19,6 +19,7 @@
 <h1>Services</h1>
 </header>
 <nav>
+  <!--TODO: usar fichero en vez de sesion-->
   <span>Welcome, <?=$_SESSION['usuarios'][$user]['fullName']?></span>
   <?php
       if($_SESSION['usuarios'][$user]['profilePicture'] != 1){

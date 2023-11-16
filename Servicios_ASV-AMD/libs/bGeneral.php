@@ -276,12 +276,13 @@ function cCheck(array $text, string $campo, array &$errores, array $valores, boo
     return true;
 }
 function cUser(string $email,string $pass, string $campo, array &$errores){
-    if(isset($_SESSION['usuarios'][$email]) && $_SESSION['usuarios'][$email]['password'] == $pass){
+    /*if(isset($_SESSION['usuarios'][$email]) && $_SESSION['usuarios'][$email]['password'] == $pass){
         return true;
     }else{
         $errores[$campo] = "Error en el campo $campo";
         return false;
-    }
+    }*/
+    //TODO: poner que use fichero para validar sesion
 }
 function cPassword(string $pass, string $campo, array &$errores, bool $required=true){
     if($required && $pass == ""){
