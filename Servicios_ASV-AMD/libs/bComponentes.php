@@ -21,7 +21,7 @@ function pintaSelect(array $valores,string $name){
     }
     echo "</select>";
 }
-function pintaServicios($usuario){
+/*function pintaServicios($usuario){
     if (!empty($_SESSION['usuarios'][$usuario]['services'])){
 
         $servicios=$_SESSION['usuarios'][$usuario]['services'];
@@ -43,9 +43,20 @@ function pintaServicios($usuario){
         }
     }else
         echo"<span>Sin Servicios</span>";
-}
+}*/
 
 function pintaServicio($usuario){
+    //leer titulo de fichero Servicios.txt
+
+
+
+
+
+
+
+
+
+    /*
     if (!empty($_SESSION['usuarios'][$usuario]['services'])){
         $cat=implode(" ",$_SESSION['usuarios'][$usuario]['services']['categoria']);
         echo "<section id=\"".$_SESSION['usuarios'][$usuario]['services']['titulo']."\">";
@@ -62,7 +73,7 @@ function pintaServicio($usuario){
         }
         echo "</section>";
     }else
-        echo"<span>Sin Servicios</span>";
+        echo"<span>Sin Servicios</span>";*/
 }
 
 ?>

@@ -51,6 +51,8 @@ $email=$_SESSION['usuarios'][$user]['email'];
     if (empty($errores)) {
         $imagen=cFile('servicePicture',$errores,$extensionesValidas,$dirSesion,$max_file_size,false);
         if(empty($errores)){//cambiar luego para mostrar error directamente y no que introduzca la default
+            if($imagen==1)
+                $imagen="../img/imgServ/servdefaultdonotdelete.jpg" ;
            $servicio = array(
                 "titulo" => $titulo  ,
                 "categoria" => $categoria  ,
@@ -61,7 +63,10 @@ $email=$_SESSION['usuarios'][$user]['email'];
                 "imagen" => $imagen  ,
                 "descripcion" => $descripcion
             );
-            array_push($_SESSION['usuarios'][$user]["services"], $servicio);//$_SESSION['usuarios'][$user]["services"][]=$servicio;
+            
+            $st= " Servicio: ".$titulo."| Categorias: ".implode(',',$categoria)."| Tipo ".$tipo."| Ubicacion ".$ubicacion."| Disponibilidad ".implode(',',$disponibilidad)."| Precio ".$precio."| Imagen ". $imagen ."| Descripcion ".$descripcion;
+            file_put_contents("../ficheros/servicios.txt",$st,FILE_APPEND);
+            //añade al usuario   array_push($_SESSION['usuarios'][$user]["services"], $servicio);//$_SESSION['usuarios'][$user]["services"][]=$servicio;
             header("location:form_mainpage.php");
         }else{
             //$imagen="../img/imgServ/servdefaultdonotdelete.jpg";
