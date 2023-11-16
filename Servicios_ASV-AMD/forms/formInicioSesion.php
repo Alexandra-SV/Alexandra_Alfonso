@@ -17,12 +17,11 @@
         cUser($email,$password,'usuario',$errores);
         //Pasar a correcto
         if(empty($errores)){
-
-
             //guardar en variable de sesion al user
             $_SESSION['active'] = $email;
             header("location:form_mainpage.php");
         }else{
+            file_put_contents("../ficheros/logLogin.txt", "Usuario: ".$email." | Contrasena: ".$password ."| Fecha: ".date("d-m-Y h:i:s",time()),FILE_APPEND);
             include("../templates/inicioSesion.php");
         }
     }

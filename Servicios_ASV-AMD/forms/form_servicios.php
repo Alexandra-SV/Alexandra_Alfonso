@@ -78,4 +78,5 @@ $email=$_SESSION['usuarios'][$user]['email'];
     }
 ?>
 
+
 <?include("../templates/pl_pie.html");?>
