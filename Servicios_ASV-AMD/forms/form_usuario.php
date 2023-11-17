@@ -5,7 +5,7 @@ include("../libs/bGeneral.php");
 include("../libs/bConfiguracion.php");
 $errores=[];
 $error=false;
-
+//TODO: NO MODIFICAR DATOS USUARIO, SOLO MOSTRAR
 //variables a utilizar
 $password;
 $languages;
