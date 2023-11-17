@@ -40,6 +40,9 @@
             //Imagen
             $profilePicture = cFile('profilePicture',$errores,$extensionesValidas,$dirPerfil,$max_file_size,false);
             //Guarda el usuario en session con la id del email, si no hay errores hacr if para la foto
+            if($profilePicture == 1){
+                $profilePicture = "../img/imgPerfil/default_picture_donotdelete.jpg";
+            }
             $usuario = array(
                 "email"=>$email,
                 "password"=>$password,
@@ -50,11 +53,12 @@
                 "description"=>$description,
                 "services"=>[]
             );
-            file_put_contents("../ficheros/usuarios.txt", "Usuario: ".$usuario["email"]." | Contrasena: ".$usuario["password"]." | Nombre completo: ".$usuario["fullName"]." | Cumpleanos: ".$usuario["dateOfBirth"]." | Foto: ".$usuario["profilePicture"]." | Idiomas: ".implode(",",$usuario["languages"])." | Descripcion: ".$usuario["description"]." | ALTA: ".date("d-m-Y h:i:s",time()).PHP_EOL,FILE_APPEND);
-            $_SESSION['usuarios'][$email] = $usuario;
+            file_put_contents("../ficheros/usuarios.txt", "".$usuario["email"]."|".$usuario["password"]."|".$usuario["fullName"]."|".$usuario["dateOfBirth"]."|".$usuario["profilePicture"]."|".implode(",",$usuario["languages"])."|".$usuario["description"]."|".date("d-m-Y h:i:s",time()).";".PHP_EOL,FILE_APPEND);
+            //$_SESSION['usuarios'][$email] = $usuario;
             //Creo la sesion activa
             $_SESSION['active'] = $email;
-            header("location:form_mainpage.php");//avisar cuando demos sesiones
+            $_SESSION['imgPerfil'] = $profilePicture;
+            header("location:formInicioSesion.php");
         }else{
             include("../templates/registro.php");
         }
