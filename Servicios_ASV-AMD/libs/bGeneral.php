@@ -275,14 +275,36 @@ function cCheck(array $text, string $campo, array &$errores, array $valores, boo
     }
     return true;
 }
-function cUser(string $email,string $pass, string $campo, array &$errores){
-    /*if(isset($_SESSION['usuarios'][$email]) && $_SESSION['usuarios'][$email]['password'] == $pass){
-        return true;
-    }else{
-        $errores[$campo] = "Error en el campo $campo";
+function cUser(string $fichero, string $email, string $password, string $campo, array &$errores){
+    $datos = file_get_contents($fichero);
+    $datosArray = explode(";",$datos);
+    for ($i=0; $i < $datosArray; $i++) {
+        $usuario = explode("|",implode("",$datosArray));
+        if($usuario[0] == $email && $usuario[1] == $password){
+            $_SESSION['imgPerfil'] = $usuario[4];
+            return true;
+        }else{
+            $errores[$campo] = "Error en el campo $campo";
+        }
         return false;
-    }*/
-    //TODO: poner que use fichero para validar sesion
+    }
+}
+//devuelve datos usuario
+function userData(string $fichero, string $email, string $campo, array $errores): array|bool{
+    //coger datos fichero
+    $datos = file_get_contents($fichero);
+    //coger cada user separado por ;
+    $datosArray = explode(";",$datos);
+    for ($i=0; $i < $datosArray; $i++) {
+        //de cada user hacer un array de todos los datos
+        $usuario = explode("|",implode("",$datosArray));
+        if($usuario[0] == $email){ //si el email dado es igual al del user se cogen datos de ese user
+            return $usuario;
+        }else{
+            $errores[$campo] = "Error en el campo $campo";
+        }
+        return false;
+    }
 }
 function cPassword(string $pass, string $campo, array &$errores, bool $required=true){
     if($required && $pass == ""){
