@@ -51,7 +51,7 @@ function getTituloServicios(){
     while (!feof($file)){
         $linea = fgets($file);
         if ($linea!="") {
-            $service=explode(" ",$linea);
+            $service=explode("|",$linea);
             $titulos[]=$service[0];
         }
 
