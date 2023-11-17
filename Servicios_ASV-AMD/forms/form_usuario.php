@@ -35,6 +35,8 @@ $email=$_SESSION['usuarios'][$user]['email'];
     //Comprobamos que no haya errores para cactualizar los datos
     if (empty($errores)) {
         $imagen=cFile('imagen',$errores,$extensionesValidas,$dirPerfil,$max_file_size,false);
+        if($imagen==1)
+            $imagen="../img/imgPerfil/default_picture_donotdelete.jpg" ;
         if(empty($errores)){//cambiar luego para mostrar error directamente y no que introduzca la default
            $_SESSION['usuarios'][$user]['languages']= ($languages)? $languages : $_SESSION['usuarios'][$user]['languages'];
             $_SESSION['usuarios'][$user]['password']= ($password)? $password : $_SESSION['usuarios'][$user]['password'] ;

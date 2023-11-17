@@ -50,7 +50,7 @@
                 "description"=>$description,
                 "services"=>[]
             );
-            file_put_contents("../ficheros/usuarios.txt", "Usuario: ".$usuario["email"]." | Contrasena: ".$usuario["password"]." | Nombre completo: ".$usuario["fullName"]." | Cumpleanos: ".$usuario["dateOfBirth"]." | Foto: ".$usuario["profilePicture"]." | Idiomas: ".implode(",",$usuario["languages"])." | Descripcion: ".$usuario["description"]." | ALTA: ".date("d-m-Y h:i:s",time()),FILE_APPEND);
+            file_put_contents("../ficheros/usuarios.txt", "Usuario: ".$usuario["email"]." | Contrasena: ".$usuario["password"]." | Nombre completo: ".$usuario["fullName"]." | Cumpleanos: ".$usuario["dateOfBirth"]." | Foto: ".$usuario["profilePicture"]." | Idiomas: ".implode(",",$usuario["languages"])." | Descripcion: ".$usuario["description"]." | ALTA: ".date("d-m-Y h:i:s",time()).PHP_EOL,FILE_APPEND);
             $_SESSION['usuarios'][$email] = $usuario;
             //Creo la sesion activa
             $_SESSION['active'] = $email;

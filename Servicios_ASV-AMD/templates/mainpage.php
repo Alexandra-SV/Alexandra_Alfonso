@@ -30,7 +30,10 @@
   ?>
 </nav>
 <main>
-     <?=pintaServicios($user);?><!--arreglar y cambiar a pintaServicios($user)-->
+  <div id="lista">
+    <?=pintaServicio();?><!--arreglar y cambiar a pintaServicios($user)-->
+    </div>  
+  
 </main>
 <a href="../forms/form_servicios.php" id="bAddService">+ add more services</a>
 <?php

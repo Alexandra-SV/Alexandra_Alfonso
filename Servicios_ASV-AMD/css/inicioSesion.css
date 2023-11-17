@@ -14,16 +14,7 @@ body{
 body > div,form{
     width: 36vh;
 }
-h1{
-    align-self: center;
-    text-align: center;
-    font-family: serif;
-    background: linear-gradient(to bottom, rgba(129, 46, 126, 0.463) 0%, rgba(91,0,29,0.4875) 100%);
-    -webkit-background-clip: text;
-    color: transparent;
-    font-size: 72px;
-    font-weight: 400;
-}
+
 form{
     align-self:flex-start;
 }
@@ -77,4 +68,35 @@ a{
 }
 footer{
     display: none;
+}
+/*Add services style*/
+#serv{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+   & h1{
+        align-self: center;
+        text-align: center;
+        font-family: serif;
+        background: linear-gradient(to bottom, rgba(129, 46, 126, 0.463) 0%, rgba(91,0,29,0.4875) 100%);
+        -webkit-background-clip: text;
+        color: transparent;
+        font-size: 72px;
+        font-weight: 400;
+    }
+   & #servicios{
+        display: flex;
+        flex-direction: column-reverse;
+        align-self: center;
+        color: #fff;
+        background: linear-gradient(to right, rgb(222, 60, 122)  5%,  rgba(228, 119, 181, 0.438));
+        border-radius: 10px;
+        min-width:300px;
+        & span{
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+            padding: 5px;
+            text-align: center;
+        }
+    }    
 }

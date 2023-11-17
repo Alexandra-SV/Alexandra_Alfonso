@@ -1,1 +1,5 @@
-../img/imgServ/servdefaultdonotdelete.jpg
+Servicio:diseñador Categorias:Diseño Gráfico Tipo:Pago Ubicacion:valencia Disponibilidad:mañanas Precio:13 Imagen:../img/imgServ/servdefaultdonotdelete.jpg Descripcion:kkkk ALTA:17-11-2023 01:18:24
+Servicio:Cuidador Categorias:Salud y Bienestar,Limpieza y Mantenimiento del Hogar Tipo:Pago Ubicacion:oporto Disponibilidad:mañanas,tardes,noches Precio:13 Imagen:../img/imgServ/servdefaultdonotdelete.jpg Descripcion:sdasd ALTA:17-11-2023 01:19:53
+Servicio:carpintero Categorias:Carpintería y Ebanistería Tipo:Pago Ubicacion:Barcelona Disponibilidad:mañanas Precio:16 Imagen:../img/imgServ/servdefaultdonotdelete.jpg Descripcion:gggg ALTA:17-11-2023 01:25:48
+Servicio:ingeniero informático Categorias:Informática Tipo:Pago Ubicacion:Madrid Disponibilidad:tardes Precio:44 Imagen:../img/imgServ/servdefaultdonotdelete.jpg Descripcion:pppp ALTA:17-11-2023 01:26:30
+Servicio:Enfermero Categorias:Salud y Bienestar Tipo:intercambio Ubicacion:Asturias Disponibilidad:mañanas,tardes,noches Precio:10 Imagen:../img/imgServ/servdefaultdonotdelete.jpg Descripcion:pppppp ALTA:17-11-2023 01:43:48
