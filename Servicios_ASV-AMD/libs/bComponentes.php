@@ -45,35 +45,27 @@ function pintaSelect(array $valores,string $name){
         echo"<span>Sin Servicios</span>";
 }*/
 
-function pintaServicio($usuario){
-    //leer titulo de fichero Servicios.txt
-
-
-
-
-
-
-
-
-
-    /*
-    if (!empty($_SESSION['usuarios'][$usuario]['services'])){
-        $cat=implode(" ",$_SESSION['usuarios'][$usuario]['services']['categoria']);
-        echo "<section id=\"".$_SESSION['usuarios'][$usuario]['services']['titulo']."\">";
-        echo "<div>";
-        echo "<h2>".$_SESSION['usuarios'][$usuario]['services']['titulo']."</h2><br>";
-        echo "<p>Category: ".$cat."</p><br>";
-        echo "<p>Type: ".$_SESSION['usuarios'][$usuario]['services']['tipo']."</p><br>";
-        echo "<p>Price : ".$_SESSION['usuarios'][$usuario]['services']['precio']." per hour</p>";
-        echo "</div>";
-        if($_SESSION['usuarios'][$usuario]['services']["imagen"] != 1){
-            echo "<img src=\"".$_SESSION['usuarios'][$usuario]['services']["imagen"]."\" alt=\"servPicture\">";
-        }else{
-            echo "<img src=\"../img/imgServ/servdefaultdonotdelete.jpg\" alt=\"servPicture\"></a>";
+function getTituloServicios(){
+ $file = fopen("../ficheros/servicios.txt", "r");
+ $titulos=[];
+    while (!feof($file)){
+        $linea = fgets($file);
+        if ($linea!="") {
+            $service=explode(" ",$linea);
+            $titulos[]=$service[0];
         }
-        echo "</section>";
-    }else
-        echo"<span>Sin Servicios</span>";*/
+
+    }
+    fclose($file);
+return $titulos;
+}
+
+function pintaServicio(){
+    //leer titulo de fichero Servicios.txt
+    $titles=getTituloServicios();
+    foreach ($titles as  $value) 
+        echo "<span>$value</span><br>";
+       
 }
 
 ?>

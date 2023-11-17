@@ -24,7 +24,10 @@
     }
     </script>
     <div></div>
-    <h1>Services</h1>
+    <div id="serv">
+        <h1>Services</h1>
+        <section id="servicios"><?=pintaServicio()?></section>
+    </div> 
     <form action="" method="POST">
         <div id="div-signInUp">
             <label for="bSignIn"></label>

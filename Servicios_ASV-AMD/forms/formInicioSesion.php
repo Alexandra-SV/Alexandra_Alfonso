@@ -3,6 +3,7 @@
     session_start();
     //Librerias
     include('../libs/bGeneral.php');
+    include('../libs/bComponentes.php');
     //Datos y array de errores
     $errores = [];
     $email = "";
