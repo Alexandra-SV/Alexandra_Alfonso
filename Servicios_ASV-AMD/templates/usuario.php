@@ -1,11 +1,11 @@
 <?php
-$titulo="ModifyUser";
+$titulo="Modify your info";
 $css="../css/ModifUsuario.css";
 include("../templates/pl_encabezado.php");
 include("../libs/bComponentes.php");
 
 $user = $_SESSION['active'];
-$userData=userData("../ficheros/usuarios.txt", $user,"GetDataUser", $errores);
+$userData=getUser($user);
     if($user == ""){
         header('location:../forms/formInicioSesion.php');
     }

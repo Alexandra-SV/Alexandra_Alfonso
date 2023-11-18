@@ -3,31 +3,11 @@
     $titulo = "Welcome to Services";
     $css = "../css/inicioSesion.css";
     include("pl_encabezado.php");
-    //Errores
-    foreach ($errores as $key => $value) {
-    }
 ?>
-    <script>
-    function mostrarOcultar(){
-        event.preventDefault();
-        var btn = this;
-        var popup = document.getElementsByClassName("div-popup")[0];
-        if (popup.classList.contains("div-popup--mostrar")) {
-            popup.classList.replace("div-popup--mostrar","div-popup--ocultar");
-        }else if (popup.classList.contains("div-popup--ocultar")) {
-            popup.classList.replace("div-popup--ocultar","div-popup--mostrar");
-        }
-    }
-    //Onload
-    window.onload = function(){
-        document.getElementById("bSignIn").addEventListener("click", mostrarOcultar, false);
-    }
-    </script>
-    <div></div>
     <div id="serv">
         <h1>Services</h1>
         <section id="servicios"><?=pintaServicio()?></section>
-    </div> 
+    </div>
     <form action="" method="POST">
         <div id="div-signInUp">
             <label for="bSignIn"></label>
@@ -52,6 +32,22 @@
                 echo (isset($errores['usuario'])) ? "<span class=\"error\">".$errores['usuario']."</span><br>" : "";
             ?>
     </form>
+    <script>
+    function mostrarOcultar(){
+        event.preventDefault();
+        var btn = this;
+        var popup = document.getElementsByClassName("div-popup")[0];
+        if (popup.classList.contains("div-popup--mostrar")) {
+            popup.classList.replace("div-popup--mostrar","div-popup--ocultar");
+        }else if (popup.classList.contains("div-popup--ocultar")) {
+            popup.classList.replace("div-popup--ocultar","div-popup--mostrar");
+        }
+    }
+    //Onload
+    window.onload = function(){
+        document.getElementById("bSignIn").addEventListener("click", mostrarOcultar, false);
+    }
+    </script>
 <?php
     //Pie
     include("pl_pie.html");

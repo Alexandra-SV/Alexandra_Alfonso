@@ -1,22 +1,24 @@
 *{
     font-family: sans-serif;
 }
-.error{
-    color: red;
-}
 body{
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-rows: 100px 450px;
+    grid-template-columns: 17% 65% 260px;
+    grid-template-areas:
+        ". . form"
+        ". serv ."
+    ;
     min-height: 100vh;
     background: radial-gradient(ellipse at right bottom, rgba(171, 60, 175, 1), transparent),
     radial-gradient(ellipse at left top, rgba(229, 78, 126, 1), transparent);
 }
-body > div,form{
-    width: 36vh;
+#serv{
+    grid-area: serv;
 }
-
 form{
-    align-self:flex-start;
+    margin-left: 20px;
+    grid-area: form;
 }
 #bSignIn, a, #bEnter{
     border: none;
@@ -40,9 +42,8 @@ a{
     background: linear-gradient(to right, rgb(201, 54, 101)  5%,  rgba(252, 174, 226, 0.438));
 }
 .div-popup{
+    width: 210px;
     color: white;
-    display: flex;
-    flex-flow: column wrap;
     background: linear-gradient(to right, rgba(229, 78, 126, 1)  5%,  rgba(252, 174, 226, 0.438));
     border-radius: 30px;
     padding: 20px 15px;
@@ -98,5 +99,8 @@ footer{
             padding: 5px;
             text-align: center;
         }
-    }    
+    }
+}
+.error{
+    color: red;
 }

@@ -1,5 +1,5 @@
 <?php
-$titulo="Add Service ";
+$titulo="Add Service";
 $css="../css/servicios.css";
 
 include("../templates/pl_encabezado.php");
