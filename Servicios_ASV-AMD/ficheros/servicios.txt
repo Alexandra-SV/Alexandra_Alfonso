@@ -1,1 +1,2 @@
-designer|Diseño Gráfico|Pago|valencia|tardes|12|../img/imgServ/servdefaultdonotdelete.jpg|gggg|17-11-2023 04:27:36
+designer|Diseño Gráfico|Pago|valencia|tardes|12|../img/imgServ/servdefaultdonotdelete.jpg|gggg|17-11-2023 04:27:36;
+carpintero|Carpintería y Ebanistería|intercambio|oporto|tardes|44|../img/imgServ/\n6.jpg|carpintere desde los 2 años|18-11-2023 12:30:00;

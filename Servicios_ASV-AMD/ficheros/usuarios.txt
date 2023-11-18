@@ -1,1 +1,2 @@
 alex@gmail.com|alex|alex|2001-10-10|../img/imgPerfil/default_picture_donotdelete.jpg|Italiano,Chino|a|17-11-2023 05:34:20;
+alf@gmail.com|alf|Alf|2002-10-10|../img/imgPerfil/\n2.jpg|Italiano|hohoho|18-11-2023 12:59:33;

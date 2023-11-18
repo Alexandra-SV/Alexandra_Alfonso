@@ -21,30 +21,6 @@ function pintaSelect(array $valores,string $name){
     }
     echo "</select>";
 }
-/*function pintaServicios($usuario){
-    if (!empty($_SESSION['usuarios'][$usuario]['services'])){
-
-        $servicios=$_SESSION['usuarios'][$usuario]['services'];
-        foreach ($servicios as $servicio) {
-            $cat=implode(" ",$servicio['categoria']);
-            echo "<section id=\"".$servicio['titulo']."\">";
-            echo "<div>";
-            echo "<h2>".$servicio['titulo']."</h2><br>";
-            echo "<p>Category: ".$cat."</p><br>";
-            echo "<p>Type: ".$servicio['tipo']."</p><br>";
-            echo "<p>Price : ".$servicio['precio']." per hour</p>";
-            echo "</div>";
-            if($servicio["imagen"] != 1){
-                echo "<img src=\"".$servicio["imagen"]."\" alt=\"servPicture\">";
-            }else{
-                echo "<img src=\"../img/imgServ/servdefaultdonotdelete.jpg\" alt=\"servPicture\"></a>";
-            }
-            echo "</section>";
-        }
-    }else
-        echo"<span>Sin Servicios</span>";
-}*/
-
 function getTituloServicios(){
  $file = fopen("../ficheros/servicios.txt", "r");
  $titulos=[];
@@ -68,4 +44,27 @@ function pintaServicio(){
        
 }
 
+/*function pintaServicios($usuario){
+    if (!empty($_SESSION['usuarios'][$usuario]['services'])){
+
+        $servicios=$_SESSION['usuarios'][$usuario]['services'];
+        foreach ($servicios as $servicio) {
+            $cat=implode(" ",$servicio['categoria']);
+            echo "<section id=\"".$servicio['titulo']."\">";
+            echo "<div>";
+            echo "<h2>".$servicio['titulo']."</h2><br>";
+            echo "<p>Category: ".$cat."</p><br>";
+            echo "<p>Type: ".$servicio['tipo']."</p><br>";
+            echo "<p>Price : ".$servicio['precio']." per hour</p>";
+            echo "</div>";
+            if($servicio["imagen"] != 1){
+                echo "<img src=\"".$servicio["imagen"]."\" alt=\"servPicture\">";
+            }else{
+                echo "<img src=\"../img/imgServ/servdefaultdonotdelete.jpg\" alt=\"servPicture\"></a>";
+            }
+            echo "</section>";
+        }
+    }else
+        echo"<span>Sin Servicios</span>";
+}*/
 ?>
