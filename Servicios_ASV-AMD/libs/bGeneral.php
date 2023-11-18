@@ -15,7 +15,6 @@
  * @param string $frase
  * @return string
  */
-
 function sinTildes($frase): string
 {
     $no_permitidas = array(
@@ -72,16 +71,13 @@ function sinTildes($frase): string
  * Elimina los espacios de una cadena de texto
  *
  * @param string $frase
- * @param string $espacio
  * @return string
  */
-
 function sinEspacios($frase)
 {
     $texto = trim(preg_replace('/ +/', ' ', $frase));
     return $texto;
 }
-
 
 /**
  * Funcion recoge
@@ -89,9 +85,9 @@ function sinEspacios($frase)
  * Sanitiza cadenas de texto
  *
  * @param string $var
+ * @param bool $espacios
  * @return string
  */
-
 function recoge(string $var,$espacios=false)
 {
     if (isset($_REQUEST[$var]) && (!is_array($_REQUEST[$var]))) {
@@ -115,7 +111,6 @@ function recoge(string $var,$espacios=false)
  * @param string $var
  * @return array
  */
-
 function recogeArray(string $var): array
 {
     $array = [];
@@ -137,13 +132,13 @@ function recogeArray(string $var): array
  * @param string $text
  * @param string $campo
  * @param array $errores
- * @param integer $min
  * @param integer $max
+ * @param integer $min
  * @param bool $espacios
  * @param bool $case
+ * @param bool $required
  * @return bool
  */
-
 function cTexto(string $text, string $campo, array &$errores, int $max = 30, int $min = 1, bool $espacios = TRUE, bool $case = TRUE, bool $required=true): bool
 {
     if(!$required && $text == ""){
@@ -158,6 +153,20 @@ function cTexto(string $text, string $campo, array &$errores, int $max = 30, int
     $errores[$campo] = "Error en el campo $campo";
     return false;
 }
+
+/**
+ * Funcion cTextarea
+ *
+ * Valida una cadena de texto con respecto a una RegEx. Reporta error en un array.
+ *
+ * @param string $text
+ * @param string $campo
+ * @param array $errores
+ * @param integer $max
+ * @param integer $min
+ * @param bool $case
+ * @return bool
+ */
 function cTextarea(string $text, string $campo, array &$errores, int $max = 30, int $min = 1, bool $required=true): bool
 {
     if(!$required && $text == ""){
@@ -171,24 +180,42 @@ function cTextarea(string $text, string $campo, array &$errores, int $max = 30, 
     return false;
 }
 
-
-
-
-
-function cEmail(String $email, string $campo, array &$errores): bool{//FILTER_VALIDATE_EMAIL
-    if(preg_match("/^[a-z][\w._]{2,}@([a-z]+[a-z\.]+\.[a-z]{2,})$/i",$email))
+/**
+ * Funcion cEmail
+ *
+ * Valida una cadena de texto con respecto a una RegEx para email. Reporta error en un array.
+ *
+ * @param string $email
+ * @param string $campo
+ * @param array $errores
+ * @return bool
+ */
+function cEmail(string $email, string $campo, array &$errores): bool{
+    /* if(preg_match("/^[a-z][\w._]{2,}@([a-z]+[a-z\.]+\.[a-z]{2,})$/i",$email))
+        return true; */
+    if(filter_var($email, FILTER_VALIDATE_EMAIL))
         return true;
 
     $errores[$campo] = "Error en el campo $campo";
     return false;
 }
-//da las fechas en formato yyyy-mm-dd
+/**
+ * Funcion cDate
+ *
+ * Valida una fecha. Reporta error en un array.
+ *
+ * @param string $fecha
+ * @param string $campo
+ * @param array $errores
+ * @return string
+ */
 function cDate(String $fecha, string $campo, array &$errores): string{
     if($fecha != ""){
-        //separar en array para validar
         $fechaArray = explode("-",$fecha);
-        if(checkdate($fechaArray[1],$fechaArray[2],$fechaArray[0]))//validar con checkdate()
+        if(checkdate($fechaArray[1],$fechaArray[2],$fechaArray[0])){
+            if($fechaArray[0] > 1950 && $fechaArray[0] < 2005)
             return true;
+        }
         $errores[$campo] = "Error en el campo $campo";
         return false;
     }else{
@@ -199,9 +226,9 @@ function cDate(String $fecha, string $campo, array &$errores): string{
 /**
  * Funcion cNum
  *
- * Valida que un string sea numerico menor o igual que un número y si es o no requerido
+ * Valida que un string sea numerico menor o igual que un número y si es o no requerido. Reporta error en un array.
  *
- * @param string $text
+ * @param string $num
  * @param string $campo
  * @param array $errores
  * @param bool $requerido
@@ -212,7 +239,6 @@ function cNum(string $num, string $campo, array &$errores, bool $requerido = TRU
 {
     $cuantificador = ($requerido) ? "+" : "*";
     if ((preg_match("/^[0-9]" . $cuantificador . "$/", $num))) {
-
         if ($num <= $max) return true;
     }
     $errores[$campo] = "Error en el campo $campo";
@@ -222,18 +248,16 @@ function cNum(string $num, string $campo, array &$errores, bool $requerido = TRU
 /**
  * Funcion cRadio
  *
- * Valida que un string se encuentre entre los valores posibles. Si es requerido o no
+ * Valida que un string se encuentre entre los valores posibles. Si es requerido o no. Reporta error en un array.
  *
  * @param string $text
  * @param string $campo
  * @param array $errores
  * @param array $valores
  * @param bool $requerido
- *
- * @return boolean
+ * @return bool
  */
-function cRadio(string $text, string $campo, array &$errores, array $valores, bool $requerido = TRUE)
-{
+function cRadio(string $text, string $campo, array &$errores, array $valores, bool $requerido = TRUE): bool{
     if (in_array($text, $valores)) {
         return true;
     }
@@ -247,22 +271,17 @@ function cRadio(string $text, string $campo, array &$errores, array $valores, bo
 /**
  * Funcion cCheck
  *
- * Valida que los valores seleccionado en un checkbox array están dentro de los
- * valores válidos dados en un array. Si es requerido o no
- *
+ * Valida que los valores seleccionados en un checkbox array están dentro de los
+ * valores válidos dados en un array. Si es requerido o no. Reporta error en un array.
  *
  * @param array $text
  * @param string $campo
  * @param array $errores
  * @param array $valores
  * @param bool $requerido
- *
- * @return boolean
+ * @return bool
  */
-
-function cCheck(array $text, string $campo, array &$errores, array $valores, bool $requerido = TRUE)
-{
-
+function cCheck(array $text, string $campo, array &$errores, array $valores, bool $requerido = TRUE): bool{
     if (($requerido) && (count($text) == 0)) {
         $errores[$campo] = "Error en el campo $campo";
         return false;
@@ -275,38 +294,44 @@ function cCheck(array $text, string $campo, array &$errores, array $valores, boo
     }
     return true;
 }
-function cUser(string $fichero, string $email, string $password, string $campo, array &$errores){
-    $datos = file_get_contents($fichero);
-    $datosArray = explode(";",$datos);
-    for ($i=0; $i < $datosArray; $i++) {
-        $usuario = explode("|",implode("",$datosArray));
+
+/**
+ * Funcion cUser
+ *
+ * Valida que el usuario exista dentro del fichero. Reporta error en un array.
+ *
+ * @param string $email
+ * @param string $password
+ * @param string $campo
+ * @param array $errores
+ * @return bool
+ */
+function cUser(string $email, string $password, string $campo, array &$errores): bool{
+    $datos = file_get_contents("../ficheros/usuarios.txt");
+    $datosArray = explode(PHP_EOL,$datos);
+    for ($i=0; $i < count($datosArray); $i++) {
+        $usuario = explode("|",$datosArray[$i]);
         if($usuario[0] == $email && $usuario[1] == $password){
             $_SESSION['imgPerfil'] = $usuario[4];
             return true;
-        }else{
-            $errores[$campo] = "Error en el campo $campo";
         }
-        return false;
     }
+    $errores[$campo] = "Error en el campo $campo";
+    return false;
 }
-//devuelve datos usuario
-function userData(string $fichero, string $email, string $campo, array $errores): array|bool{
-    //coger datos fichero
-    $datos = file_get_contents($fichero);
-    //coger cada user separado por ;
-    $datosArray = explode(";",$datos);
-    for ($i=0; $i < $datosArray; $i++) {
-        //de cada user hacer un array de todos los datos
-        $usuario = explode("|",implode("",$datosArray));
-        if($usuario[0] == $email){ //si el email dado es igual al del user se cogen datos de ese user
-            return $usuario;
-        }else{
-            $errores[$campo] = "Error en el campo $campo";
-        }
-        return false;
-    }
-}
-function cPassword(string $pass, string $campo, array &$errores, bool $required=true){
+
+/**
+ * Funcion cPassword
+ *
+ * Valida la existencia del campo contraseña. Reporta error en un array.
+ *
+ * @param string $pass
+ * @param string $campo
+ * @param array $errores
+ * @param bool $required
+ * @return bool
+ */
+function cPassword(string $pass, string $campo, array &$errores, bool $required=true): bool{
     if($required && $pass == ""){
         $errores[$campo] = "Error en el campo $campo";
         return false;
@@ -318,15 +343,15 @@ function cPassword(string $pass, string $campo, array &$errores, bool $required=
 /**
  * Funcion cFile
  *
- * Valida la subida de un archivo a un servidor.
+ * Valida la subida de un archivo a un servidor. Reporta error en un array.
  *
  * @param string $nombre
+ * @param array $errores
  * @param array $extensiones_validas
  * @param string $directorio
  * @param integer $max_file_size
- * @param array $errores
  * @param boolean $required
- * @return boolean|string
+ * @return bool|string
  */
 function cFile(string $nombre, array &$errores, array $extensionesValidas, string $directorio, int  $max_file_size,  bool $required = TRUE): bool|string
 {
@@ -367,23 +392,23 @@ function cFile(string $nombre, array &$errores, array $extensionesValidas, strin
         }
         // Almacenamos el archivo en ubicación definitiva si no hay errores ( al compartir array de errores TODOS LOS ARCHIVOS tienen que poder procesarse para que sea exitoso. Si cualquiera da error, NINGUNO  se procesa)
         if (empty($errores)) {
-            /**
-             * Comprobamos si el directorio pasado es válido
+            /*
+                * Comprobamos si el directorio pasado es válido
             */
             if (is_dir($directorio)) {
-                /**
-             * Tenemos que buscar un nombre único para guardar el fichero de manera definitiva.
-             * Podemos hacerlo de diferentes maneras, en este caso se hace añadiendo microtime() al nombre del fichero
-             * si ya existe un archivo guardado con ese nombre.
-             **/
+                /*
+                    * Tenemos que buscar un nombre único para guardar el fichero de manera definitiva.
+                    * Podemos hacerlo de diferentes maneras, en este caso se hace añadiendo microtime() al nombre del fichero
+                    * si ya existe un archivo guardado con ese nombre.
+                **/
                 $nombreArchivo = is_file($directorio . DIRECTORY_SEPARATOR . $nombreArchivo) ? time() . $nombreArchivo : $nombreArchivo;
                 $nombreCompleto = $directorio . DIRECTORY_SEPARATOR . $nombreArchivo;
-                /**
-                 * Movemos el fichero a la ubicación definitiva.
+                /*
+                    * Movemos el fichero a la ubicación definitiva.
                  * */
                 if (move_uploaded_file($directorioTemp, $nombreCompleto)) {
-                    /**
-                     * Si todo es correcto devuelve la ruta y nombre del fichero como se ha guardado
+                    /*
+                        * Si todo es correcto devuelve la ruta y nombre del fichero como se ha guardado
                      */
                     return $nombreCompleto;
                 } else {

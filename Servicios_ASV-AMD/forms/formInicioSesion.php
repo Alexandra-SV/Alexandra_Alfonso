@@ -15,14 +15,14 @@
         $email = recoge('email');
         $password = recoge('password');
         //Ver que existe el user
-        cUser("../ficheros/usuarios.txt", $email, $password,'usuario',$errores);
+        cUser($email, $password,'usuario',$errores);
         //Pasar a correcto
         if(empty($errores)){
             //guardar en variable de sesion al user
             $_SESSION['active'] = $email;
             header("location:form_mainpage.php");
         }else{
-            file_put_contents("../ficheros/logLogin.txt", "".$email."|".$password ."|".date("d-m-Y h:i:s",time()).";".PHP_EOL,FILE_APPEND);
+            file_put_contents("../ficheros/logLogin.txt", "".$email."|".$password ."|".date("d-m-Y,h:i:s",time()).PHP_EOL,FILE_APPEND);
             include("../templates/inicioSesion.php");
         }
     }

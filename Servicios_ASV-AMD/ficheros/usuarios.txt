@@ -1,2 +1,2 @@
-alex@gmail.com|alex|alex|2001-10-10|../img/imgPerfil/default_picture_donotdelete.jpg|Italiano,Chino|a|17-11-2023 05:34:20;
-alf@gmail.com|alf|Alf|2002-10-10|../img/imgPerfil/\n2.jpg|Italiano|hohoho|18-11-2023 12:59:33;
+alex@gmail.com|alex|alex|2001-10-10|../img/imgPerfil/default_picture_donotdelete.jpg|Español,Italiano|a|18-11-2023,05:27:59
+alf@gmail.com|alf|alf|2001-10-10|../img/imgPerfil/\download20230306212057.png|Chino|b|18-11-2023,05:28:20

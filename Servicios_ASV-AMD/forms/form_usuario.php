@@ -1,6 +1,5 @@
 <?php
 session_start();
-include("../templates/pl_encabezado.php");
 include("../libs/bGeneral.php");
 include("../libs/bConfiguracion.php");
 $errores=[];

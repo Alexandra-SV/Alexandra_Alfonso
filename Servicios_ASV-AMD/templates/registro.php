@@ -11,30 +11,33 @@
     </div>
     <form action="" method="POST" enctype="multipart/form-data">
         <label for="fullName"></label>
-        Full name <input type="text" id="fullName" name="fullName" size="30"><br>
+        Full name* <input type="text" id="fullName" name="fullName"><br>
         <?php
             echo (isset($errores['fullName'])) ? "<span class=\"error\">".$errores['fullName']."</span><br>" : "";
         ?>
         <label for="email"></label>
-        Email <input type="text" id="email" name="email" size="30"><br>
+        Email* <input type="text" id="email" name="email"><br>
         <?php
             echo (isset($errores['email'])) ? "<span class=\"error\">".$errores['email']."</span><br>" : "";
         ?>
 
         <label for="password"></label>
-        Password <input type="password" id="password" name="password" size="30"><br>
+        Password* <input type="password" id="password" name="password"><br>
         <?php
             echo (isset($errores['password'])) ? "<span class=\"error\">".$errores['password']."</span><br>" : "";
         ?>
 
         <label for="dateOfBirth"></label>
-        Date of birth <input type="date" id="dateOfBirth" name="dateOfBirth" min="1950-01-01" max="2005-01-01"  size="30"/><br>
+        Date of birth* <input type="date" id="dateOfBirth" name="dateOfBirth"/><br>
         <?php
             echo (isset($errores['dateOfBirth'])) ? "<span class=\"error\">".$errores['dateOfBirth']."</span><br>" : "";
         ?>
 
         <label for="profilePicture"></label>
         Profile picture<input type="file" id="profilePicture" name="profilePicture"><br>
+        <?php
+            echo (isset($errores['profilePicture'])) ? "<span class=\"error\">".$errores['profilePicture']."</span><br>" : "";
+        ?>
 
         <label for="languages"></label>
         Languages <br>
