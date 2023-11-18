@@ -23,7 +23,6 @@ $user = $_SESSION['active'];
 if($user == ""){
   header('location:../forms/formInicioSesion.php');
 }
-$email=$_SESSION['usuarios'][$user]['email'];
 
     if (!isset($_REQUEST['bSave'])) {
         include ('../templates/servicios.php');
@@ -63,7 +62,7 @@ $email=$_SESSION['usuarios'][$user]['email'];
                 "imagen" => $imagen  ,
                 "descripcion" => $descripcion
             );
-            $st= "Servicio:$titulo Categorias:".implode(',',$categoria)." Tipo:$tipo Ubicacion:$ubicacion Disponibilidad:".implode(',',$disponibilidad)." Precio:$precio Imagen:$imagen Descripcion:$descripcion ALTA:".date("d-m-Y h:i:s",time());
+            $st= $titulo."|".implode(',',$categoria)."|".$tipo."|".$ubicacion."|".implode(',',$disponibilidad)."|".$precio."|".$imagen."|".$descripcion."|".date("d-m-Y h:i:s",time()).";";
             file_put_contents("../ficheros/servicios.txt",$st.PHP_EOL,FILE_APPEND);
             //añade al usuario   array_push($_SESSION['usuarios'][$user]["services"], $servicio);//$_SESSION['usuarios'][$user]["services"][]=$servicio;
             header("location:form_mainpage.php");

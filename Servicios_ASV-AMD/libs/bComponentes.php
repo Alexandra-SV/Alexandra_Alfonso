@@ -21,6 +21,29 @@ function pintaSelect(array $valores,string $name){
     }
     echo "</select>";
 }
+function getTituloServicios(){
+ $file = fopen("../ficheros/servicios.txt", "r");
+ $titulos=[];
+    while (!feof($file)){
+        $linea = fgets($file);
+        if ($linea!="") {
+            $service=explode("|",$linea);
+            $titulos[]=$service[0];
+        }
+
+    }
+    fclose($file);
+return $titulos;
+}
+
+function pintaServicio(){
+    //leer titulo de fichero Servicios.txt
+    $titles=getTituloServicios();
+    foreach ($titles as  $value) 
+        echo "<span>$value</span><br>";
+       
+}
+
 /*function pintaServicios($usuario){
     if (!empty($_SESSION['usuarios'][$usuario]['services'])){
 
@@ -44,28 +67,4 @@ function pintaSelect(array $valores,string $name){
     }else
         echo"<span>Sin Servicios</span>";
 }*/
-
-function getTituloServicios(){
- $file = fopen("../ficheros/servicios.txt", "r");
- $titulos=[];
-    while (!feof($file)){
-        $linea = fgets($file);
-        if ($linea!="") {
-            $service=explode(" ",$linea);
-            $titulos[]=$service[0];
-        }
-
-    }
-    fclose($file);
-return $titulos;
-}
-
-function pintaServicio(){
-    //leer titulo de fichero Servicios.txt
-    $titles=getTituloServicios();
-    foreach ($titles as  $value) 
-        echo "<span>$value</span><br>";
-       
-}
-
 ?>

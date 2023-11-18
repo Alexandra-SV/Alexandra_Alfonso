@@ -16,7 +16,6 @@ $user = $_SESSION['active'];
 if($user == ""){
   header('location:../forms/formInicioSesion.php');
 }
-$email=$_SESSION['usuarios'][$user]['email'];
 
     if (!isset($_REQUEST['bSave'])) {
         include ('../templates/usuario.php');
