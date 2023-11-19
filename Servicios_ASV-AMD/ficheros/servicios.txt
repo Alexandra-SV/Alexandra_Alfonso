@@ -1,2 +1,3 @@
-designer|Diseño Gráfico|Pago|valencia|tardes|12|../img/imgServ/servdefaultdonotdelete.jpg|gggg|17-11-2023 04:27:36
-carpintero|Carpintería y Ebanistería|intercambio|oporto|tardes|44|../img/imgServ/\n6.jpg|carpintere desde los 2 años|18-11-2023 12:30:00
+Designer|Diseño Gráfico|Pago|Oporto|tardes|13|../img/imgServ/servdefaultdonotdelete.jpg|-|19-11-2023 10:57:00
+Carpintero|Carpintería y Ebanistería|Pago|Barcelona|tardes|18|../img/imgServ/servdefaultdonotdelete.jpg|arreglo y creo muebles |19-11-2023 10:58:11
+Guía casco antiguo|Guía Turística|Pago|Valencia|mañanas|16|../img/imgServ/servdefaultdonotdelete.jpg|-|19-11-2023 10:58:57
