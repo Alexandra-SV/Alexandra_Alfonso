@@ -17,9 +17,9 @@
  */
 function getUser(string $email): array|bool{
     $datos = file_get_contents("../ficheros/usuarios.txt");
-    $datosArray = explode(";",$datos);
+    $datosArray = explode(PHP_EOL,$datos);
     for ($i=0; $i < $datosArray; $i++) {
-        $usuario = explode("|",implode("",$datosArray));
+        $usuario = explode("|",$datosArray[$i]);
         if($usuario[0] == $email)
             return $usuario;
     }
