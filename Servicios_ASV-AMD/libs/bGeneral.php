@@ -422,4 +422,29 @@ function cFile(string $nombre, array &$errores, array $extensionesValidas, strin
         }
     }
 }
+
+//****** Funcionces set ****/
+/**
+ * Funcion setTimer
+ *
+ * Crea un timeout de inactividad del usuario. Reporta error en un array.
+ * 
+ * @param string $timerName
+ * @param int $time
+ * @return bool
+ */
+
+ function setTimer(string $timerName,int $time):bool{
+    $inact=$time;
+    $lifetime=time()-$_SESSION[$timerName];
+    if($lifetime>$inact){
+        echo"sesion cerrada por inactividad";
+        session_start();
+        session_unset();
+        session_destroy();
+        return true;
+    }else $_SESSION[$timerName]=time();
+    return false;
+}
+
 ?>
