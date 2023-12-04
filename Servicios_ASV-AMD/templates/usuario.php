@@ -4,14 +4,15 @@ $css="../css/ModifUsuario.css";
 include("../templates/pl_encabezado.php");
 include("../libs/bComponentes.php");
 
-$user = $_SESSION['active'];
-$userData=getUser($user);
-    if($user == ""){
+    if(empty($_SESSION['active']) /*|| $_SESSION['active']['ip'] != $_SERVER['REMOTE_ADDR']*/){
         header('location:../forms/formInicioSesion.php');
     }
+    $user = $_SESSION['active'];
+    $userData=getUser($user);
 ?>
 
-    <header><a href="../forms\form_mainpage.php">&#60; To main page</a><h1>Services-Usuario</h1></header><!--Redirige a inicio -->
+    <header><a href="../forms\form_mainpage.php">&#60; To main page</a><h1>Services-Usuario</h1><label for="fondo"></label>
+    <?=pintaSelect(['PaleVioletRed','MediumOrchid'],'fondo');?></header><!--Redirige a inicio -->
     <main>
         <form action="" method="POST" id="form-usuario" enctype="multipart/form-data">
         <section id="s1">
@@ -62,14 +63,17 @@ $userData=getUser($user);
         </section>
         </form>
     </main>
-
 <?include("./pl_pie.html");?>
 <script>
     window.onload = function () {
         var addImagen = document.getElementById("boton");
         addImagen.addEventListener("change", changePicture, false);
+        document.getElementById('fondo').addEventListener('change',color,false);
     }
-
+    function color(){
+        var c=this[this.selectedIndex].value;
+        document.body.style.background=c;
+    }
     function changePicture(event) {
         var input = event.target;
         var img = input.previousElementSibling.previousElementSibling.previousElementSibling;

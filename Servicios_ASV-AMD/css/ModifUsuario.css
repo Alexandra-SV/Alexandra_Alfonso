@@ -7,7 +7,7 @@ body{
     radial-gradient(ellipse at left top,#ee54ab, transparent);
 
     & header{
-        & h1{text-align:center; font-family:sans;margin-top: -20px;
+        & h1{text-align:center; font-family:sans;margin-top: -40px;
             background: linear-gradient(#ff26a1, #b61671 );
             -webkit-background-clip: text;
             color: transparent;
@@ -26,6 +26,16 @@ body{
             margin: 4px 2px;
             cursor: pointer;
             font-size: 1.5em;
+        }
+        & select{
+            position: absolute;
+            right: 20px;
+            top: 40px;
+            margin: 5px 20px 0px 5px;
+            height: 20px;
+            border-radius: 9px;
+            &  option:checked {background-color: rgb(255, 208, 223);} /* Ajusta el color de fondo de las opciones según tus preferencias */
+            &::-webkit-scrollbar {display: none;}align-self: center;
         }
     }
 

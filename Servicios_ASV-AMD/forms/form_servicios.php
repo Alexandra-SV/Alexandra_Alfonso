@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("../libs/bGeneral.php");
+setTimer('timeout',300);
 include("../libs/bConfiguracion.php");
 
 $errores=[];
@@ -17,11 +18,10 @@ $descripcion;
 $imagen;
 
 
-$user = $_SESSION['active'];
-if($user == ""){
+if(empty($_SESSION['active']) /*|| $_SESSION['active']['ip'] != $_SERVER['REMOTE_ADDR']*/){
   header('location:../forms/formInicioSesion.php');
 }
-
+$user = $_SESSION['active'];
     if (!isset($_REQUEST['bSave'])) {
         include ('../templates/servicios.php');
     }

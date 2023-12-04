@@ -6,7 +6,8 @@ include("../templates/pl_encabezado.php");
 include("../libs/bComponentes.php");
 
 ?>
-    <header><a href="../forms/form_mainpage.php"> &#60; To main page</a><h1>Services-services</h1></header><!--Redirige a inicio -->
+    <header><a href="../forms/form_mainpage.php"> &#60; To main page</a><h1>Services-services</h1><label for="fondo"></label>
+    <?=pintaSelect(['PaleVioletRed','MediumOrchid'],'fondo');?></header><!--Redirige a inicio -->
     <main>
         <form action="" method="POST" enctype="multipart/form-data">
         <div>
@@ -63,4 +64,13 @@ include("../libs/bComponentes.php");
             <input type="submit" name="bSave" id="bSave" value="S A V E">
         </form>
     </main>
+    <script>
+        window.onload=function(){
+        document.getElementById('fondo').addEventListener('change',color,false);
+        };
+        function color(){
+        var c=this[this.selectedIndex].value;
+        document.body.style.background=c;
+        }
+    </script>
 <?include("./pl_pie.html");?>

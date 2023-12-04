@@ -1,18 +1,17 @@
 <?php
 session_start();
 include("../libs/bGeneral.php");
+setTimer('timeout',300);
 include("../libs/bConfiguracion.php");
 $errores=[];
 $error=false;
-//TODO: NO MODIFICAR DATOS USUARIO, SOLO MOSTRAR
+
 //variables a utilizar
 $password;
 $languages;
 $description;
 
-//recojo usario
-$user = $_SESSION['active'];
-if($user == ""){
+if(empty($_SESSION['active']) /*|| $_SESSION['active']['ip'] != $_SERVER['REMOTE_ADDR']*/){
   header('location:../forms/formInicioSesion.php');
 }
 
@@ -43,5 +42,3 @@ if($user == ""){
         include("../templates/usuario.php");
     }
 ?>
-
-<?include("../templates/pl_pie.html");?>
