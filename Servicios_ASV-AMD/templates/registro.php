@@ -46,13 +46,25 @@
 
         <label for="description">Description</label>
         <br><textarea id="description"name="description" rows="5"cols="50"></textarea><br>
-
+        <label for="fondo">Fondo Privado</label>
+            <?=pintaSelect(['PaleVioletRed','MediumOrchid'],'fondo');?>
+        <br>
         <label for="cookie">¿Aceptas la politica de cookies de nuestra página?</label><br>
            <div id="radios"><?=pintaRadio(['si','no'],'cookie');?></div> 
         <br>
         <label for="bRegister"></label>
         <input type="submit" id="bRegister"name="bRegister" value="Save">
     </form>
+
+    <script>
+        window.onload=function(){
+            document.getElementById('fondo').addEventListener('change',color,false); 
+        };
+        function color(){
+            var c=this[this.selectedIndex].value;
+            document.body.style.background=c;
+        }
+    </script>
 <?php
     //Pie
     include("pl_pie.html");

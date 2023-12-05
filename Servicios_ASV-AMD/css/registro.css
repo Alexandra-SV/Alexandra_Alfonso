@@ -58,6 +58,14 @@ form{
         border-radius: 30px;
         border: none;
     }
+    & #fondo{
+        margin-left:170px ;
+        margin-top: -33px;
+        height: 37px;
+        border-radius: 9px;
+        &  option:checked {background-color: rgb(225, 208, 255);} /* Ajusta el color de fondo de las opciones según tus preferencias */
+        &::-webkit-scrollbar {display: none;}align-self: center;
+    }
 }
 footer{
     display: none;
