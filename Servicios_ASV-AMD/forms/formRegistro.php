@@ -24,7 +24,7 @@
         $dateOfBirth = recoge('dateOfBirth');
         $languages = recogeArray('languages');
         $description = recoge('description');
-        $cookie=recoge('cookie');
+
         //Validar
         cTexto($fullName,'fullName',$errores);
         cEmail($email,'email',$errores);
@@ -32,8 +32,11 @@
         cDate($dateOfBirth,'dateOfBirth',$errores);
         cCheck($languages,'languages',$errores, $languagesArray, false);
         cTextarea($description,'description',$errores, 30, 1, false);
-        cRadio($cookie,'cookie', $errores, ['si','no'],FALSE);
-            ($cookie == 'si')?setcookie('politica',true,time()+60):false;
+        
+        //recogemos y seteamos la cookie del fondo
+            $cookie=recoge('fondo');
+                setcookie('fondo',$cookie,time()+1000);
+
         if(empty($errores)){
             //Imagen
             $profilePicture = cFile('profilePicture',$errores,$extensionesValidas,$dirPerfil,$max_file_size,false);
