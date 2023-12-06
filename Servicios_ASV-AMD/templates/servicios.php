@@ -6,8 +6,15 @@ include("../templates/pl_encabezado.php");
 include("../libs/bComponentes.php");
 
 ?>
-    <header><a href="../forms/form_mainpage.php"> &#60; To main page</a><h1>Services-services</h1><label for="fondo"></label>
-    <?=pintaSelect(['PaleVioletRed','MediumOrchid'],'fondo');?></header><!--Redirige a inicio -->
+    <header>
+        <a href="../forms/form_mainpage.php"> &#60; To main page</a>
+        <h1>Services-services</h1>
+        <form action="">
+        <label for="colorFondo"></label>
+        <?=pintaDesplegable($coloresCookie,'colorFondo');?>
+        <input type="submit" value="Change" name="bChange">
+        </form>
+    </header><!--Redirige a inicio -->
     <main>
         <form action="" method="POST" enctype="multipart/form-data">
         <div>
@@ -64,13 +71,17 @@ include("../libs/bComponentes.php");
             <input type="submit" name="bSave" id="bSave" value="S A V E">
         </form>
     </main>
-    <script>
-        window.onload=function(){
-        document.getElementById('fondo').addEventListener('change',color,false);
-        };
-        function color(){
-        var c=this[this.selectedIndex].value;
-        document.body.style.background=c;
+<script>
+    window.onload=function(){
+      //Coge cookies
+      var cookieString = document.cookie;
+      //Divide las cookies y pone el color
+      var cookies = cookieString.split("; ");
+      for(let i = 0; i < cookies.length; i++) {
+        if(cookies[i].indexOf('fondo') != -1) {
+          document.body.style.background= cookies[i].substring(6);
         }
-    </script>
+      }
+    };
+</script>
 <?include("./pl_pie.html");?>

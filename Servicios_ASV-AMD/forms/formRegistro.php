@@ -1,6 +1,4 @@
 <?php
-    //Iniciar session
-    session_start();
     //Librerias
     include('../libs/bGeneral.php');
     include('../libs/bComponentes.php');
@@ -32,10 +30,6 @@
         cDate($dateOfBirth,'dateOfBirth',$errores);
         cCheck($languages,'languages',$errores, $languagesArray, false);
         cTextarea($description,'description',$errores, 30, 1, false);
-        
-        //recogemos y seteamos la cookie del fondo
-            $cookie=recoge('fondo');
-                setcookie('fondo',$cookie,time()+1000);
 
         if(empty($errores)){
             //Imagen
@@ -52,9 +46,6 @@
                     "description"=>($description=="")?"none":$description,
                 );
                 file_put_contents("../ficheros/usuarios.txt", "".$usuario["email"]."|".$usuario["password"]."|".$usuario["fullName"]."|".$usuario["dateOfBirth"]."|".$usuario["profilePicture"]."|".$usuario["languages"]."|".$usuario["description"]."|".date("d-m-Y,h:i:s",time()).PHP_EOL,FILE_APPEND);
-                //Creo la sesion activa
-                $_SESSION['active'] = $email;
-                $_SESSION['imgPerfil'] = $profilePicture;
                 header("location:formInicioSesion.php");
             }else{
                 include("../templates/registro.php");

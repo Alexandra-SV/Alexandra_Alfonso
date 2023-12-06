@@ -7,6 +7,9 @@ background: radial-gradient(ellipse at right bottom, #6f5ae5, transparent),
 radial-gradient(ellipse at left top,#a954ee, transparent);
 
     & header{
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
         & h1{text-align:center; font-family:sans;margin-top: -40px;
             background: linear-gradient(#daa3ff, #6e16b6 );
             -webkit-background-clip: text;
@@ -26,16 +29,22 @@ radial-gradient(ellipse at left top,#a954ee, transparent);
             margin: 4px 2px;
             cursor: pointer;
             font-size: 1.5em;
+            height: 30px;
         }
-        & select{
-            position: absolute;
-            right: 20px;
-            top: 40px;
-            margin: 5px 20px 0px 5px;
-            height: 20px;
-            border-radius: 9px;
-            &  option:checked {background-color: rgb(255, 208, 223);} /* Ajusta el color de fondo de las opciones según tus preferencias */
-            &::-webkit-scrollbar {display: none;}align-self: center;
+        & form select, form input{
+            background: linear-gradient(to right, rgba(169, 78, 229, 1)  5%,  rgba(201, 174, 252, 0.438));
+            border: none;
+            border-radius: 30px;
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        & select option{
+            color: rgba(169, 78, 229, 1);
         }
     }
     & main{
@@ -70,7 +79,7 @@ radial-gradient(ellipse at left top,#a954ee, transparent);
                     border-radius:20px;
                     color: #230939;
                     &  option:checked {
-                        background-color: rgb(232, 208, 255); 
+                        background-color: rgb(232, 208, 255);
                       }
                     &::-webkit-scrollbar {display: none;}
                 }
@@ -94,11 +103,11 @@ radial-gradient(ellipse at left top,#a954ee, transparent);
                     border-radius: 20px;
                     color: #230939;
                     &  option:checked {
-                        background-color:  rgb(232, 208, 255); 
+                        background-color:  rgb(232, 208, 255);
                       }
                     &::-webkit-scrollbar {display: none;}
                 }
-                
+
                 & #precioH{
                     height: 35px;
                     width: 190px;
@@ -126,11 +135,11 @@ radial-gradient(ellipse at left top,#a954ee, transparent);
                 & input{margin-left:220px;font-size: 1em;accent-color: #7936b0;}
             }
             & #addfile{
-                & label{ 
+                & label{
                 background: linear-gradient(to right, #9a37d3e1  5%,  rgba(204, 174, 252, 0.438));
                 padding: 3px 8px;
                 border-radius: 30px;
-                border: none;              
+                border: none;
                 margin-left: 28px;
                 letter-spacing: 4px;
                 color: #fff;
@@ -151,6 +160,6 @@ radial-gradient(ellipse at left top,#a954ee, transparent);
                 font-size: 1.5em;
                 letter-spacing: 2px;
             }
-        }     
+        }
     }
 }
