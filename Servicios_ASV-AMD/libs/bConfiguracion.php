@@ -14,7 +14,7 @@ $dirPerfil = "../img/imgPerfil/";
 $dirServicio = "../img/imgServ/";
 $max_file_size = "2000000";
 
-
-
+//Colores de cookie
+$coloresCookie = ['Pink'=>'PaleVioletRed','Purple'=>'MediumOrchid'];
 
 ?>

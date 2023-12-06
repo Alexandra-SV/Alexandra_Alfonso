@@ -4,15 +4,23 @@ $css="../css/ModifUsuario.css";
 include("../templates/pl_encabezado.php");
 include("../libs/bComponentes.php");
 
-    if(empty($_SESSION['active']) /*|| $_SESSION['active']['ip'] != $_SERVER['REMOTE_ADDR']*/){
-        header('location:../forms/formInicioSesion.php');
-    }
+    //Comporbacion parte privada
+    if($_SESSION['access'] != 1 || $_SESSION['ip'] != $_SERVER['REMOTE_ADDR']){
+        header("location:formInicioSesion.php");
+    };
     $user = $_SESSION['active'];
     $userData=getUser($user);
 ?>
 
-    <header><a href="../forms\form_mainpage.php">&#60; To main page</a><h1>Services-Usuario</h1><label for="fondo"></label>
-    <?=pintaSelect(['PaleVioletRed','MediumOrchid'],'fondo');?></header><!--Redirige a inicio -->
+    <header>
+        <a href="../forms\form_mainpage.php">&#60; To main page</a>
+        <h1>Services-Usuario</h1>
+        <form action="">
+        <label for="colorFondo"></label>
+        <?=pintaDesplegable($coloresCookie,'colorFondo');?>
+        <input type="submit" value="Change" name="bChange">
+        </form>
+    </header><!--Redirige a inicio -->
     <main>
         <form action="" method="POST" id="form-usuario" enctype="multipart/form-data">
         <section id="s1">
@@ -68,11 +76,15 @@ include("../libs/bComponentes.php");
     window.onload = function () {
         var addImagen = document.getElementById("boton");
         addImagen.addEventListener("change", changePicture, false);
-        document.getElementById('fondo').addEventListener('change',color,false);
-    }
-    function color(){
-        var c=this[this.selectedIndex].value;
-        document.body.style.background=c;
+        //Coge cookies
+        var cookieString = document.cookie;
+        //Divide las cookies y pone el color
+        var cookies = cookieString.split("; ");
+        for(let i = 0; i < cookies.length; i++) {
+            if(cookies[i].indexOf('fondo') != -1) {
+            document.body.style.background= cookies[i].substring(6);
+            }
+        }
     }
     function changePicture(event) {
         var input = event.target;

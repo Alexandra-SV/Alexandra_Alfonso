@@ -27,6 +27,26 @@ function getUser(string $email): array|bool{
 }
 
 /**
+ * Funcion getUserValue
+ *
+ * Devuelve dato concreto del usuario indicado según la posición del dato en el fichero.
+ *
+ * @param string $email
+ * @param int $pos
+ * @return array|bool
+ */
+function getUserValue(string $email, int $pos): string|bool{
+    $datos = file_get_contents("../ficheros/usuarios.txt");
+    $datosArray = explode(PHP_EOL,$datos);
+    for ($i=0; $i < $datosArray; $i++) {
+        $usuario = explode("|",$datosArray[$i]);
+        if($usuario[0] == $email)
+            return $usuario[$pos];
+    }
+    return false;
+}
+
+/**
  * Funcion getTituloServicios
  *
  * Devuelve los titulos de los servicios.
@@ -80,7 +100,7 @@ function pintaCheck(array $valores, string $campo){
 /**
  * Funcion pintaSelect
  *
- * Pinta un select en un formulario.
+ * Pinta un select múltiple en un formulario.
  *
  * @param array $valores
  * @param string $name
@@ -89,6 +109,22 @@ function pintaSelect(array $valores,string $name){
     echo "<select name=\"".$name."[]\"id=\"$name\" multiple>";
     for ($i=0; $i < count($valores); $i++) {
         echo "<option value=\"$valores[$i]\" >". $valores[$i] ."</option>";
+    }
+    echo "</select>";
+}
+/**
+ * Funcion pintaDesplegable
+ *
+ * Pinta un select en un formulario.
+ *
+ * @param array $valores
+ * @param string $name
+ */
+function pintaDesplegable(array $valores,string $name){
+    echo "<select name=\"".$name."\"id=\"$name\">";
+    echo "<option value=\"\" disabled selected hidden>Page color</option>";
+    foreach ($valores as $key => $value) {
+        echo "<option value=\"$key\" >". $key ."</option>";
     }
     echo "</select>";
 }

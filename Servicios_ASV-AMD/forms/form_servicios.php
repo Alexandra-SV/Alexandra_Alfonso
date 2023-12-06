@@ -17,10 +17,20 @@ $precio;
 $descripcion;
 $imagen;
 
-
-if(empty($_SESSION['active']) /*|| $_SESSION['active']['ip'] != $_SERVER['REMOTE_ADDR']*/){
-  header('location:../forms/formInicioSesion.php');
+//Cambia la cookie
+$color = "";
+$errores = [];
+if(isset($_REQUEST['bChange'])){
+    $color = recoge('colorFondo');
+    cRadio($coloresCookie[$color],'colorFondo',$errores,$coloresCookie,false);
+    if(empty($errores)){
+    setcookie('fondo',$coloresCookie[$color]);
+    }
 }
+//Comporbacion parte privada
+if($_SESSION['access'] != 1 || $_SESSION['ip'] != $_SERVER['REMOTE_ADDR']){
+    header("location:formInicioSesion.php");
+};
 $user = $_SESSION['active'];
     if (!isset($_REQUEST['bSave'])) {
         include ('../templates/servicios.php');
@@ -33,7 +43,7 @@ $user = $_SESSION['active'];
         $ubicacion=recoge('ubicacion',true);
         $disponibilidad=recogeArray('Availability');
         $precio=recoge('precioH');
-        $descripcion= recoge('servicedescription',true); 
+        $descripcion= recoge('servicedescription',true);
 
     //Validamos
     cTexto( $titulo,"titulo",$errores,50,3);
@@ -45,7 +55,7 @@ $user = $_SESSION['active'];
     cTextarea( $descripcion,"servicedescription",$errores,100,0,false);
 
     if($descripcion=="")$descripcion="-";
-    
+
     //Comprobamos que no haya errores para crear el servicio
     if (empty($errores)) {
         $imagen=cFile('servicePicture',$errores,$extensionesValidas,$dirServicio,$max_file_size,false);

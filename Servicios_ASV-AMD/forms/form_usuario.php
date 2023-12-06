@@ -11,10 +11,16 @@ $password;
 $languages;
 $description;
 
-if(empty($_SESSION['active']) /*|| $_SESSION['active']['ip'] != $_SERVER['REMOTE_ADDR']*/){
-  header('location:../forms/formInicioSesion.php');
-}
-
+    //Cambia la cookie
+    $color = "";
+    $errores = [];
+    if(isset($_REQUEST['bChange'])){
+        $color = recoge('colorFondo');
+        cRadio($coloresCookie[$color],'colorFondo',$errores,$coloresCookie,false);
+        if(empty($errores)){
+        setcookie('fondo',$coloresCookie[$color]);
+        }
+    }
     if (!isset($_REQUEST['bSave'])) {
         include ('../templates/usuario.php');
     }
