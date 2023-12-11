@@ -8,6 +8,9 @@ include("../libs/bComponentes.php");
 ?>
     <header>
         <a href="../forms/form_mainpage.php"> &#60; To main page</a>
+        <form action="">
+            <input type="submit" name="bLogOut" id="bLogOut" value="&#60; Log Out">
+        </form>
         <h1>Services-services</h1>
         <form action="">
         <label for="colorFondo"></label>
