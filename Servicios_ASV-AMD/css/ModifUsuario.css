@@ -17,20 +17,38 @@ body{
             font-size: 72px;
             font-weight: 400;
         }
-        & a{background: linear-gradient(to right, rgba(229, 78, 126, 1)  5%,  rgba(252, 174, 226, 0.438));
-            border: none;
-            border-radius: 30px;
-            color: white;
-            padding: 10px 30px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            font-size: 1.5em;
-            height: 30px;
+        & div{
+            display: flex;
+            flex-flow: column wrap;
+            & a{background: linear-gradient(to right, rgba(229, 78, 126, 1)  5%,  rgba(252, 174, 226, 0.438));
+                border: none;
+                border-radius: 30px;
+                color: white;
+                padding: 10px 30px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                font-size: 1.5em;
+                height: 30px;
+            }
+            #bLogOut{
+                background: linear-gradient(to right, rgba(229, 78, 126, 1)  5%,  rgba(252, 174, 226, 0.438));
+                border: none;
+                border-radius: 30px;
+                color: white;
+                padding: 10px 30px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+            }
         }
+        
         & form select, form input{
             background: linear-gradient(to right, rgba(229, 78, 126, 1)  5%,  rgba(252, 174, 226, 0.438));
             border: none;
@@ -45,19 +63,6 @@ body{
         }
         & select option{
             color: rgba(229, 78, 126, 1);
-        }
-        #bLogOut{
-            background: linear-gradient(to right, rgba(229, 78, 126, 1)  5%,  rgba(252, 174, 226, 0.438));
-            border: none;
-            border-radius: 30px;
-            color: white;
-            padding: 10px 30px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
         }
     }
 
@@ -158,6 +163,27 @@ body{
                 }
             }
         }
+    }
+    footer{
+        padding: 20px;
+        border-radius: 20px;
+        justify-content: center;
+        color: #fff;
+       
+        & input[type='submit']{
+            border-radius: 30px;
+            border: none;
+            color: white;
+            padding: 10px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        & .show{visibility: visible; background:linear-gradient(to right, rgb(143, 78, 229)  5%,  rgba(188, 174, 252, 0.438)); & input[type='submit']{display: block;} }
+        & .hide{visibility:hidden ; background:linear-gradient(to right, rgb(143, 78, 229)  5%,  rgba(188, 174, 252, 0.438));& input[type='submit']{display: none;}}
     }
 }
 

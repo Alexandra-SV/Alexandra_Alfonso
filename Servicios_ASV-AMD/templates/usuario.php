@@ -13,15 +13,17 @@ include("../libs/bComponentes.php");
 ?>
 
     <header>
-        <a href="../forms\form_mainpage.php">&#60; To main page</a>
-        <form action="">
-            <input type="submit" name="bLogOut" id="bLogOut" value="&#60; Log Out">
-        </form>
+        <div>
+            <a href="../forms/form_mainpage.php"> &#60; To main page</a>
+            <form action="" id="log">
+                <input type="submit" name="bLogOut" id="bLogOut" value="&#60; Log Out">
+            </form>
+        </div>
         <h1>Services-Usuario</h1>
         <form action="">
-        <label for="colorFondo"></label>
-        <?=pintaDesplegable($coloresCookie,'colorFondo');?>
-        <input type="submit" value="Change" name="bChange">
+            <label for="colorFondo"></label>
+                <?=pintaDesplegable($coloresCookie,'colorFondo');?>
+            <input type="submit" value="Change" name="bChange">
         </form>
     </header><!--Redirige a inicio -->
     <main>
@@ -74,7 +76,6 @@ include("../libs/bComponentes.php");
         </section>
         </form>
     </main>
-<?include("./pl_pie.html");?>
 <script>
     window.onload = function () {
         var addImagen = document.getElementById("boton");
@@ -101,3 +102,12 @@ include("../libs/bComponentes.php");
         }
     }
 </script>
+    <footer>
+        <form action="" method="post" class="<?=$class?>">
+            <label for="cookie">¿Aceptas la politica de cookies de nuestra página?</label>
+                <?=pintaRadio(['si','no'],'cookie');?> 
+                <input type="submit" value="politica" name="bPolitic">
+        </form>
+    </footer>
+    </body>
+</html>
