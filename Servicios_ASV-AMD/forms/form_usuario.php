@@ -11,6 +11,11 @@ $password;
 $languages;
 $description;
 
+//Comporbacion parte privada
+if($_SESSION['access'] != 1 || $_SESSION['ip'] != $_SERVER['REMOTE_ADDR']){
+    header("location:formInicioSesion.php");
+};
+
     //Cambia la cookie
     $color = "";
     $errores = [];
@@ -21,6 +26,23 @@ $description;
         setcookie('fondo',$coloresCookie[$color]);
         }
     }
+
+//comprueba si la cookie de politica existe y si su valor es valido 
+//si no existe muestra el form para poder aceptar o negar las cookies
+if(isset($_COOKIE['politica'])){
+    $cookie=htmlspecialchars($_COOKIE['politica']);
+    ($cookie != 'si' || $cookie != 'no')?$class="hide":$class="show"; 
+}else 
+    $class="";
+//crea la cookie al clicar el submit de las cookies
+if(isset($_REQUEST['bPolitic'])){
+    $respCookie = recoge('cookie');
+    cRadio($respCookie,'politicaCookie',$errores,['si','no'],false);
+    if(empty($errores)){
+        setcookie('politica',$respCookie,time()+1000);
+    }
+}
+
     if (!isset($_REQUEST['bSave'])) {
         include ('../templates/usuario.php');
     }

@@ -7,10 +7,12 @@ include("../libs/bComponentes.php");
 
 ?>
     <header>
-        <a href="../forms/form_mainpage.php"> &#60; To main page</a>
-        <form action="">
-            <input type="submit" name="bLogOut" id="bLogOut" value="&#60; Log Out">
-        </form>
+        <div>
+            <a href="../forms/form_mainpage.php"> &#60; To main page</a>
+            <form action="" id="log">
+                <input type="submit" name="bLogOut" id="bLogOut" value="&#60; Log Out">
+            </form>
+        </div>
         <h1>Services-services</h1>
         <form action="">
         <label for="colorFondo"></label>
@@ -74,17 +76,25 @@ include("../libs/bComponentes.php");
             <input type="submit" name="bSave" id="bSave" value="S A V E">
         </form>
     </main>
-<script>
-    window.onload=function(){
-      //Coge cookies
-      var cookieString = document.cookie;
-      //Divide las cookies y pone el color
-      var cookies = cookieString.split("; ");
-      for(let i = 0; i < cookies.length; i++) {
-        if(cookies[i].indexOf('fondo') != -1) {
-          document.body.style.background= cookies[i].substring(6);
+    <script>
+        window.onload=function(){
+        //Coge cookies
+        var cookieString = document.cookie;
+        //Divide las cookies y pone el color
+        var cookies = cookieString.split("; ");
+        for(let i = 0; i < cookies.length; i++) {
+            if(cookies[i].indexOf('fondo') != -1) {
+            document.body.style.background= cookies[i].substring(6);
+            }
         }
-      }
-    };
-</script>
-<?include("./pl_pie.html");?>
+        };
+    </script>
+    <footer >
+        <form action="" method="post" class="<?=$class?>">
+            <label for="cookie">¿Aceptas la politica de cookies de nuestra página?</label>
+                <?=pintaRadio(['si','no'],'cookie');?> 
+                <input type="submit" value="politica" name="bPolitic">
+        </form>
+    </footer>
+    </body>
+</html>

@@ -38,18 +38,25 @@
     </div>
   </main>
   <a href="../forms/form_servicios.php" id="bAddService">+ add more services</a>
-<script>
-    window.onload=function(){
-      //Coge cookies
-      var cookieString = document.cookie;
-      //Divide las cookies y pone el color
-      var cookies = cookieString.split("; ");
-      for(let i = 0; i < cookies.length; i++) {
-        if(cookies[i].indexOf('fondo') != -1) {
-          document.body.style.background= cookies[i].substring(6);
+  <script>
+      window.onload=function(){
+        //Coge cookies
+        var cookieString = document.cookie;
+        //Divide las cookies y pone el color
+        var cookies = cookieString.split("; ");
+        for(let i = 0; i < cookies.length; i++) {
+          if(cookies[i].indexOf('fondo') != -1) {
+            document.body.style.background= cookies[i].substring(6);
+          }
         }
-      }
-    };
-</script>
-
-  <?php include("pl_pie.html"); ?>
+      };
+  </script>
+  <footer class="<?=$class?>">
+      <form action="" method="post" class="<?=$class?>">
+          <label for="cookie">¿Aceptas la politica de cookies de nuestra página?</label>
+            <?=pintaRadio(['si','no'],'cookie');?>
+          <input type="submit" value="politica" name="bPolitic">
+      </form>
+  </footer>
+  </body>
+</html>

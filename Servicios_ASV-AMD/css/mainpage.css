@@ -4,12 +4,15 @@
 body{
     display: grid;
     grid-template-columns: 1.2fr 0.6fr 1.2fr;
-    grid-template-rows: 0.2fr 2.6fr 0.2fr;
+    grid-template-rows: 0.2fr 2.6fr 0.1fr 0.2fr;
     gap: 0px 0px;
     grid-template-areas:
       "logout title user"
       "services services services"
-      ". addserv .";
+      ". addserv ."
+      "foot foot foot"
+      ;
+
     min-height: 100vh;
     background: radial-gradient(ellipse at right bottom, rgba(171, 60, 175, 1), transparent),
     radial-gradient(ellipse at left top, rgba(229, 78, 126, 1), transparent);
@@ -106,4 +109,26 @@ main {
 }
 #bAddService { grid-area: addserv; }
 
-footer{display: none;}
+footer{
+    grid-area: foot;
+    padding: 20px;
+    border-radius: 20px;
+    justify-content: center;
+    color: #fff;
+
+    & input[type='submit']{
+        background: linear-gradient(to right, rgba(229, 78, 126, 1)  5%,  rgba(252, 174, 226, 0.438));
+        border: none;
+        border-radius: 30px;
+        color: white;
+        padding: 10px 30px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+    & .show{visibility: visible; background: linear-gradient(to right, rgba(229, 78, 126, 1)  5%,  rgba(252, 174, 226, 0.438)); & form{display: block;} }
+    & .hide{visibility:hidden ; background: linear-gradient(to right, rgba(229, 78, 126, 1)  5%,  rgba(252, 174, 226, 0.438)); & form{display: none;}}
+}
