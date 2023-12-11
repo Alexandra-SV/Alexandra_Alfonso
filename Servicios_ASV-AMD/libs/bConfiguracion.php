@@ -17,4 +17,9 @@ $max_file_size = "2000000";
 //Colores de cookie
 $coloresCookie = ['Pink'=>'PaleVioletRed','Purple'=>'MediumOrchid'];
 
+//Base de datos
+    $db_hostname = "localhost";
+    $db_nombre = "evaluable_7W";
+    $db_usuario = "root";
+    $db_clave = "";
 ?>
