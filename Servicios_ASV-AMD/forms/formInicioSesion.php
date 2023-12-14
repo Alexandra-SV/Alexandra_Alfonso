@@ -4,6 +4,10 @@
     //Librerias
     include('../libs/bGeneral.php');
     include('../libs/bComponentes.php');
+    include('../libs/bConfiguracion.php');
+    include('../modelo/consultas.php');
+    //Iniciar conexion
+    $pdo = conectBd($db_hostname,$db_nombre,$db_usuario,$db_clave);
     //Datos y array de errores
     $errores = [];
     $email = "";
@@ -29,4 +33,6 @@
             include("../templates/inicioSesion.php");
         }
     }
+    //Cerrar conexion
+    stopBd($pdo, $errores);
 ?>
