@@ -1,6 +1,11 @@
 <?php
 $titulo="Add Service";
-$css="../css/servicios.css";
+//Verifica cookie y usa css adecuado
+if(isset($_COOKIE['fondo']) && array_key_exists($_COOKIE['fondo'],$coloresCookie)){
+    $css="../css/servicios".htmlspecialchars($_COOKIE['fondo']).".css";
+}else{
+    $css="../css/serviciosPurple.css";
+}
 
 include("../templates/pl_encabezado.php");
 include("../libs/bComponentes.php");
@@ -76,23 +81,10 @@ include("../libs/bComponentes.php");
             <input type="submit" name="bSave" id="bSave" value="S A V E">
         </form>
     </main>
-    <script>
-        window.onload=function(){
-        //Coge cookies
-        var cookieString = document.cookie;
-        //Divide las cookies y pone el color
-        var cookies = cookieString.split("; ");
-        for(let i = 0; i < cookies.length; i++) {
-            if(cookies[i].indexOf('fondo') != -1) {
-            document.body.style.background= cookies[i].substring(6);
-            }
-        }
-        };
-    </script>
     <footer >
         <form action="" method="post" class="<?=$class?>">
             <label for="cookie">¿Aceptas la politica de cookies de nuestra página?</label>
-                <?=pintaRadio(['si','no'],'cookie');?> 
+                <?=pintaRadio(['si','no'],'cookie');?>
                 <input type="submit" value="politica" name="bPolitic">
         </form>
     </footer>

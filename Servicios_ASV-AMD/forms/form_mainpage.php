@@ -8,16 +8,17 @@
         $color = recoge('colorFondo');
         cRadio($coloresCookie[$color],'colorFondo',$errores,$coloresCookie,false);
         if(empty($errores)){
-        setcookie('fondo',$coloresCookie[$color]);
+            setcookie('fondo',$coloresCookie[$color]);
+            header('location:form_mainpage.php');
         }
     }
 
-    //comprueba si la cookie de politica existe y si su valor es valido 
+    //comprueba si la cookie de politica existe y si su valor es valido
     //si no existe muestra el form para poder aceptar o negar las cookies
     if(isset($_COOKIE['politica'])){
         $cookie=htmlspecialchars($_COOKIE['politica']);
-        ($cookie != 'si' || $cookie != 'no')?$class="hide":$class=""; 
-    }else 
+        ($cookie != 'si' || $cookie != 'no')?$class="hide":$class="";
+    }else
         $class="";
     //crea la cookie al clicar el submit de las cookies
     if(isset($_REQUEST['bPolitic'])){
@@ -25,6 +26,7 @@
         cRadio($respCookie,'politicaCookie',$errores,['si','no'],false);
         if(empty($errores)){
             setcookie('politica',$respCookie,time()+1000);
+            header('location:form_mainpage.php');
         }
     }
 
@@ -33,7 +35,8 @@
         session_unset ();
         session_destroy();
         header("location:formInicioSesion.php");
-    }else{//Si no se ha pulsado volvemos al formulario
+    }
+    if(!isset($_REQUEST['bLogOut'])){//Si no se ha pulsado volvemos al formulario
         include("../templates/mainpage.php");
     }
 ?>
