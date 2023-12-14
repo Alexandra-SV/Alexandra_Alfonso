@@ -4,7 +4,7 @@
  * @author Alexandra Simona Vasilache, Alfonso Marquez Diaz
  *
  */
-
+include('../modelo/consultas.php');
 //***** Funciones de sanitización **** //
 
 /**
@@ -295,18 +295,8 @@ function cCheck(array $text, string $campo, array &$errores, array $valores, boo
     return true;
 }
 
-/**
- * Funcion cUser
- *
- * Valida que el usuario exista dentro del fichero. Reporta error en un array.
- *
- * @param string $email
- * @param string $password
- * @param string $campo
- * @param array $errores
- * @return bool
- */
-function cUser(string $email, string $password, string $campo, array &$errores): bool{
+/*Funcion cUser con fichero*/
+/* function cUser(string $email, string $password, string $campo, array &$errores): bool{
     $datos = file_get_contents("../ficheros/usuarios.txt");
     $datosArray = explode(PHP_EOL,$datos);
     for ($i=0; $i < count($datosArray); $i++) {
@@ -315,6 +305,36 @@ function cUser(string $email, string $password, string $campo, array &$errores):
             $_SESSION['imgPerfil'] = $usuario[4];
             return true;
         }
+    }
+    $errores[$campo] = "Error en el campo $campo";
+    return false;
+} */
+/**
+ * Funcion cUser
+ *
+ * Valida que el usuario exista dentro de la base de datos. Reporta error en un array.
+ *
+ * @param string $email
+ * @param string $password
+ * @param string $campo
+ * @param array $errores
+ * @param object $pdo
+ * @return bool
+ */
+function cUser(string $email, string $password, string $campo, array &$errores, object $pdo): bool{
+    $tabla = 'usuario';
+    $columna = 'email';
+    try {
+        $resultado = selectRow($pdo, $tabla, $columna, $email, $errores);
+        if($resultado){ //Email esta bien porque el select ha sido exitoso
+            //Comprobar password
+            $bdPass = $resultado['pass'];
+            if(password_verify($password, $bdPass))
+                return true;
+        }
+    } catch (PDOEXCEPTION $e) {
+        error_log($e->getMessage()."##Código: ".$e->getCode()."  ".microtime().PHP_EOL,3,"../log/logBD.txt");
+        echo "Error";
     }
     $errores[$campo] = "Error en el campo $campo";
     return false;
@@ -428,7 +448,7 @@ function cFile(string $nombre, array &$errores, array $extensionesValidas, strin
  * Funcion setTimer
  *
  * Crea un timeout de inactividad del usuario. Reporta error en un array.
- * 
+ *
  * @param string $timerName
  * @param int $time
  * @return bool
@@ -446,5 +466,4 @@ function cFile(string $nombre, array &$errores, array $extensionesValidas, strin
     }else $_SESSION[$timerName]=time();
     return false;
 }
-
 ?>
