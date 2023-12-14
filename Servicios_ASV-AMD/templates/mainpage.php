@@ -4,7 +4,12 @@
     include("../libs/bComponentes.php");
     //Encabezado
     $titulo = "Welcome to Services";
-    $css = "../css/mainpage.css";
+    //Verifica cookie y usa css adecuado
+    if(isset($_COOKIE['fondo']) && array_key_exists($_COOKIE['fondo'],$coloresCookie)){
+        $css="../css/mainpage".htmlspecialchars($_COOKIE['fondo']).".css";
+    }else{
+        $css="../css/mainpagePink.css";
+    }
     include("../templates/pl_encabezado.php");
     //Comporbacion parte privada
     if($_SESSION['access'] != 1 || $_SESSION['ip'] != $_SERVER['REMOTE_ADDR']){
@@ -38,19 +43,6 @@
     </div>
   </main>
   <a href="../forms/form_servicios.php" id="bAddService">+ add more services</a>
-  <script>
-      window.onload=function(){
-        //Coge cookies
-        var cookieString = document.cookie;
-        //Divide las cookies y pone el color
-        var cookies = cookieString.split("; ");
-        for(let i = 0; i < cookies.length; i++) {
-          if(cookies[i].indexOf('fondo') != -1) {
-            document.body.style.background= cookies[i].substring(6);
-          }
-        }
-      };
-  </script>
   <footer class="<?=$class?>">
       <form action="" method="post" class="<?=$class?>">
           <label for="cookie">¿Aceptas la politica de cookies de nuestra página?</label>

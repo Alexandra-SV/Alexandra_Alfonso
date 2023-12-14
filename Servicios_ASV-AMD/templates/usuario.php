@@ -1,6 +1,11 @@
 <?php
 $titulo="Modify your info";
-$css="../css/ModifUsuario.css";
+//Verifica cookie y usa css adecuado
+if(isset($_COOKIE['fondo']) && array_key_exists($_COOKIE['fondo'],$coloresCookie)){
+    $css="../css/ModifUsuario".htmlspecialchars($_COOKIE['fondo']).".css";
+}else{
+    $css="../css/ModifUsuarioPink.css";
+}
 include("../templates/pl_encabezado.php");
 include("../libs/bComponentes.php");
 
@@ -80,15 +85,6 @@ include("../libs/bComponentes.php");
     window.onload = function () {
         var addImagen = document.getElementById("boton");
         addImagen.addEventListener("change", changePicture, false);
-        //Coge cookies
-        var cookieString = document.cookie;
-        //Divide las cookies y pone el color
-        var cookies = cookieString.split("; ");
-        for(let i = 0; i < cookies.length; i++) {
-            if(cookies[i].indexOf('fondo') != -1) {
-            document.body.style.background= cookies[i].substring(6);
-            }
-        }
     }
     function changePicture(event) {
         var input = event.target;
@@ -105,7 +101,7 @@ include("../libs/bComponentes.php");
     <footer>
         <form action="" method="post" class="<?=$class?>">
             <label for="cookie">¿Aceptas la politica de cookies de nuestra página?</label>
-                <?=pintaRadio(['si','no'],'cookie');?> 
+                <?=pintaRadio(['si','no'],'cookie');?>
                 <input type="submit" value="politica" name="bPolitic">
         </form>
     </footer>

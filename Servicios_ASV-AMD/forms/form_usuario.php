@@ -23,16 +23,17 @@ if($_SESSION['access'] != 1 || $_SESSION['ip'] != $_SERVER['REMOTE_ADDR']){
         $color = recoge('colorFondo');
         cRadio($coloresCookie[$color],'colorFondo',$errores,$coloresCookie,false);
         if(empty($errores)){
-        setcookie('fondo',$coloresCookie[$color]);
+            setcookie('fondo',$coloresCookie[$color]);
+            header('location:form_usuario.php');
         }
     }
 
-//comprueba si la cookie de politica existe y si su valor es valido 
+//comprueba si la cookie de politica existe y si su valor es valido
 //si no existe muestra el form para poder aceptar o negar las cookies
 if(isset($_COOKIE['politica'])){
     $cookie=htmlspecialchars($_COOKIE['politica']);
-    ($cookie != 'si' || $cookie != 'no')?$class="hide":$class="show"; 
-}else 
+    ($cookie != 'si' || $cookie != 'no')?$class="hide":$class="show";
+}else
     $class="";
 //crea la cookie al clicar el submit de las cookies
 if(isset($_REQUEST['bPolitic'])){
@@ -40,6 +41,7 @@ if(isset($_REQUEST['bPolitic'])){
     cRadio($respCookie,'politicaCookie',$errores,['si','no'],false);
     if(empty($errores)){
         setcookie('politica',$respCookie,time()+1000);
+        header('location:form_usuario.php');
     }
 }
 

@@ -69,7 +69,8 @@ CREATE TABLE `servicios` (
   `descripcion` varchar(200) NOT NULL,
   `precio` int(11) NOT NULL,
   `tipo` tinyint(1) NOT NULL,
-  `foto_servicio` varchar(100) NOT NULL
+  `foto_servicio` varchar(100) NOT NULL,
+  `fecha_alta` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -87,10 +88,10 @@ CREATE TABLE `tokens` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `user-idioma`
+-- Estructura de tabla para la tabla `user_idioma`
 --
 
-CREATE TABLE `user-idioma` (
+CREATE TABLE `user_idioma` (
   `id_user` int(11) NOT NULL,
   `id_idioma` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -108,7 +109,7 @@ CREATE TABLE `usuario` (
   `pass` varchar(256) NOT NULL,
   `f_nacimiento` date NOT NULL,
   `foto_perfil` varchar(100) NOT NULL,
-  `dscripción` varchar(300) NOT NULL,
+  `descripción` varchar(300) NOT NULL,
   `nivel` smallint(6) NOT NULL,
   `activo` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -150,9 +151,9 @@ ALTER TABLE `tokens`
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indices de la tabla `user-idioma`
+-- Indices de la tabla `user_idioma`
 --
-ALTER TABLE `user-idioma`
+ALTER TABLE `user_idioma`
   ADD PRIMARY KEY (`id_user`,`id_idioma`),
   ADD KEY `fk_ididioma` (`id_idioma`);
 
@@ -209,9 +210,9 @@ ALTER TABLE `tokens`
   ADD CONSTRAINT `tokens_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `usuario` (`id_user`);
 
 --
--- Filtros para la tabla `user-idioma`
+-- Filtros para la tabla `user_idioma`
 --
-ALTER TABLE `user-idioma`
+ALTER TABLE `user_idioma`
   ADD CONSTRAINT `fk_ididioma` FOREIGN KEY (`id_idioma`) REFERENCES `idioma` (`id_idioma`),
   ADD CONSTRAINT `fk_iduser` FOREIGN KEY (`id_user`) REFERENCES `usuario` (`id_user`);
 COMMIT;
