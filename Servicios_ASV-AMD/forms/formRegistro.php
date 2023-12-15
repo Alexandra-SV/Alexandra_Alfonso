@@ -38,14 +38,16 @@
             if(empty($errores)){
                 $usuario = array(
                     "email"=>$email,
-                    "password"=>$password,
+                    "password"=>encriptar($password), //encripta la password
                     "fullName"=>$fullName,
                     "dateOfBirth"=>$dateOfBirth,
                     "profilePicture"=>($profilePicture == 1)?"../img/imgPerfil/default_picture_donotdelete.jpg":$profilePicture,
                     "languages"=>(empty($languages))?"none":implode(",",$languages),
                     "description"=>($description=="")?"none":$description,
                 );
-                file_put_contents("../ficheros/usuarios.txt", "".$usuario["email"]."|".$usuario["password"]."|".$usuario["fullName"]."|".$usuario["dateOfBirth"]."|".$usuario["profilePicture"]."|".$usuario["languages"]."|".$usuario["description"]."|".date("d-m-Y,h:i:s",time()).PHP_EOL,FILE_APPEND);
+                //file_put_contents("../ficheros/usuarios.txt", "".$usuario["email"]."|".$usuario["password"]."|".$usuario["fullName"]."|".$usuario["dateOfBirth"]."|".$usuario["profilePicture"]."|".$usuario["languages"]."|".$usuario["description"]."|".date("d-m-Y,h:i:s",time()).PHP_EOL,FILE_APPEND);
+                //TODO: meter datos en bd
+
                 header("location:formInicioSesion.php");
             }else{
                 include("../templates/registro.php");

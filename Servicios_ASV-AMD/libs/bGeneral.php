@@ -453,7 +453,6 @@ function cFile(string $nombre, array &$errores, array $extensionesValidas, strin
  * @param int $time
  * @return bool
  */
-
  function setTimer(string $timerName,int $time):bool{
     $inact=$time;
     $lifetime=time()-$_SESSION[$timerName];
@@ -465,5 +464,20 @@ function cFile(string $nombre, array &$errores, array $extensionesValidas, strin
         return true;
     }else $_SESSION[$timerName]=time();
     return false;
+}
+
+//****** Funciones encriptar ****/
+/**
+ * Funcion ecriptar
+ *
+ * Encripta una contraseña y devuelve el hash de esta o false en caso de error.
+ *
+ * @param string $password
+ * @param int $cost=10
+ * @return int|bool
+ */
+
+function encriptar($password, $cost=10):int|bool{
+    return password_hash($password, PASSWORD_DEFAULT, ['cost' => $cost]);
 }
 ?>
