@@ -1,6 +1,7 @@
 <?php
-//user
-    $languagesArray=["Español","Italiano","Chino","Aleman","Ingles","Frances","Japones","Portugues","Ruso","Polaco","Arabe","Sueco","Hindi"];
+//cargar select
+    $languagesArray=["Español","Italiano","Chino","Aleman"];
+
 
 //imagen
     $extensionesValidas=["jpeg","jpg","png","gif"];

@@ -21,15 +21,19 @@
         $email = recoge('email');
         $password = recoge('password');
         //Ver que existe el user
-        cUser($email, $password,'usuario',$errores);
+        cUser($email, $password,'login',$errores,$pdo);
         //Pasar a correcto
         if(empty($errores)){
             $_SESSION['user'] = $email;
-            $_SESSION['imgPerfil'] = getUserValue($email, 4);
+            $_SESSION['imgPerfil'] = getRowValue('usuario', 'email', $email, 'foto_perfil', $errores, $pdo);
             $_SESSION['timeout']=time();
             $_SESSION['level'] = 1;
             $_SESSION['ip']= $_SERVER["REMOTE_ADDR"];
-            header("location:form_mainpage.php");
+            //TODO: coger el active segun el user de la bd
+                //if($userActive == 1) //Solo login admitido de usuarios activos
+                    header("location:form_mainpage.php");
+                /* else
+                    $errores['login'] = 'Activa tu cuenta para iniciar sesión'; */
         }else{
             file_put_contents("../ficheros/logLogin.txt", "".$email."|".$password ."|".date("d-m-Y,h:i:s",time()).PHP_EOL,FILE_APPEND);
             include("../templates/inicioSesion.php");

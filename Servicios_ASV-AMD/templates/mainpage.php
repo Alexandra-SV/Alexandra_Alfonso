@@ -12,11 +12,11 @@
     }
     include("../templates/pl_encabezado.php");
     //Comporbacion parte privada
-    if($_SESSION['access'] != 1 || $_SESSION['ip'] != $_SERVER['REMOTE_ADDR']){
+    if($_SESSION['level'] != 1 || $_SESSION['ip'] != $_SERVER['REMOTE_ADDR']){
         header("location:formInicioSesion.php");
     };
     //recoger usuario
-     $user = $_SESSION['active'];
+     $user = $_SESSION['user'];
 ?>
   <form action="">
     <input type="submit" name="bLogOut" id="bLogOut" value="&#60; Log Out">
@@ -26,7 +26,7 @@
   </header>
   <nav>
     <div id="user">
-      <span>Welcome, <?=$_SESSION['active']?></span>
+      <span>Welcome, <?=$_SESSION['user']?></span>
       <?php
         echo "<a href=\"../forms/form_usuario.php\"><img height=\"50\"width=\"50\"src=\"".$_SESSION['imgPerfil']."\" alt=\"profPicture\"></a>";
       ?>

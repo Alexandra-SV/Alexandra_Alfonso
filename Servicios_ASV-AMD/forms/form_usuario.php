@@ -12,7 +12,7 @@ $languages;
 $description;
 
 //Comporbacion parte privada
-if($_SESSION['access'] != 1 || $_SESSION['ip'] != $_SERVER['REMOTE_ADDR']){
+if($_SESSION['level'] != 1 || $_SESSION['ip'] != $_SERVER['REMOTE_ADDR']){
     header("location:formInicioSesion.php");
 };
 

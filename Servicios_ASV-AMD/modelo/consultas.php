@@ -21,11 +21,9 @@ function conectBd(string $db_hostname,string $db_nombre,string $db_usuario,strin
         //Accionamos el uso de excepciones
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }catch (PDOException $e) {
-        echo "X";
+        $errores[]="Error al conectar la BBDD: ";
         // En este caso guardamos los errores en un archivo de errores log
         error_log($e->getMessage().microtime().PHP_EOL,3,"../log/logBd.txt");
-        //guardamos en ·errores el error que queremos mostrar a los usuarios
-        $pdo =false;
     }
     if($pdo) return $pdo;
     else return false;
@@ -87,27 +85,6 @@ function getAllTable(object $pdo,string $tabla,array &$errores):array|bool{
 /* Consultas parametrizadas*/
 
 /**
- * Funcion selectRow
- *
- * Devuelve la fila concreta. Reporta error en un error.log.
- *
- * @param object $pdo
- * @param string $tabla
- * @param string $columna
- * @param string $valor
- * @param array $errores
- * @return array|bool
- */
-function selectRow(object $pdo, string $tabla, string $columna, string $valor, array $errores): array|bool{
-    $consulta = "SELECT * FROM $tabla WHERE ($columna = $valor)"; 
-    if($res= $pdo->query($consulta)){
-        $resArray = $res->fetchAll(PDO::FETCH_ASSOC);
-        return $resArray;
-    }
-    $errores[]="Error al seleccionar la tabla: ".$tabla;
-    return false;
-} 
-/**
  * Funcion selectCol
  *
  * Devuelve la columna concreta. Reporta error en un error.log.
@@ -122,6 +99,31 @@ function selectCol(object $pdo, string $tabla, string $columna, array $errores):
     $consulta = "SELECT $columna FROM $tabla ";
     if($res= $pdo->query($consulta)){
         $resArray = $res->fetchAll(PDO::FETCH_ASSOC);
+        return $resArray;
+    }
+    $errores[]="Error al seleccionar la tabla: ".$tabla;
+    return false;
+}
+
+/**
+ * Funcion selectRow
+ *
+ * Devuelve la fila concreta. Reporta error en un error.log.
+ *
+ * @param object $pdo
+ * @param string $tabla
+ * @param string $columna
+ * @param string $valor
+ * @param array $errores
+ * @return array|bool
+ */
+function selectRow(object $pdo, string $tabla, string $columna, string $valor, array &$errores): array|bool{
+    //TODO: preparar consulta
+    $consulta = "SELECT * FROM $tabla WHERE $columna = ?";
+    $resultado = $pdo->prepare($consulta);
+    $resultado->bindParam(1,$valor);
+    if($resultado->execute()){
+        $resArray = $resultado->fetchAll(PDO::FETCH_ASSOC);
         return $resArray;
     }
     $errores[]="Error al seleccionar la tabla: ".$tabla;

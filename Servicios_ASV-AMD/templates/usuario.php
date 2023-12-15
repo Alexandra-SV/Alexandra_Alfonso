@@ -10,10 +10,10 @@ include("../templates/pl_encabezado.php");
 include("../libs/bComponentes.php");
 
     //Comporbacion parte privada
-    if($_SESSION['access'] != 1 || $_SESSION['ip'] != $_SERVER['REMOTE_ADDR']){
+    if($_SESSION['level'] != 1 || $_SESSION['ip'] != $_SERVER['REMOTE_ADDR']){
         header("location:formInicioSesion.php");
     };
-    $user = $_SESSION['active'];
+    $user = $_SESSION['user'];
     $userData=getUser($user);
 ?>
 
