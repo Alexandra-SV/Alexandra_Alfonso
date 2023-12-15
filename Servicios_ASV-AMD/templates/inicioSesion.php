@@ -29,7 +29,7 @@
             <input type="submit" id="bEnter" value="Enter" name="bEnter">
         </div>
             <?php
-                echo (isset($errores['usuario'])) ? "<span class=\"error\">".$errores['usuario']."</span><br>" : "";
+                echo (isset($errores['login'])) ? "<span class=\"error\">".$errores['login']."</span><br>" : "";
             ?>
     </form>
     <script>

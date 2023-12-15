@@ -6,7 +6,7 @@
  */
 
 //***** Funciones get **** //
-
+//TODO: hacer estas funciones con bd
 /**
  * Funcion getUser
  *
@@ -15,7 +15,7 @@
  * @param string $email
  * @return array|bool
  */
-function getUser(string $email): array|bool{
+/* function getUser(string $email): array|bool{
     $datos = file_get_contents("../ficheros/usuarios.txt");
     $datosArray = explode(PHP_EOL,$datos);
     for ($i=0; $i < $datosArray; $i++) {
@@ -24,8 +24,8 @@ function getUser(string $email): array|bool{
             return $usuario;
     }
     return false;
-}
-
+} */
+//TODO: hacer estas funciones con bd
 /**
  * Funcion getUserValue
  *
@@ -35,7 +35,7 @@ function getUser(string $email): array|bool{
  * @param int $pos
  * @return array|bool
  */
-function getUserValue(string $email, int $pos): string|bool{
+/* function getUserValue(string $email, int $pos): string|bool{
     $datos = file_get_contents("../ficheros/usuarios.txt");
     $datosArray = explode(PHP_EOL,$datos);
     for ($i=0; $i < $datosArray; $i++) {
@@ -43,6 +43,29 @@ function getUserValue(string $email, int $pos): string|bool{
         if($usuario[0] == $email)
             return $usuario[$pos];
     }
+    return false;
+} */
+
+/**
+ * Funcion getRowValue
+ *
+ * Devuelve dato concreto de la fila.
+ *
+ * @param string $email
+ * @param int $pos
+ * @return array|bool
+ */
+function getRowValue(string $tabla, string $columna, string $valor, string $campo, array &$errores, object $pdo): string|bool{
+    try {
+        $resultado = selectRow($pdo, $tabla, $columna, $valor, $errores);
+        if($resultado !== false){ //Usuario encontrado
+            return $resultado[0][$campo];
+        }
+    } catch (PDOEXCEPTION $e) {
+        error_log($e->getMessage()."##Código: ".$e->getCode()."  ".microtime().PHP_EOL,3,"../log/logBD.txt");
+        echo "Error";
+    }
+    $errores = "Error al buscar el dato";
     return false;
 }
 

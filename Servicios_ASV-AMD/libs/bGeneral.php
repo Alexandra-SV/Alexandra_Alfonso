@@ -4,7 +4,6 @@
  * @author Alexandra Simona Vasilache, Alfonso Marquez Diaz
  *
  */
-include('../modelo/consultas.php');
 //***** Funciones de sanitización **** //
 
 /**
@@ -326,9 +325,12 @@ function cUser(string $email, string $password, string $campo, array &$errores, 
     $columna = 'email';
     try {
         $resultado = selectRow($pdo, $tabla, $columna, $email, $errores);
-        if($resultado){ //Email esta bien porque el select ha sido exitoso
+        if(!empty($resultado)){ //Email esta bien porque el select ha sido exitoso
             //Comprobar password
-            $bdPass = $resultado['pass'];
+            $bdPass = $resultado[0]['pass'];
+            //Aqui encripto la contreseña porque las pruebas las hacemos con los usuarios añadidos a mano y esas contraseñas no estan encriptadas
+            //TODO: quitar esto cuando todo este encriptado
+            $bdPass = encriptar($bdPass);
             if(password_verify($password, $bdPass))
                 return true;
         }
@@ -477,7 +479,7 @@ function cFile(string $nombre, array &$errores, array $extensionesValidas, strin
  * @return int|bool
  */
 
-function encriptar($password, $cost=10):int|bool{
+function encriptar($password, $cost=10):string|bool{
     return password_hash($password, PASSWORD_DEFAULT, ['cost' => $cost]);
 }
 ?>

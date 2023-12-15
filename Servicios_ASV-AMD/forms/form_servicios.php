@@ -46,10 +46,10 @@ if(isset($_REQUEST['bPolitic'])){
 }
 
 //Comporbacion parte privada
-if($_SESSION['access'] != 1 || $_SESSION['ip'] != $_SERVER['REMOTE_ADDR']){
+if($_SESSION['level'] != 1 || $_SESSION['ip'] != $_SERVER['REMOTE_ADDR']){
     header("location:formInicioSesion.php");
 };
-$user = $_SESSION['active'];
+$user = $_SESSION['user'];
     if (!isset($_REQUEST['bSave'])){
         include ('../templates/servicios.php');
     }
