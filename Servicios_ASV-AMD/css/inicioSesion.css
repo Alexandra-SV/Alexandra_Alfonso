@@ -89,9 +89,6 @@ footer{
         display: flex;
         flex-direction: column-reverse;
         align-self: center;
-        color: #fff;
-        background: linear-gradient(to right, rgb(222, 60, 122)  5%,  rgba(228, 119, 181, 0.438));
-        border-radius: 10px;
         min-width:300px;
         & span{
             margin-bottom: 10px;
@@ -99,6 +96,7 @@ footer{
             padding: 5px;
             text-align: center;
         }
+        & a{text-decoration: none;color: #fff;}
     }
 }
 .error{

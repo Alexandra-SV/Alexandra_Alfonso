@@ -1,3 +1,0 @@
-SQLSTATE[42S02]: Base table or view not found: 1146 Table 'evaluable_7w.user-idioma' doesn't exist## Fichero: E:\xampp\htdocs\DWES\REPO\Alexandra_Alfonso\Servicios_ASV-AMD\modelo\crearBD.php## Línea: 12##Código: 42S02##Instante: 0.56382500 1702576229
-SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'disponibilidad' already exists## Fichero: E:\xampp\htdocs\DWES\REPO\Alexandra_Alfonso\Servicios_ASV-AMD\modelo\crearBD.php## Línea: 12##Código: 42S01##Instante: 0.03153400 1702576289
-SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '@gmail.com)' at line 1##Código: 42000  0.64224900 1702653642

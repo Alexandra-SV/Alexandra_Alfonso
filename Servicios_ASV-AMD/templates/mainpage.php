@@ -39,7 +39,7 @@
   </nav>
   <main>
     <div id="lista">
-      <?=pintaServicio();?>
+    <?=pintaServicio( $pdo, "servicios", "titulo",$errores)?>
     </div>
   </main>
   <a href="../forms/form_servicios.php" id="bAddService">+ add more services</a>
