@@ -1,2 +1,3 @@
 SQLSTATE[42S02]: Base table or view not found: 1146 Table 'evaluable_7w.user-idioma' doesn't exist## Fichero: E:\xampp\htdocs\DWES\REPO\Alexandra_Alfonso\Servicios_ASV-AMD\modelo\crearBD.php## Línea: 12##Código: 42S02##Instante: 0.56382500 1702576229
 SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'disponibilidad' already exists## Fichero: E:\xampp\htdocs\DWES\REPO\Alexandra_Alfonso\Servicios_ASV-AMD\modelo\crearBD.php## Línea: 12##Código: 42S01##Instante: 0.03153400 1702576289
+SQLSTATE[HY000] [1045] Access denied for user 'admin'@'localhost' (using password: YES)0.32853100 1702652611

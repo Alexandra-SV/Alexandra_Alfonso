@@ -4,7 +4,6 @@
  * @author Alexandra Simona Vasilache, Alfonso Marquez Diaz
  *
  */
-include('../modelo/consultas.php');
 //***** Funciones de sanitización **** //
 
 /**

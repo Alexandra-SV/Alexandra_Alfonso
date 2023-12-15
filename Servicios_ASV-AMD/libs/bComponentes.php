@@ -4,7 +4,6 @@
  * @author Alexandra Simona Vasilache, Alfonso Marquez Diaz
  *
  */
-
 //***** Funciones get **** //
 
 /**
@@ -53,6 +52,7 @@ function getUserValue(string $email, int $pos): string|bool{
  *
  * @return array
  */
+/*Con Ficheros antiguo
 function getTituloServicios(): array{
     $file = fopen("../ficheros/servicios.txt", "r");
     $titulos=[];
@@ -65,10 +65,10 @@ function getTituloServicios(): array{
         }
         fclose($file);
     return $titulos;
-}
+}*/
+
 
 //***** Funciones de creación de elementos **** //
-
 /**
  * Funcion pintaRadio
  *
@@ -104,11 +104,12 @@ function pintaCheck(array $valores, string $campo){
  *
  * @param array $valores
  * @param string $name
+ * @param string $column
  */
-function pintaSelect(array $valores,string $name){
+function pintaSelect(array $valores,string $name,$id,$column){
     echo "<select name=\"".$name."[]\"id=\"$name\" multiple>";
-    for ($i=0; $i < count($valores); $i++) {
-        echo "<option value=\"$valores[$i]\" >". $valores[$i] ."</option>";
+    foreach ($valores as $value) {
+        echo "<option value=\"$value[$id]\" >". $value[$column] ."</option>";
     }
     echo "</select>";
 }
@@ -131,13 +132,19 @@ function pintaDesplegable(array $valores,string $name){
 
 /**
  * Funcion pintaServicio
- *
+ * 
  * Pinta los titulos de los servicios.
+ * 
+ * @param object $pdo
+ * @param string $tabla
+ * @param string $columna
+ * @param array $errores
+ * 
  */
-function pintaServicio(){
-    $titles=getTituloServicios();
-    foreach ($titles as  $value)
-        echo "<span>$value</span><br>";
+function pintaServicio(object $pdo, string $tabla, string $columna, array &$errores){
+        $titulos= selectCol($pdo,$tabla,$columna,$errores);  
+            foreach ($titulos as  $value)
+        echo "<span>$value[0][$columna]</span><br>";
 }
 
 /*function pintaServicios($usuario){

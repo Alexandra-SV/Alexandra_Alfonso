@@ -34,12 +34,8 @@ include("../libs/bComponentes.php");
                 echo (isset($errores['titulo'])) ? "<span class=\"error\">".$errores['titulo']."</span><br>" : "";
             ?>
         </div>
-        <div><label for="category">Category</label><br><?= pintaSelect($category,"category");?>
-            <?php
-                echo (isset($errores['category'])) ? "<span class=\"error\">".$errores['category']."</span><br>" : "";
-            ?>
         </div>
-        <div id="radio"><label for="tipo">Type</label><?= pintaRadio($type, "tipo");?>
+        <div id="radio"><label for="tipo">Type</label><?= pintaRadio(["Pago","intercambio"], "tipo");?>
             <?php
                 echo (isset($errores['tipo'])) ? "<span class=\"error\">".$errores['tipo']."</span><br>" : "";
             ?>
@@ -51,7 +47,7 @@ include("../libs/bComponentes.php");
                 echo (isset($errores['ubicacion'])) ? "<span class=\"error\">".$errores['ubicacion']."</span><br>" : "";
             ?>
         </div>
-        <div><label for="Availability">Availability</label><br><?= pintaSelect($Availability,"Availability");?>
+        <div><label for="Availability">Availability</label><br><?= pintaSelect(getAllTable($pdo,  $tabla,  $errores),"Availability","id_disponibilidad","disponibilidad");?>
             <?php
                 echo (isset($errores['Availability'])) ? "<span class=\"error\">".$errores['Availability']."</span><br>" : "";
             ?>

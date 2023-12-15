@@ -6,7 +6,7 @@
 ?>
     <div id="serv">
         <h1>Services</h1>
-        <section id="servicios"><?=pintaServicio()?></section>
+        <section id="servicios" ><a href="../templates/redirectServicios.html"><?=pintaServicio( $pdo, "servicios", "titulo",$errores)?></a></section>
     </div>
     <form action="" method="POST">
         <div id="div-signInUp">

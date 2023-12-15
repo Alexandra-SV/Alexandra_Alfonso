@@ -2,10 +2,10 @@
     //Iniciar session
     session_start();
     //Librerias
+    include('../modelo/consultas.php');
     include('../libs/bGeneral.php');
     include('../libs/bComponentes.php');
     include('../libs/bConfiguracion.php');
-    include('../modelo/consultas.php');
     //Iniciar conexion
     $pdo = conectBd($db_hostname,$db_nombre,$db_usuario,$db_clave);
     //Datos y array de errores
@@ -13,6 +13,8 @@
     $email = "";
     $password = "";
     if(!isset($_REQUEST['bEnter'])){
+        if(!isset($_SESSION['access']))
+            $_SESSION['access'] = 0;
         include("../templates/inicioSesion.php");
     }else{ //Clic a iniciar sesion
         //Sanitizar
@@ -22,10 +24,10 @@
         cUser($email, $password,'usuario',$errores);
         //Pasar a correcto
         if(empty($errores)){
-            $_SESSION['active'] = $email;
+            $_SESSION['user'] = $email;
             $_SESSION['imgPerfil'] = getUserValue($email, 4);
             $_SESSION['timeout']=time();
-            $_SESSION['access'] = 1;
+            $_SESSION['level'] = 1;
             $_SESSION['ip']= $_SERVER["REMOTE_ADDR"];
             header("location:form_mainpage.php");
         }else{

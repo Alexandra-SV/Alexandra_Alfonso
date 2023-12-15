@@ -56,7 +56,6 @@ $user = $_SESSION['active'];
     else {
     //sanitizamos
         $titulo=recoge('titulo',true);
-        $categoria=recogeArray('category');
         $tipo=recoge('tipo');
         $ubicacion=recoge('ubicacion',true);
         $disponibilidad=recogeArray('Availability');
@@ -65,7 +64,6 @@ $user = $_SESSION['active'];
 
     //Validamos
     cTexto( $titulo,"titulo",$errores,50,3);
-    cCheck( $categoria,"categoria",$errores,$category);
     cRadio( $tipo,"tipo",$errores,$type);
     cTexto( $ubicacion,"ubicacion",$errores,50);
     cCheck( $disponibilidad,"disponibilidad",$errores,$Availability);
@@ -80,8 +78,9 @@ $user = $_SESSION['active'];
         if(empty($errores)){
             if($imagen==1)
                 $imagen="../img/imgServ/servdefaultdonotdelete.jpg" ;
-            $st= $titulo."|".implode(',',$categoria)."|".$tipo."|".$ubicacion."|".implode(',',$disponibilidad)."|".$precio."|".$imagen."|".$descripcion."|".date("d-m-Y h:i:s",time()).PHP_EOL;
-            file_put_contents("../ficheros/servicios.txt",$st,FILE_APPEND);
+            
+            //$st= $titulo."|".$tipo."|".$ubicacion."|".implode(',',$disponibilidad)."|".$precio."|".$imagen."|".$descripcion."|".date("d-m-Y h:i:s",time()).PHP_EOL;
+            //file_put_contents("../ficheros/servicios.txt",$st,FILE_APPEND);
             header("location:form_mainpage.php");
         }else
             include("../templates/servicios.php");
