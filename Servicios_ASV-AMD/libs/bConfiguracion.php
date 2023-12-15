@@ -1,12 +1,13 @@
 <?php
-
-$category=["Informática","Diseño Gráfico","Consultoría Empresarial","Salud y Bienestar",
-"Reparación de Vehículos","Enseñanza y Tutoría","Guía Turística",
-"Carpintería y Ebanistería","Limpieza y Mantenimiento del Hogar"];
+//QUITAR
+    $category=["Informática","Diseño Gráfico","Consultoría Empresarial","Salud y Bienestar",
+    "Reparación de Vehículos","Enseñanza y Tutoría","Guía Turística",
+    "Carpintería y Ebanistería","Limpieza y Mantenimiento del Hogar"];
 
 $type=["Pago","intercambio"];
-$Availability=["mañanas","tardes","noches"];
-$languagesArray=["Español","Italiano","Chino","Aleman","Ingles","Frances","Japones","Portugues","Ruso","Polaco","Arabe","Sueco","Hindi"];
+//Cargar de la bd
+    $Availability=["mañanas","tardes","noches"];
+    $languagesArray=["Español","Italiano","Chino","Aleman"];
 
 //imagen
 $extensionesValidas=["jpeg","jpg","png","gif"];

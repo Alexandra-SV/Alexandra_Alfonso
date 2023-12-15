@@ -47,7 +47,7 @@
                 );
                 //file_put_contents("../ficheros/usuarios.txt", "".$usuario["email"]."|".$usuario["password"]."|".$usuario["fullName"]."|".$usuario["dateOfBirth"]."|".$usuario["profilePicture"]."|".$usuario["languages"]."|".$usuario["description"]."|".date("d-m-Y,h:i:s",time()).PHP_EOL,FILE_APPEND);
                 //TODO: meter datos en bd
-
+                //generar token: bin2hex(random_bytes(64))
                 header("location:formInicioSesion.php");
             }else{
                 include("../templates/registro.php");
