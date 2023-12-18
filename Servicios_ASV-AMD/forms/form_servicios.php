@@ -19,7 +19,6 @@ $imagen;
 
 //Cambia la cookie
 $color = "";
-$errores = [];
 if(isset($_REQUEST['bChange'])){
     $color = recoge('colorFondo');
     cRadio($coloresCookie[$color],'colorFondo',$errores,$coloresCookie,false);
@@ -69,7 +68,6 @@ $user = $_SESSION['user'];
     cCheck( $disponibilidad,"disponibilidad",$errores,$Availability);
     cNum( $precio,"precioH",$errores);
     cTextarea( $descripcion,"servicedescription",$errores,100,0,false);
-
     if($descripcion=="")$descripcion="-";
 
     //Comprobamos que no haya errores para crear el servicio
