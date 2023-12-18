@@ -118,7 +118,6 @@ function selectCol(object $pdo, string $tabla, string $columna, array $errores):
  * @return array|bool
  */
 function selectRow(object $pdo, string $tabla, string $columna, string $valor, array &$errores): array|bool{
-    //TODO: preparar consulta
     $consulta = "SELECT * FROM $tabla WHERE $columna = ?";
     $resultado = $pdo->prepare($consulta);
     $resultado->bindParam(1,$valor);
