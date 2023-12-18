@@ -37,16 +37,21 @@
             //Pasar a correcto
             if(empty($errores)){
                 $usuario = array(
+                    "nombre"=>$fullName,
                     "email"=>$email,
-                    "password"=>encriptar($password), //encripta la password
-                    "fullName"=>$fullName,
-                    "dateOfBirth"=>$dateOfBirth,
-                    "profilePicture"=>($profilePicture == 1)?"../img/imgPerfil/default_picture_donotdelete.jpg":$profilePicture,
-                    "languages"=>(empty($languages))?"none":implode(",",$languages),
-                    "description"=>($description=="")?"none":$description,
+                    "pass"=>encriptar($password), //encripta la password
+                    "f_nacimiento"=>$dateOfBirth,
+                    "foto_perfil"=>($profilePicture == 1)?"../img/imgPerfil/default_picture_donotdelete.jpg":$profilePicture,
+                    "descripción"=>($description=="")?"none":$description,
+                    "nivel"=> 0
                 );
+                insertRowAnonim($pdo, "usuario", $usuario,$errores);
+                $idUser=$pdo->lastInsertId();
+                foreach ($languages as $idioma) {
+                   $idiomas=["id_user"=>$idUser,"id_idioma"=>$idioma];
+                    insertRowAnonim($pdo, "idioma",$idiomas ,$errores);
+                }   
                 //file_put_contents("../ficheros/usuarios.txt", "".$usuario["email"]."|".$usuario["password"]."|".$usuario["fullName"]."|".$usuario["dateOfBirth"]."|".$usuario["profilePicture"]."|".$usuario["languages"]."|".$usuario["description"]."|".date("d-m-Y,h:i:s",time()).PHP_EOL,FILE_APPEND);
-                //TODO: meter datos en bd
                 //generar token: bin2hex(random_bytes(64))
                 header("location:formInicioSesion.php");
             }else{

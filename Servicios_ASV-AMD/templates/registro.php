@@ -41,14 +41,11 @@
 
         <label for="languages"> Languages</label>
         <br>
-        <?php pintaSelect($languagesArray,'languages') ;?>
+        <?= pintaSelect(getAllTable($pdo,  "idioma",  $errores),"languages","id_idioma","idioma");?>
         <br>
 
         <label for="description">Description</label>
         <br><textarea id="description"name="description" rows="5"cols="50"></textarea><br>
-        <label for="fondo">Fondo Privado</label>
-            <?=pintaSelect(['PaleVioletRed','MediumOrchid'],'fondo');?>
-        <br>
         <label for="cookie">¿Aceptas la politica de cookies de nuestra página?</label><br>
            <div id="radios"><?=pintaRadio(['si','no'],'cookie');?></div> 
         <br>

@@ -142,7 +142,7 @@ function selectRow(object $pdo, string $tabla, string $columna, string $valor, a
  *
  * @return bool
  */
-function addRowAnonim(object $pdo,string $tabla,array $valores,array &$errores):bool{
+function insertRowAnonim(object $pdo,string $tabla,array $valores,array &$errores):bool{
     if($pdo){
         $stValueColumns="";
         $llaves=array_keys($valores);
@@ -157,8 +157,9 @@ function addRowAnonim(object $pdo,string $tabla,array $valores,array &$errores):
             if($consulta->execute($valores)) return true; //si se ejecuta el insert devuelve true
             else return false;
         }catch(PDOException $e){
-            $errores[]=$e->getMessage();
-            return false;
+            $errores[]="error al conectar con la BBDD";
+            error_log($e->getMessage().microtime().PHP_EOL,3,"../log/logBd.txt");
+            //guardamos en ·errores el error que queremos mostrar a los usuarios
         }
     }else {
         $errores[]="error al conectar con la BBDD";
