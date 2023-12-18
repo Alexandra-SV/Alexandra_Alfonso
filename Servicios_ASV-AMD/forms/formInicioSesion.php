@@ -21,7 +21,7 @@
         $email = recoge('email');
         $password = recoge('password');
         //Ver que existe el user
-        cUser($email, $password,'login',$errores,$pdo);
+        cUser($email, $password,'login',$errores,$pdo); //comprobar que este activo tambien, si no no dejar
         //Pasar a correcto
         if(empty($errores)){
             $_SESSION['user'] = $email;
