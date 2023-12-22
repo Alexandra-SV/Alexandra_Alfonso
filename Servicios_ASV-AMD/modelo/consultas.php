@@ -198,4 +198,45 @@ function addInfoColumn(object $pdo,string $tabla,string $nomCol,array $valores,a
         return false;
     }
 }
+/**
+ * function updateInfoRow
+ *
+ * Actualiza los datos de una fila y una tabla concretas
+ * en caso de algun error, devuelve false y añade
+ * el error a un array de errores recursivo
+ *
+ * @param object $pdo
+ * @param string $tabla
+ * @param array $valores
+ * @param string $colId
+ * @param string $id
+ * @param array $errores
+ *
+ * @return bool
+ */
+function updateInfoRow(object $pdo,string $tabla,array $valores,string $colId,string $id,array &$errores):bool{
+    if ($pdo) {
+        try {
+            $strActualizar = "";
+            foreach ($valores as $key => $value) {
+                $strActualizar .= "$key=:$key, ";
+            }
+            $strActualizar = rtrim($strActualizar, ', ');
+            $consulta = $pdo->prepare("UPDATE $tabla SET $strActualizar WHERE $colId = :id");
+            // Vincular valores con marcadores de posición
+            foreach ($valores as $key => $value) {
+                $consulta->bindValue(":$key", $value);
+            }
+            $consulta->bindValue(":id", $id);
+            if (!$consulta->execute())return false; // Si ocurre un error en la ejecución, devuelve false
+            return true; // Si se ejecuta correctamente, devuelve true
+        } catch (PDOException $e) {
+            $errores[] = $e->getMessage();
+            return false;
+        }
+    } else {
+        $errores[] = "Error al conectar con la BBDD";
+        return false;
+    }
+}
 ?>
