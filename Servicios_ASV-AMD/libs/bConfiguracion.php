@@ -1,8 +1,4 @@
 <?php
-//cargar select
-    $languagesArray=["Español","Italiano","Chino","Aleman"];
-
-
 //imagen
     $extensionesValidas=["jpeg","jpg","png","gif"];
     $dirPerfil = "../img/imgPerfil/";

@@ -8,15 +8,11 @@ if(isset($_COOKIE['fondo']) && array_key_exists($_COOKIE['fondo'],$coloresCookie
 }
 include("../templates/pl_encabezado.php");
 include("../libs/bComponentes.php");
-
-    //Comporbacion parte privada
+//Comporbacion parte privada
     if($_SESSION['level'] != 1 || $_SESSION['ip'] != $_SERVER['REMOTE_ADDR']){
         header("location:formInicioSesion.php");
     };
-    $user = $_SESSION['user'];
-    $userData=getUser($user);
 ?>
-
     <header>
         <div>
             <a href="../forms/form_mainpage.php"> &#60; To main page</a>
@@ -36,11 +32,11 @@ include("../libs/bComponentes.php");
         <section id="s1">
         <div>
             <label for="nombreCompleto">Full Name*</label>
-                <span name="nombreCompleto" id="nombreCompleto"> <?=$userData[2]?></span>
+                <span name="nombreCompleto" id="nombreCompleto"> <?=$userValues['nombre']?></span>
         </div>
         <div>
             <label for="email">Email*</label>
-                <span name="email" id="email" ><?=$userData[0]?></span>
+                <span name="email" id="email" ><?=$userValues['email']?></span>
         </div>
         <div>
             <label for="Password">Password*</label>
@@ -51,17 +47,17 @@ include("../libs/bComponentes.php");
         </div>
         <div>
             <label for="date">Date of Birth*</label>
-                <span name="date" id="date" ><?=$userData[3]?></span>
+                <span name="date" id="date" ><?=$userValues['f_nacimiento']?></span>
         </div>
         <div><label for="languages">Languages</label><br>
-                <?=pintaSelect($languagesArray,"languages");?>
+                <?=pintaSelect($userLenguages,"languages");?><!--No creo q vaya pero bueno 0~0  -->
                 <?php
                     echo (isset($errores['languages'])) ? "<span class=\"error\">".$errores['languages']."</span><br>" : "";
                 ?>
         </div>
         <div>
             <label for="descripcionPersonal"> Personal description</label><br>
-                <textarea name="descripcionPersonal" id="descripcionPersonal"><?=$userData[6]?></textarea>
+                <textarea name="descripcionPersonal" id="descripcionPersonal"><?=$userValues['descripción']?></textarea>
                 <?php
                     echo (isset($errores['descripcionPersonal'])) ? "<span class=\"error\">".$errores['descripcionPersonal']."</span><br>" : "";
                 ?>
@@ -71,7 +67,7 @@ include("../libs/bComponentes.php");
         <section id="div-image">
             <span>Profile picture</span>
                 <br>
-            <img src="<?=$userData[4]?>" alt="profPicture">
+            <img src="<?=$userValues['foto_perfil']?>" alt="profPicture">
                 <br>
             <label for="boton">Select a file</label>
                 <input type="file" name="imagen" value="imagen-perfil" id="boton" >
@@ -81,23 +77,6 @@ include("../libs/bComponentes.php");
         </section>
         </form>
     </main>
-<script>
-    window.onload = function () {
-        var addImagen = document.getElementById("boton");
-        addImagen.addEventListener("change", changePicture, false);
-    }
-    function changePicture(event) {
-        var input = event.target;
-        var img = input.previousElementSibling.previousElementSibling.previousElementSibling;
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                img.setAttribute("src", e.target.result);
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-</script>
     <footer>
         <form action="" method="post" class="<?=$class?>">
             <label for="cookie">¿Aceptas la politica de cookies de nuestra página?</label>
@@ -105,5 +84,22 @@ include("../libs/bComponentes.php");
                 <input type="submit" value="politica" name="bPolitic">
         </form>
     </footer>
+    <script>
+        window.onload = function () {
+            var addImagen = document.getElementById("boton");
+            addImagen.addEventListener("change", changePicture, false);
+        }
+        function changePicture(event) {
+            var input = event.target;
+            var img = input.previousElementSibling.previousElementSibling.previousElementSibling;
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    img.setAttribute("src", e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
     </body>
 </html>
