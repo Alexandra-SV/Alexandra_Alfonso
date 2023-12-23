@@ -155,17 +155,17 @@ function pintaDesplegable(array $valores,string $name){
 
 /**
  * Funcion pintaServicio
- * 
+ *
  * Pinta los titulos de los servicios.
- * 
+ *
  * @param object $pdo
  * @param string $tabla
  * @param string $columna
  * @param array $errores
- * 
+ *
  */
 function pintaServicio(object $pdo, string $tabla, string $columna, array &$errores){
-        $titulos= selectCol($pdo,$tabla,$columna,$errores);  
+        $titulos= selectColumn($pdo,$tabla,$columna,$errores);
             foreach ($titulos as  $value)
         echo "<span>$value[0][$columna]</span><br>";
 }

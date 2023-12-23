@@ -42,11 +42,11 @@ $error=false;
                     $imagen="../img/imgPerfil/default_picture_donotdelete.jpg" ;
                 if(empty($errores)){
                     $arr=['pass'=>$password,'descripción'=>$description];
-                    updateInfoRow($pdo,'usuario',$arr,'id_user',$userValues['id_user'],$errores);
+                    updateRow($pdo,'usuario',$arr,'id_user',$userValues['id_user'],$errores);
                     if ($languages!="") {//habría que borrar todos los idiomasdel user y volverlos a añadir ??
                         foreach ($languages as $idioma) {
                             $idiomas=["id_user"=>$idUser,"id_idioma"=>$idioma];
-                            updateInfoRow($pdo,"user_idioma",$idiomas,'id_user',$userValues['id_user'],$errores);
+                            updateRow($pdo,"user_idioma",$idiomas,'id_user',$userValues['id_user'],$errores);
                         }
                     }
                     header("location:form_mainpage.php");
