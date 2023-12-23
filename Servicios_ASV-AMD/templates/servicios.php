@@ -47,7 +47,7 @@ include("../libs/bComponentes.php");
                 echo (isset($errores['ubicacion'])) ? "<span class=\"error\">".$errores['ubicacion']."</span><br>" : "";
             ?>
         </div>
-        <div><label for="Availability">Availability</label><br><?= pintaSelect(getAllTable($pdo,  $tabla,  $errores),"Availability","id_disponibilidad","disponibilidad");?>
+        <div><label for="Availability">Availability</label><br><?= pintaSelect(selectTable($pdo,  $tabla,  $errores),"Availability","id_disponibilidad","disponibilidad");?>
             <?php
                 echo (isset($errores['Availability'])) ? "<span class=\"error\">".$errores['Availability']."</span><br>" : "";
             ?>

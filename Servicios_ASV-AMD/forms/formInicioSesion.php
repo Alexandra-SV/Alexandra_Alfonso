@@ -5,7 +5,7 @@
     include('../modelo/consultas.php');
     include('../libs/bGeneral.php');
     include('../libs/bComponentes.php');
-    include('../libs/bConfiguracion.php');
+    include("../libs/bConfiguracion.php");
     //Iniciar conexion
     $pdo = conectBd($db_hostname,$db_nombre,$db_usuario,$db_clave);
     //Datos y array de errores

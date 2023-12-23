@@ -280,17 +280,18 @@ function cRadio(string $text, string $campo, array &$errores, array $valores, bo
  * @param bool $requerido
  * @return bool
  */
-function cCheck(array $text, string $campo, array &$errores, array $valores, bool $requerido = TRUE): bool{
+function cCheck(array $text, string $campo, array &$errores, object $pdo, string $tabla, string $columna, bool $requerido = TRUE): bool{
     if (($requerido) && (count($text) == 0)) {
         $errores[$campo] = "Error en el campo $campo";
         return false;
     }
     foreach ($text as $valor) {
-        if (!in_array($valor, $valores)) {
+        if (!selectRow($pdo,$tabla,$columna,$valor,$errores)) {
             $errores[$campo] = "Error en el campo $campo";
             return false;
         }
     }
+    //Validar con la bd
     return true;
 }
 
