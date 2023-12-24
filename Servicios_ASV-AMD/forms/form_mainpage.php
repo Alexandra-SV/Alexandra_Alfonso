@@ -1,4 +1,5 @@
 <?php
+    include('../modelo/consultas.php');
     include("../libs/bGeneral.php");
     include("../libs/bConfiguracion.php");
     //Cambia la cookie
@@ -12,7 +13,6 @@
             header('location:form_mainpage.php');
         }
     }
-
     //comprueba si la cookie de politica existe y si su valor es valido
     //si no existe muestra el form para poder aceptar o negar las cookies
     if(isset($_COOKIE['politica'])){
@@ -29,7 +29,6 @@
             header('location:form_mainpage.php');
         }
     }
-
     //Compruebo si se ha pulsado el botón de cerrar sesion
     if (isset($_REQUEST['bLogOut'])) {
         session_unset ();

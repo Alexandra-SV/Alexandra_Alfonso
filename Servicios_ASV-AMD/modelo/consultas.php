@@ -137,8 +137,8 @@ function selectColumn(object $pdo, string $tabla, string $columna, array $errore
  * @param array $errores
  * @return array|bool
  */
-function selectRow(object $pdo, string $tabla, string $columna, string $valor, array &$errores): array|bool{
-    $consulta = "SELECT * FROM $tabla WHERE $columna = ?";
+function selectRow(object $pdo, string $tabla, string $columna, string $valor, array &$errores,string $igual="="): array|bool{
+    $consulta = "SELECT * FROM $tabla WHERE $columna $igual ?";
     $resultado = $pdo->prepare($consulta);
     $resultado->bindParam(1,$valor);
     if($resultado->execute()){
@@ -164,7 +164,7 @@ function selectRow(object $pdo, string $tabla, string $columna, string $valor, a
  */
 function insertRow(object $pdo,string $tabla,array $valores,array &$errores):bool{
     //Forma anon
-    if($pdo){
+  if($pdo){
         $stValueColumns="";
         $llaves=array_keys($valores);
         $stColumns=implode(",",$llaves); //Nombres de cada columna separados por ,
@@ -191,7 +191,7 @@ function insertRow(object $pdo,string $tabla,array $valores,array &$errores):boo
         $errores[]="error al conectar con la BBDD";
         return false;
     }
-    /* if($pdo){
+      /* if($pdo){
         $stValueColumns="";
         $llaves=array_keys($valores);
         $stColumns=implode(",",$llaves); //Nombres de cada columna separados por ,
@@ -212,7 +212,34 @@ function insertRow(object $pdo,string $tabla,array $valores,array &$errores):boo
     }else {
         $errores[]="error al conectar con la BBDD";
         return false;
-    } */
+    } 
+    //manera directa
+    if ($pdo) {
+        try {
+            $consultaSQL = "INSERT INTO $tabla (nombre, email, pass, f_nacimiento, foto_perfil, descripción, nivel, activo) VALUES (:nombre, :email, :pass, :f_nacimiento, :foto_perfil, :descripción, :nivel, :activo)";
+            $consulta = $pdo->prepare($consultaSQL);
+
+            //bindParam en lugar de bindValue con el tipo de dato
+            $consulta->bindParam(':nombre', $valores['nombre'], PDO::PARAM_STR);
+            $consulta->bindParam(':email', $valores['email'], PDO::PARAM_STR);
+            $consulta->bindParam(':pass', $valores['pass'], PDO::PARAM_STR);
+            $consulta->bindParam(':f_nacimiento', $valores['f_nacimiento'], PDO::PARAM_STR);
+            $consulta->bindParam(':foto_perfil', $valores['foto_perfil'], PDO::PARAM_STR);
+            $consulta->bindParam(':descripción', $valores['descripción'], PDO::PARAM_STR);
+            $consulta->bindParam(':nivel', $valores['nivel'], PDO::PARAM_INT);
+            $consulta->bindParam(':activo', $valores['activo'], PDO::PARAM_INT);
+
+            return $consulta->execute();
+        } catch (PDOException $e) {
+            $errores[] = "Error al conectar con la BBDD";
+            error_log($e->getMessage() . microtime() . PHP_EOL, 3, "../log/logBd.txt");
+            // Guardamos en $errores el error que queremos mostrar a los usuarios
+            return false;
+        }
+    } else {
+        $errores[] = "Error al conectar con la BBDD";
+        return false;
+    }*/
 }
 //TODO: ESTE METODO ME PARECE IGUAL QUE INSERTROW MENOS POR ALGUNAS COSITAS, SI AL FINAL DEL TRABAJO NO LO USAMOS BORRAR
 /**

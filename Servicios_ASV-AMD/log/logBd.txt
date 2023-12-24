@@ -1,6 +1,0 @@
-SQLSTATE[HY093]: Invalid parameter number: parameter was not defined0.98749300 1703351537
-SQLSTATE[HY093]: Invalid parameter number: parameter was not defined0.22349300 1703351887
-SQLSTATE[HY093]: Invalid parameter number: parameter was not defined0.23487700 1703352002
-SQLSTATE[HY093]: Invalid parameter number: parameter was not defined0.88273300 1703352054
-SQLSTATE[42S22]: Column not found: 1054 Unknown column 'descripcion' in 'field list'0.96663700 1703352745
-SQLSTATE[HY093]: Invalid parameter number: parameter was not defined0.75437100 1703353193
