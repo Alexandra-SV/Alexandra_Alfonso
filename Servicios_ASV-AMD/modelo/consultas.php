@@ -56,7 +56,6 @@ function stopBd(object $pdo,array &$errores):bool{
     }
         return false;
 }
-//TODO: VER COMO USAR
 /**
  * function normalArray
  *
@@ -66,7 +65,7 @@ function stopBd(object $pdo,array &$errores):bool{
  *
  * @return array
  */
-function normalArray(array $arrayBidimensional, $campo): array{
+function normalArray(array $arrayBidimensional): array{
     foreach($arrayBidimensional as $key=>$id_columna){
         //Cada key es el número de columna y la id_columna son los pares clave:valor
         foreach($id_columna as $key=>$value){
@@ -177,7 +176,7 @@ function insertRow(object $pdo,string $tabla,array $valores,array &$errores):boo
            $consulta=$pdo->prepare("INSERT INTO $tabla ($stColumns) values($stValueColumns)");
            $i = 1;
            foreach ($valores as $key => $value) {
-                $consulta->bindParam($i,$value);
+                $consulta->bindValue($i,$value);
                 $i++;
            }
             if($consulta->execute()) return true; //si se ejecuta el insert devuelve true
@@ -235,7 +234,7 @@ function addInfoColumn(object $pdo,string $tabla,string $nomCol,array $valores,a
             $consulta=$pdo->prepare("INSERT INTO $tabla ($nomCol) values(?)");
             for ($i=0; $i < count($valores); $i++) {
                 $consulta->bindParam(1,$valores[$i]);
-                if(!$consulta->execute($valores))return false; //si se ejecuta el insert devuelve true
+                if(!$consulta->execute($valores))return false; //si se ejecuta el insert devuelve true, esto dará error, va sin el $valores entre parentesis si es anonimo
             }
             return true;
         }catch(PDOException $e){
@@ -311,9 +310,11 @@ function deleteRow(object $pdo, string $tabla, string $columna, string $valor, a
         $resultado = $pdo->prepare($consulta);
         $resultado->bindParam(1,$valor);
         // Comprobamos cuantas filas se han borrado
-        $cuenta = $resultado->rowCount();
-        if ($cuenta)
-            return true;
+        if ($resultado->execute()){
+            $cuenta = $resultado->rowCount();
+            if ($cuenta)
+                return true;
+        }
     } catch (PDOException $e) {
         error_log($e->getMessage().microtime().PHP_EOL,3,"../log/logBd.txt");
         $errores[] = $e->getMessage();
