@@ -15,12 +15,12 @@
         $validez = 3600;
         $tiempo = time() - $fila[0]['validez'];
         if($tiempo < $validez){
-            //Eliminar de la tabla
-            deleteRow($pdo, 'tokens', 'token', $token, $errores);
             //Activar la cuenta
             $idUser = $fila[0]['id_user'];
-            if(updateRow($pdo,'usuario',['activo',1], 'id_user', $id, $errores))
+            if(updateRow($pdo,'usuario',['activo'=>1], 'id_user', $idUser, $errores))
                 echo('Cuenta activada');
+            //Eliminar de la tabla
+            deleteRow($pdo, 'tokens', 'token', $token, $errores);
         }else{ //Se pasa de validez
             //Eliminar por pasarse del tiempo
             deleteRow($pdo, 'tokens', 'token', $token, $errores);

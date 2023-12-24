@@ -256,22 +256,22 @@ function cNum(string $num, string $campo, array &$errores, bool $requerido = TRU
  * @param bool $requerido
  * @return bool
  */
-function cRadio(string $text, string $campo, array &$errores, array $valores, bool $requerido = TRUE): bool{
-    if (in_array($text, $valores)) {
-        return true;
+function cRadio(string $text, string $campo, array &$errores, object $pdo, string $tabla, string $columna, bool $requerido = TRUE): bool{
+    if (($requerido) && $text == "") {
+        $errores[$campo] = "Error en el campo $campo";
+        return false;
     }
-    if (!$requerido && $text == "") {
-        return true;
+    if (!selectRow($pdo,$tabla,$columna,$text,$errores)) {
+        $errores[$campo] = "Error en el campo $campo";
+        return false;
     }
-    $errores[$campo] = "Error en el campo $campo";
-    return false;
+    return true;
 }
 
 /**
  * Funcion cCheck
  *
- * Valida que los valores seleccionados en un checkbox array están dentro de los
- * valores válidos dados en un array. Si es requerido o no. Reporta error en un array.
+ * Valida que los valores seleccionados en un checkbox array están dentro de los valores válidos dados en un array. Si es requerido o no. Reporta error en un array.
  *
  * @param array $text
  * @param string $campo
@@ -291,7 +291,6 @@ function cCheck(array $text, string $campo, array &$errores, object $pdo, string
             return false;
         }
     }
-    //Validar con la bd
     return true;
 }
 
@@ -329,9 +328,9 @@ function cUser(string $email, string $password, string $campo, array &$errores, 
         if(!empty($resultado)){ //Email esta bien porque el select ha sido exitoso
             //Comprobar password
             $bdPass = $resultado[0]['pass'];
-            //Aqui encripto la contreseña porque las pruebas las hacemos con los usuarios añadidos a mano y esas contraseñas no estan encriptadas
-            //TODO: quitar esto cuando todo este encriptado
-            $bdPass = encriptar($bdPass);
+            //Encriptar contraseñas de usuarios no registrados desde la web porque no están encriptadas
+            if($bdPass == 'alex' || $bdPass == 'alf'|| $bdPass == 'admin')
+                $bdPass = encriptar($bdPass);
             if(password_verify($password, $bdPass))
                 return true;
         }

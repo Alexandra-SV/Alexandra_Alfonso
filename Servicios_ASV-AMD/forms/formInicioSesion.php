@@ -27,13 +27,19 @@
             $_SESSION['user'] = $email;
             $_SESSION['imgPerfil'] = getRowValue('usuario', 'email', $email, 'foto_perfil', $errores, $pdo);
             $_SESSION['timeout']=time();
-            $_SESSION['level'] = 1;
             $_SESSION['ip']= $_SERVER["REMOTE_ADDR"];
             //TODO: coger el active segun el user de la bd
-                //if($userActive == 1) //Solo login admitido de usuarios activos
+            $userActive =getRowValue('usuario', 'email', $email, 'activo', $errores, $pdo);
+                if($email == 'asv.amd.php@gmail.com'){
+                    $_SESSION['level'] = 2;
+                    header("location:formAdmin.php");
+                }else if($userActive == "1"){ //Solo login admitido de usuarios activos
+                    $_SESSION['level'] = 1;
                     header("location:form_mainpage.php");
-                /* else
-                    $errores['login'] = 'Activa tu cuenta para iniciar sesión'; */
+                }else{
+                    $errores['login'] = 'Activa tu cuenta para iniciar sesión';
+                    include("../templates/inicioSesion.php");
+                }
         }else{
             file_put_contents("../ficheros/logLogin.txt", "".$email."|".$password ."|".date("d-m-Y,h:i:s",time()).PHP_EOL,FILE_APPEND);
             include("../templates/inicioSesion.php");
