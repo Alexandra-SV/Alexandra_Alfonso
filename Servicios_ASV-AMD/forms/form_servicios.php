@@ -3,9 +3,14 @@ session_start();
 include("../libs/bGeneral.php");
 setTimer('timeout',300);
 include("../libs/bConfiguracion.php");
-
+include("../modelo/consultas.php");
 $errores=[];
 $error=false;
+
+//conectamos con la bd
+$pdo = conectBd($db_hostname,$db_nombre,$db_usuario,$db_clave);
+$Availability=selectColumn( $pdo,"disponibilidad","disponibilidad",  $errores);
+
 
 //variables a utilizar
 $titulo;
@@ -86,5 +91,4 @@ $user = $_SESSION['user'];
         include("../templates/servicios.php");
     }
 ?>
-
 <?include("../templates/pl_pie.html");?>

@@ -17,6 +17,10 @@
     };
     //recoger usuario
      $user = $_SESSION['user'];
+     //conectamos con la bd
+    $pdo = conectBd($db_hostname,$db_nombre,$db_usuario,$db_clave);
+    $usuario=selectRow( $pdo, "usuario", "email",$_SESSION['user'],$errores);
+    $user_id=$usuario[0]['id_user'];
 ?>
   <form action="">
     <input type="submit" name="bLogOut" id="bLogOut" value="&#60; Log Out">
@@ -38,9 +42,7 @@
     </form>
   </nav>
   <main>
-    <div id="lista">
-    <?=pintaServicio( $pdo, "servicios", "titulo",$errores)?>
-    </div>
+    <?=pintaServicios($pdo,"servicios","id_user", $user_id, $errores)?>
   </main>
   <a href="../forms/form_servicios.php" id="bAddService">+ add more services</a>
   <footer class="<?=$class?>">

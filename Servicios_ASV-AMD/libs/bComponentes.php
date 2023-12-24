@@ -169,6 +169,35 @@ function pintaServicio(object $pdo, string $tabla, string $columna, array &$erro
             foreach ($titulos as  $value)
         echo "<span>$value[0][$columna]</span><br>";
 }
+function pintaServicios(object $pdo, string $tabla,string $columna,string $valor, array &$errores){
+    $arrayServicios=selectRow( $pdo, $tabla, $columna, $valor, $errores, "<>");
+    if($arrayServicios){
+        foreach ($arrayServicios as $key => $value) {
+            $serviciosClean["{$value['id_servicios']}"]=
+            [`titulo`=>$value[`titulo`],`descripcion`=>$value[`descripcion`],`precio`=>$value[`precio`]
+            ,`tipo`=>$value[`tipo`],`foto_servicio`=>$value[`foto_servicio`],`fecha_alta`=>$value[`fecha_alta`]];
+        }
+        for ($i=count($serviciosClean); $i < 0 ; $i--) { 
+            //tipo 0 = pago, =1 intercambio
+            $serviciosClean[$i]['tipo']=($serviciosClean[$i]['tipo']==0)?"pago":"intercambio";
+            $printPrecio=($serviciosClean[$i]['tipo']=="pago")?"<p>$serviciosClean[$i]['precio']</p>":"<span></span>";
+            $section=
+            "<section>
+                <a href='../forms/form_unic_service.php'>
+                    <img src='$serviciosClean[$i]['foto_servicio']' alt='Imagen Servicio'>
+                    <div>
+                        <p>$serviciosClean[$i]['titulo']</p>
+                        <p>$serviciosClean[$i]['descripcion']</p>
+                        <p>$serviciosClean[$i]['tipo']</p>
+                        $printPrecio
+                        <p>$serviciosClean[$i]['fecha_alta']</p>
+                    </div>
+                </a>
+            </section>";
+            echo $section;
+        }
+    }
+}
 
 /*function pintaServicios($usuario){
     if (!empty($_SESSION['usuarios'][$usuario]['services'])){

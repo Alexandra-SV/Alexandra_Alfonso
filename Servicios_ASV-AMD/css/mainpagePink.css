@@ -89,13 +89,14 @@ main {
     & section{
         margin: 20px;
         color: #fff;
-        align-self: self-start;
-        display: flex;
-
+        /*align-self: self-start;*/
         background: linear-gradient(to right, rgba(255, 110, 156, 0.774)  5%,  rgba(252, 174, 206, 0.438));
         border-radius: 20px;
-        & div{flex-grow: 2; & h2{font-size: 2em;text-align: left;text-transform:capitalize ;} & p{font-size: 1.3em;text-align: left;} margin: 20px;}
-        & img{flex-grow: 1;height: 150px;width: 150px;border-radius: 100px;align-self: self-start;margin: 10px;}
+        & a{
+            display: flex;
+            & div{flex-grow: 2; & h2{font-size: 2em;text-align: left;text-transform:capitalize ;} & p{font-size: 1.3em;text-align: left;} margin: 20px;}
+            & img{flex-grow: 1;height: 150px;width: 150px;border-radius: 100px;align-self: self-start;margin: 10px;}
+        }
     }
     & #lista{
         margin: 20px;

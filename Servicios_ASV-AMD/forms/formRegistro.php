@@ -51,7 +51,7 @@
                     "nivel"=> 1,
                     "activo"=>0
                 );
-                insertRow($pdo, "usuario", $usuario,$errores);
+                if(insertRow($pdo, "usuario", $usuario,$errores)){
                 $idUser=$pdo->lastInsertId();
                 //TODO: Hacer esto opcional porque si lo dejas vacio da error
                 foreach ($languages as $idioma) {
@@ -65,7 +65,8 @@
                     //PHPMailer
                     include '../PHPMailer/PHPMailer.php';
                 //file_put_contents("../ficheros/usuarios.txt", "".$usuario["email"]."|".$usuario["password"]."|".$usuario["fullName"]."|".$usuario["dateOfBirth"]."|".$usuario["profilePicture"]."|".$usuario["languages"]."|".$usuario["description"]."|".date("d-m-Y,h:i:s",time()).PHP_EOL,FILE_APPEND);
-                header("location:formInicioSesion.php");
+                header("location:formInicioSesion.php");}
+                else print_r($errores[0]);//informa al user de que ha habido un problema al registrarse
             }else{
                 include("../templates/registro.php");
             }
