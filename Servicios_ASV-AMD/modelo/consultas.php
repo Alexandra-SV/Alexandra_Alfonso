@@ -270,7 +270,8 @@ function addInfoColumn(object $pdo,string $tabla,string $nomCol,array $valores,a
             }
             return true;
         }catch(PDOException $e){
-            $errores[]=$e->getMessage();
+            error_log($e->getMessage() . microtime() . PHP_EOL, 3, "../log/logBd.txt");
+            // Guardamos en $errores el error que queremos mostrar a los usuarios
             return false;
         }
     }else {
@@ -299,19 +300,23 @@ function updateRow(object $pdo,string $tabla,array $valores,string $colId,string
         try {
             $strActualizar = "";
             foreach ($valores as $key => $value) {
-                $strActualizar .= "$key=:$key, ";
+                $strActualizar .= "$key=?, ";
             }
             $strActualizar = rtrim($strActualizar, ', ');
-            $consulta = $pdo->prepare("UPDATE $tabla SET $strActualizar WHERE $colId = :id");
+            $consulta = $pdo->prepare("UPDATE $tabla SET $strActualizar WHERE $colId = ?");
             // Vincular valores con marcadores de posición
+            $i=1;
             foreach ($valores as $key => $value) {
-                $consulta->bindValue(":$key", $value);
+                $consulta->bindValue($i, $value);
+                $i++;
             }
-            $consulta->bindValue(":id", $id);
+            $consulta->bindValue(count($valores)+1, $id);
             if (!$consulta->execute())return false; // Si ocurre un error en la ejecución, devuelve false
             return true; // Si se ejecuta correctamente, devuelve true
+            
         } catch (PDOException $e) {
-            $errores[] = $e->getMessage();
+            error_log($e->getMessage() . microtime() . PHP_EOL, 3, "../log/logBd.txt");
+            // Guardamos en $errores el error que queremos mostrar a los usuarios
             return false;
         }
     } else {

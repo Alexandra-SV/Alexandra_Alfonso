@@ -34,7 +34,7 @@
             </div>
             <div id="radio">
                 <label for="tipo">Type</label>
-                <?= pintaRadio(["Pago","intercambio"], "tipo");?>
+                <?= pintaRadio($type, "tipo");?>
                 <?php
                     echo (isset($errores['tipo'])) ? "<span class=\"error\">".$errores['tipo']."</span><br>" : "";
                 ?>
@@ -49,7 +49,7 @@
             <div>
                 <label for="Availability">Availability</label>
                 <br>
-                <?= pintaSelect( $Availability,"Availability","id_disponibilidad","disponibilidad");?>
+                <?= pintaSelect( $Availability,"Availability");?>
                 <?php
                     echo (isset($errores['Availability'])) ? "<span class=\"error\">".$errores['Availability']."</span><br>" : "";
                 ?>

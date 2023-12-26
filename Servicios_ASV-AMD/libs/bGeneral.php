@@ -252,7 +252,9 @@ function cNum(string $num, string $campo, array &$errores, bool $requerido = TRU
  * @param string $text
  * @param string $campo
  * @param array $errores
- * @param array $valores
+ * @param object $pdo
+ * @param string $tabla
+ * @param string $columna
  * @param bool $requerido
  * @return bool
  */
@@ -262,6 +264,30 @@ function cRadio(string $text, string $campo, array &$errores, object $pdo, strin
         return false;
     }
     if (!selectRow($pdo,$tabla,$columna,$text,$errores)) {
+        $errores[$campo] = "Error en el campo $campo";
+        return false;
+    }
+    return true;
+}
+/**
+ * Funcion Cradio
+ *
+ * Valida que un string se encuentre entre los valores posibles. Si es requerido o no. Reporta error en un array.
+ * version sin la parte de base de datos
+ *
+ * @param string $text
+ * @param string $campo
+ * @param array $errores
+ * @param array $valores
+ * @param bool $requerido
+ * @return bool
+ */
+function cRadios(string $text, string $campo, array &$errores,array $valores, bool $requerido = TRUE): bool{
+    if ($requerido && $text == "") {
+        $errores[$campo] = "Error en el campo $campo";
+        return false;
+    }
+    if (!in_array($text, $valores)) {
         $errores[$campo] = "Error en el campo $campo";
         return false;
     }
