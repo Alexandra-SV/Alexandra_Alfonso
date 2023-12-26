@@ -17,6 +17,12 @@
     $precio;
     $descripcion;
     $imagen;
+    //Compruebo si se ha pulsado el botón de cerrar sesion
+    if (isset($_REQUEST['bLogOut'])) {
+        session_unset ();
+        session_destroy();
+        header("location:formInicioSesion.php");
+    }
     //Cambia la cookie
     $color = "";
     if(isset($_REQUEST['bChange'])){
@@ -48,10 +54,10 @@
         header("location:formInicioSesion.php");
     };
     $user = $_SESSION['user'];
-        if (!isset($_REQUEST['bSave'])){
-            include ('../templates/servicios.php');
-        }
-        else {
+    if (!isset($_REQUEST['bSave'])){
+        include ('../templates/servicios.php');
+    }
+    else {
         //sanitizamos
         $titulo=recoge('titulo',true);
         $tipo=recoge('tipo');
@@ -78,7 +84,7 @@
                 include("../templates/servicios.php");
         }else
             include("../templates/servicios.php");
-        }
-        //Cerrar conexion
-        stopBd($pdo, $errores);
+    }
+    //Cerrar conexion
+    stopBd($pdo, $errores);
 ?>
