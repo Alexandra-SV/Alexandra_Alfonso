@@ -15,6 +15,12 @@
     $languages;
     $description;
     $errores=[];
+    //Compruebo si se ha pulsado el botón de cerrar sesion
+    if (isset($_REQUEST['bLogOut'])) {
+        session_unset ();
+        session_destroy();
+        header("location:formInicioSesion.php");
+    }
     //Comporbacion parte privada
     if($_SESSION['level'] != 1 || $_SESSION['ip'] != $_SERVER['REMOTE_ADDR']){
         header("location:formInicioSesion.php");
