@@ -19,3 +19,4 @@ try {
     // guardamos en ·errores el error que queremos mostrar a los usuarios
     $errores['datos'] = "Ha habido un error <br>";
 }
+?>

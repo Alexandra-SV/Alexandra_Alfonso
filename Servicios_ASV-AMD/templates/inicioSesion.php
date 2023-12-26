@@ -20,7 +20,6 @@
                 <label for="email"></label>
                 Email <input type="text" id="email" name="email" size="14"><br>
             </div>
-
             <div id="div-password">
                 <label for="password"></label>
                 Password <input type="password" id="password" name="password" size="14"><br>

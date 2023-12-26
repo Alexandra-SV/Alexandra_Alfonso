@@ -6,7 +6,6 @@
     $max_file_size = "2000000";
 
 //Colores de cookie
-    //TODO: ARREGLAR
     $coloresCookie = ['Pink'=>'Pink','Purple'=>'Purple'];
 
 //Base de datos

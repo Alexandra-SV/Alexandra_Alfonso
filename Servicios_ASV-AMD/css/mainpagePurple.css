@@ -12,7 +12,6 @@ body{
       ". addserv ."
       "foot foot foot"
       ;
-
     min-height: 100vh;
     background: radial-gradient(ellipse at right bottom, #6f5ae5, transparent),
     radial-gradient(ellipse at left top,#a954ee, transparent);
@@ -94,8 +93,27 @@ main {
         border-radius: 20px;
         & a{
             display: flex;
-            & div{flex-grow: 2; & h2{font-size: 2em;text-align: left;text-transform:capitalize ;} & p{font-size: 1.3em;text-align: left;} margin: 20px;}
-            & img{flex-grow: 1;height: 150px;width: 150px;border-radius: 100px;align-self: self-start;margin: 10px;}
+            & div{
+                flex-grow: 2;
+                margin: 20px;
+                & h2{
+                    font-size: 2em;
+                    text-align: left;
+                    text-transform:capitalize;
+                }
+                & p{
+                    font-size: 1.3em;
+                    text-align: left;
+                }
+            }
+            & img{
+                flex-grow: 1;
+                height: 150px;
+                width: 150px;
+                border-radius: 100px;
+                align-self: self-start;
+                margin: 10px;
+            }
         }
     }
     & #lista{
@@ -104,19 +122,20 @@ main {
         background: linear-gradient(to right, rgb(143, 78, 229)  5%,  rgba(188, 174, 252, 0.438));
         border-radius: 20px;
         min-width: 300px;
-        & span{display: 5px;margin: 5px;font-size: 1.5rem;}
+        & span{
+            display: 5px;
+            margin: 5px;
+            font-size: 1.5rem;
+        }
     }
-
 }
-#bAddService { grid-area: addserv; }
-
+#bAddService { grid-area: addserv;}
 footer{
     grid-area: foot;
     padding: 20px;
     border-radius: 20px;
     justify-content: center;
     color: #fff;
-
     & input[type='submit']{
         background: linear-gradient(to right, rgb(143, 78, 229)  5%,  rgba(188, 174, 252, 0.438));
         border: none;
@@ -130,6 +149,14 @@ footer{
         margin: 4px 2px;
         cursor: pointer;
     }
-    & .show{visibility: visible; background:linear-gradient(to right, rgb(143, 78, 229)  5%,  rgba(188, 174, 252, 0.438)); & form{display: block;} }
-    & .hide{visibility:hidden ; background:linear-gradient(to right, rgb(143, 78, 229)  5%,  rgba(188, 174, 252, 0.438)); & form{display: none;}}
+    & .show{
+        visibility: visible;
+        background:linear-gradient(to right, rgb(143, 78, 229)  5%,  rgba(188, 174, 252, 0.438));
+        & form{display: block;}
+    }
+    & .hide{
+        visibility:hidden;
+        background:linear-gradient(to right, rgb(143, 78, 229)  5%,  rgba(188, 174, 252, 0.438));
+        & form{display: none;}
+    }
 }

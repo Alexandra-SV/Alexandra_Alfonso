@@ -24,7 +24,6 @@
         $dateOfBirth = recoge('dateOfBirth');
         $languages = recogeArray('languages');
         $description = recoge('description');
-
         //Validar
         cTexto($fullName,'fullName',$errores);
         cEmail($email,'email',$errores);
@@ -32,11 +31,9 @@
         cDate($dateOfBirth,'dateOfBirth',$errores);
         cCheck($languages,'languages',$errores, $pdo, 'idioma', 'id_idioma', false);
         cTextarea($description,'description',$errores, 30, 1, false);
-
         if(empty($errores)){
-            //1. generar token: bin2hex(random_bytes(64))
+            //1. generar token
             $token = uniqid();
-            //2. Guardar user en la bd con cuenta no activa
             //Imagen
             $profilePicture = cFile('profilePicture',$errores,$extensionesValidas,$dirPerfil,$max_file_size,false);
             //Pasar a correcto
@@ -51,22 +48,21 @@
                     "nivel"=> 1,
                     "activo"=>0
                 );
+                //2. Guardar user en la bd con cuenta no activa
                 if(insertRow($pdo, "usuario", $usuario,$errores)){
-                $idUser=$pdo->lastInsertId();
-                //TODO: Hacer esto opcional porque si lo dejas vacio da error
-                foreach ($languages as $idioma) {
-                   $idiomas=["id_user"=>$idUser,"id_idioma"=>$idioma];
-                    insertRow($pdo, "user_idioma",$idiomas ,$errores);
-                }
-                //PARTE DEL COMPOSER
+                    $idUser=$pdo->lastInsertId();
+                    //TODO: Hacer esto opcional porque si lo dejas vacio da error
+                    foreach ($languages as $idioma) {
+                    $idiomas=["id_user"=>$idUser,"id_idioma"=>$idioma];
+                        insertRow($pdo, "user_idioma",$idiomas ,$errores);
+                    }
                     //3. Guardar token, id_user y validez en bd
-                    //TODO: poner a 86400 segundos cuando se vea que va bien
-                    insertRow($pdo, "tokens", ['token'=>$token, 'validez'=>time()+60, 'id_user'=>$idUser],$errores);
+                    insertRow($pdo, "tokens", ['token'=>$token, 'validez'=>time()+86400, 'id_user'=>$idUser],$errores);
                     //PHPMailer
                     include '../PHPMailer/PHPMailer.php';
-                //file_put_contents("../ficheros/usuarios.txt", "".$usuario["email"]."|".$usuario["password"]."|".$usuario["fullName"]."|".$usuario["dateOfBirth"]."|".$usuario["profilePicture"]."|".$usuario["languages"]."|".$usuario["description"]."|".date("d-m-Y,h:i:s",time()).PHP_EOL,FILE_APPEND);
-                header("location:formInicioSesion.php");}
-                else print_r($errores[0]);//informa al user de que ha habido un problema al registrarse
+                    header("location:formInicioSesion.php");
+                }else
+                    $errores['insert'] = 'Error al registrar el usuario';//informa al user de que ha habido un problema al registrarse
             }else{
                 include("../templates/registro.php");
             }

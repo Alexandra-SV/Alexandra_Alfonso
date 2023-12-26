@@ -1,4 +1,9 @@
 <?php
+/****
+ * Librería con funciones de consultas SQL
+ * @author Alexandra Simona Vasilache, Alfonso Marquez Diaz
+ *
+ */
 
 /**
  * function conectBd
@@ -211,7 +216,7 @@ function insertRow(object $pdo,string $tabla,array $valores,array &$errores):boo
     }else {
         $errores[]="error al conectar con la BBDD";
         return false;
-    } 
+    }
     //manera directa
     if ($pdo) {
         try {

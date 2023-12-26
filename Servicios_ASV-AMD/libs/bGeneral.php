@@ -294,20 +294,6 @@ function cCheck(array $text, string $campo, array &$errores, object $pdo, string
     return true;
 }
 
-/*Funcion cUser con fichero*/
-/* function cUser(string $email, string $password, string $campo, array &$errores): bool{
-    $datos = file_get_contents("../ficheros/usuarios.txt");
-    $datosArray = explode(PHP_EOL,$datos);
-    for ($i=0; $i < count($datosArray); $i++) {
-        $usuario = explode("|",$datosArray[$i]);
-        if($usuario[0] == $email && $usuario[1] == $password){
-            $_SESSION['imgPerfil'] = $usuario[4];
-            return true;
-        }
-    }
-    $errores[$campo] = "Error en el campo $campo";
-    return false;
-} */
 /**
  * Funcion cUser
  *
@@ -470,7 +456,7 @@ function cFile(string $nombre, array &$errores, array $extensionesValidas, strin
 
 //****** Funciones encriptar ****/
 /**
- * Funcion ecriptar
+ * Funcion encriptar
  *
  * Encripta una contraseña y devuelve el hash de esta o false en caso de error.
  *
