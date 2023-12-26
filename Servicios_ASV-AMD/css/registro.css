@@ -28,7 +28,8 @@ h1{
 .container > div{
     width: 25vh;
 }
-a, #bRegister{background: linear-gradient(to right, rgb(98, 38, 148)  5%,  rgba(252, 174, 226, 0.438));
+a, #bRegister{
+    background: linear-gradient(to right, rgb(98, 38, 148)  5%,  rgba(252, 174, 226, 0.438));
     border: none;
     border-radius: 30px;
     color: white;
@@ -63,8 +64,9 @@ form{
         margin-top: -33px;
         height: 37px;
         border-radius: 9px;
+        align-self: center;
         &  option:checked {background-color: rgb(225, 208, 255);} /* Ajusta el color de fondo de las opciones según tus preferencias */
-        &::-webkit-scrollbar {display: none;}align-self: center;
+        &::-webkit-scrollbar {display: none;}
     }
 }
 footer{

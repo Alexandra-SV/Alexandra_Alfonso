@@ -2,15 +2,17 @@
     font-family: sans-serif;
 }
 body{
-min-height: 100vh;
-background: radial-gradient(ellipse at right bottom, rgba(171, 60, 175, 1), transparent),
-radial-gradient(ellipse at left top, rgba(229, 78, 126, 1), transparent);
-
+    min-height: 100vh;
+    background: radial-gradient(ellipse at right bottom, rgba(171, 60, 175, 1), transparent),
+    radial-gradient(ellipse at left top, rgba(229, 78, 126, 1), transparent);
     & header{
         margin-top: 20px;
         display: flex;
         justify-content: space-between;
-        & h1{text-align:center; font-family:sans;margin-top: -40px;
+        & h1{
+            text-align:center;
+            font-family:sans;
+            margin-top: -40px;
             background: linear-gradient(to bottom, rgba(129, 46, 126, 0.463) 0%, rgba(91,0,29,0.4875) 100%);
             -webkit-background-clip: text;
             color: transparent;
@@ -22,18 +24,18 @@ radial-gradient(ellipse at left top, rgba(229, 78, 126, 1), transparent);
             flex-flow: column wrap;
             & a{
                 background: linear-gradient(to right, rgba(229, 78, 126, 1)  5%,  rgba(252, 174, 226, 0.438));
-            border: none;
-            border-radius: 30px;
-            color: white;
-            padding: 10px 30px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            font-size: 1.5em;
-            height: 30px;
+                border: none;
+                border-radius: 30px;
+                color: white;
+                padding: 10px 30px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                font-size: 1.5em;
+                height: 30px;
             }
             #bLogOut{
                 background: linear-gradient(to right, rgba(229, 78, 126, 1)  5%,  rgba(252, 174, 226, 0.438));
@@ -49,7 +51,6 @@ radial-gradient(ellipse at left top, rgba(229, 78, 126, 1), transparent);
                 cursor: pointer;
             }
         }
-
         & form select, form input{
             background: linear-gradient(to right, rgba(229, 78, 126, 1)  5%,  rgba(252, 174, 226, 0.438));
             border: none;
@@ -102,7 +103,6 @@ radial-gradient(ellipse at left top, rgba(229, 78, 126, 1), transparent);
                       }
                     &::-webkit-scrollbar {display: none;}
                 }
-
                 & #ubicacion{
                     height: 35px;
                     width: 193px;
@@ -126,7 +126,6 @@ radial-gradient(ellipse at left top, rgba(229, 78, 126, 1), transparent);
                       }
                     &::-webkit-scrollbar {display: none;}
                 }
-
                 & #precioH{
                     height: 35px;
                     width: 190px;
@@ -151,24 +150,28 @@ radial-gradient(ellipse at left top, rgba(229, 78, 126, 1), transparent);
             }
             & #radio{
                 font-size: 1.6em;
-                & input{margin-left:220px;font-size: 1em;accent-color:rgba(229, 78, 126, 1);}
+                & input{
+                    margin-left:220px;
+                    font-size: 1em;
+                    accent-color:rgba(229, 78, 126, 1);
+                }
             }
             & #addfile{
                 & label{
                     background: linear-gradient(to right, rgba(229, 78, 126, 1)  5%,  rgba(252, 174, 226, 0.438));
-                padding: 3px 8px;
-                border-radius: 30px;
-                border: none;
-                margin-left: 28px;
-                letter-spacing: 4px;
-                color: #fff;
-            }
+                    padding: 3px 8px;
+                    border-radius: 30px;
+                    border: none;
+                    margin-left: 28px;
+                    letter-spacing: 4px;
+                    color: #fff;
+                }
                 & input{
-                display: none;
+                    display: none;
+                }
             }
-            }
-
-            & #bSave{text-decoration: none;
+            & #bSave{
+                text-decoration: none;
                 background: linear-gradient(to right, rgba(229, 78, 126, 1)  5%,  rgba(252, 174, 226, 0.438));
                 padding: 3px 10px;
                 border-radius: 20px;
@@ -186,7 +189,6 @@ radial-gradient(ellipse at left top, rgba(229, 78, 126, 1), transparent);
         border-radius: 20px;
         justify-content: center;
         color: #fff;
-
         & input[type='submit']{
             background: linear-gradient(to right, rgba(229, 78, 126, 1)  5%,  rgba(252, 174, 226, 0.438));
             border-radius: 30px;
@@ -200,7 +202,15 @@ radial-gradient(ellipse at left top, rgba(229, 78, 126, 1), transparent);
             margin: 4px 2px;
             cursor: pointer;
         }
-        & .show{visibility: visible; background: linear-gradient(to right, rgba(229, 78, 126, 1)  5%,  rgba(252, 174, 226, 0.438)); & input[type='submit']{display: block;} }
-        & .hide{visibility:hidden ; background: linear-gradient(to right, rgba(229, 78, 126, 1)  5%,  rgba(252, 174, 226, 0.438));& input[type='submit']{display: none;}}
+        & .show{
+            visibility: visible;
+            background: linear-gradient(to right, rgba(229, 78, 126, 1)  5%,  rgba(252, 174, 226, 0.438));
+            & input[type='submit']{display: block;}
+        }
+        & .hide{
+            visibility:hidden ;
+            background: linear-gradient(to right, rgba(229, 78, 126, 1)  5%,  rgba(252, 174, 226, 0.438));
+            & input[type='submit']{display: none;}
+        }
     }
 }

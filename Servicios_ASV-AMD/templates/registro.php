@@ -4,6 +4,9 @@
     $css = "../css/registro.css";
     include("pl_encabezado.php");
 ?>
+    <?php
+        echo (isset($errores['insert'])) ? "<span class=\"error\">".$errores['insert']."</span><br>" : "";
+    ?>
     <div class="container">
         <a href="formInicioSesion.php">< To main page</a>
         <h1>Sign Up</h1>

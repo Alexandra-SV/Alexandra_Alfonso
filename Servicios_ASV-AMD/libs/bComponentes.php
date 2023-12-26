@@ -5,7 +5,7 @@
  *
  */
 //***** Funciones get **** //
-//TODO: hacer estas funciones con bd
+
 /**
  * Funcion getUser
  *
@@ -14,36 +14,19 @@
  * @param string $email
  * @return array|bool
  */
-/* function getUser(string $email): array|bool{
-    $datos = file_get_contents("../ficheros/usuarios.txt");
-    $datosArray = explode(PHP_EOL,$datos);
-    for ($i=0; $i < $datosArray; $i++) {
-        $usuario = explode("|",$datosArray[$i]);
-        if($usuario[0] == $email)
-            return $usuario;
+function getUser(string $tabla, string $columna, string $valor, array &$errores, object $pdo): string|bool{
+    try {
+        $resultado = selectRow($pdo, $tabla, $columna, $valor, $errores);
+        if($resultado !== false){ //Usuario encontrado
+            return normalArray($resultado); //TODO: QUIEN LO VAYA A USAR COMPROBAR QUE EL NORMALARRAY HACE LO QUE DEBE PORQUE HACE LO QUE QUIERE
+        }
+    } catch (PDOEXCEPTION $e) {
+        error_log($e->getMessage()."##Código: ".$e->getCode()."  ".microtime().PHP_EOL,3,"../log/logBD.txt");
+        echo "Error";
     }
+    $errores = "Error al buscar el usuario";
     return false;
-} */
-//TODO: hacer estas funciones con bd
-/**
- * Funcion getUserValue
- *
- * Devuelve dato concreto del usuario indicado según la posición del dato en el fichero.
- *
- * @param string $email
- * @param int $pos
- * @return array|bool
- */
-/* function getUserValue(string $email, int $pos): string|bool{
-    $datos = file_get_contents("../ficheros/usuarios.txt");
-    $datosArray = explode(PHP_EOL,$datos);
-    for ($i=0; $i < $datosArray; $i++) {
-        $usuario = explode("|",$datosArray[$i]);
-        if($usuario[0] == $email)
-            return $usuario[$pos];
-    }
-    return false;
-} */
+}
 
 /**
  * Funcion getRowValue
@@ -68,6 +51,7 @@ function getRowValue(string $tabla, string $columna, string $valor, string $camp
     return false;
 }
 
+//TODO: BORRAR METODOS QUE USEN FICHEROS CUANDO SE HAYAN PASADO A USAR BD
 /**
  * Funcion getTituloServicios
  *
@@ -177,7 +161,7 @@ function pintaServicios(object $pdo, string $tabla,string $columna,string $valor
             [`titulo`=>$value[`titulo`],`descripcion`=>$value[`descripcion`],`precio`=>$value[`precio`]
             ,`tipo`=>$value[`tipo`],`foto_servicio`=>$value[`foto_servicio`],`fecha_alta`=>$value[`fecha_alta`]];
         }
-        for ($i=count($serviciosClean); $i < 0 ; $i--) { 
+        for ($i=count($serviciosClean); $i < 0 ; $i--) {
             //tipo 0 = pago, =1 intercambio
             $serviciosClean[$i]['tipo']=($serviciosClean[$i]['tipo']==0)?"pago":"intercambio";
             $printPrecio=($serviciosClean[$i]['tipo']=="pago")?"<p>$serviciosClean[$i]['precio']</p>":"<span></span>";

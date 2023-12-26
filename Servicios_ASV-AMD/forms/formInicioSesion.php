@@ -28,7 +28,6 @@
             $_SESSION['imgPerfil'] = getRowValue('usuario', 'email', $email, 'foto_perfil', $errores, $pdo);
             $_SESSION['timeout']=time();
             $_SESSION['ip']= $_SERVER["REMOTE_ADDR"];
-            //TODO: coger el active segun el user de la bd
             $userActive =getRowValue('usuario', 'email', $email, 'activo', $errores, $pdo);
                 if($email == 'asv.amd.php@gmail.com'){
                     $_SESSION['level'] = 2;

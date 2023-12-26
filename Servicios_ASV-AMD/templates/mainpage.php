@@ -52,5 +52,7 @@
           <input type="submit" value="politica" name="bPolitic">
       </form>
   </footer>
-  </body>
-</html>
+<?php
+    //Pie
+    include("pl_pie.html");
+?>
