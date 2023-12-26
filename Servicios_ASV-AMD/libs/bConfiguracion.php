@@ -1,5 +1,7 @@
 <?php
-//imagen
+//Sevicios
+    $type=[0=>"Pago",1=>"intercambio"];
+//Imagen
     $extensionesValidas=["jpeg","jpg","png","gif"];
     $dirPerfil = "../img/imgPerfil/";
     $dirServicio = "../img/imgServ/";

@@ -50,7 +50,7 @@
                         <span name="date" id="date" ><?=$userValues['f_nacimiento']?></span>
                 </div>
                 <div><label for="languages">Languages</label><br>
-                        <?=pintaSelect($userLenguages,"languages");?><!--No creo q vaya pero bueno 0~0  -->
+                        <?=pintaSelect($languagesArray,"languages");?><!--No creo q vaya pero bueno 0~0  -->
                         <?php
                             echo (isset($errores['languages'])) ? "<span class=\"error\">".$errores['languages']."</span><br>" : "";
                         ?>
