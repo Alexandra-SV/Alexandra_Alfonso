@@ -56,7 +56,7 @@
                             "id_user"=>$userValues['id_user'],
                             "descripcion"=>$descripcion, 
                             "precio"=>$precio,
-                            "tipo"=>($tipo=="pago")?0:1,
+                            "tipo"=>$tipo,
                             "foto_servicio"=>$imagen,
                             "fecha_alta"=> date('Y-m-d', time()),
                         );
@@ -78,7 +78,7 @@
     $color = "";
     if(isset($_REQUEST['bChange'])){
         $color = recoge('colorFondo');
-        cRadio($coloresCookie[$color],'colorFondo',$errores,$coloresCookie,false);
+        cRadios($coloresCookie[$color],'colorFondo',$errores,$coloresCookie,false);
         if(empty($errores)){
             setcookie('fondo',$coloresCookie[$color]);
             header('location:form_servicios.php');
@@ -94,7 +94,7 @@
     //crea la cookie al clicar el submit de las cookies
     if(isset($_REQUEST['bPolitic'])){
         $respCookie = recoge('cookie');
-        cRadio($respCookie,'politicaCookie',$errores,['si','no'],false);
+        cRadios($respCookie,'politicaCookie',$errores,['si','no'],false);
         if(empty($errores)){
             setcookie('politica',$respCookie,time()+1000);
             header('location:form_servicios.php');
