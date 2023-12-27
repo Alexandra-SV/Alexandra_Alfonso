@@ -161,6 +161,7 @@ function pintaDesplegable(array $valores,string $name){
  */
 function pintaServicio(object $pdo, string $tabla, string $columna, array &$errores){
         $titulos= selectColumn($pdo,$tabla,$columna,$errores);
+        $titulos=array_reverse($titulos);//imprime del mas nuevo al mas viejo
             foreach ($titulos as $key=>  $value)
         echo "<span>$value[$columna]</span><br>";
 }
@@ -177,16 +178,17 @@ function pintaServicios(object $pdo, string $tabla,string $columna,string $valor
         //doy la vuelta al array para imprimirlo del mas nuevo al mas viejo
         $serviciosClean=array_reverse($serviciosClean);
         foreach ($serviciosClean as $value) {//TODO decide if we show the price even if type is intercambio
-        $printTipo=($value['tipo']=="pago")?"<p>".$value['precio']."</p>":"<span></span>";
-            $section=
+        $printPrecio=($value['tipo']==0)?"<p>".$value['precio']."</p>":"<span></span>";
+        $printTipo=($value['tipo']==0)?"Pago":"Intercambio";
+        $section=
             "<section>
-                <a href='../forms/form_unic_service.php'>
+                <a href='../forms/form_unic_service.php?titulo=".$value['titulo']."'>
                     <img src='".$value['foto_servicio']."' alt='Imagen Servicio'>
                     <div>
                         <p>".$value['titulo']."</p>
                         <p>".$value['descripcion']."</p>
-                        <p>".$value['tipo']."</p>
-                        $printTipo
+                        <p>$printTipo</p>
+                        $printPrecio
                         <p>".$value['fecha_alta']."</p>
                     </div>
                 </a>

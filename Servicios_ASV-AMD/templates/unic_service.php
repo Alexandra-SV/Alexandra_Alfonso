@@ -2,12 +2,13 @@
     $titulo="Unic Service";
     //Verifica cookie y usa css adecuado
     if(isset($_COOKIE['fondo']) && array_key_exists($_COOKIE['fondo'],$coloresCookie)){
-        $css="../css/servicios".htmlspecialchars($_COOKIE['fondo']).".css";
+        $css="../css/form_unic_service".htmlspecialchars($_COOKIE['fondo']).".css";
     }else{
-        $css="../css/serviciosPurple.css";
+        $css="../css/form_unic_servicePurple.css";
     }
     include("../templates/pl_encabezado.php");
     include("../libs/bComponentes.php");
+    $tipo=($servicio['tipo']==0)?"Pago":"Intercambio";
 ?>
     <header>
         <div>
@@ -24,18 +25,24 @@
         </form>
     </header><!--Redirige a inicio -->
     <main>
-        <p></p>
-        <p></p>
-        <p></p>
+        <div class="info">
+            <img src="<?=$servicio['foto_servicio']?>" alt="">
+            <div class="text">
+                <p><?=$servicio['titulo']?></p>
+                <p><?=$tipo?></p>
+                <p><?=$servicio['precio']?>€</p>
+                <p id="description"><?=$servicio['descripcion']?></p>
+            </div>
+        </div>
         <form action="" method="POST" enctype="multipart/form-data">
             <div>
-                <label for=" servicedescription"> Service description</label><br>
+                <label for=" servicedescription">Message</label><br>
                 <textarea name="servicedescription" id="servicedescription"></textarea>
                 <?php
                     echo (isset($errores['servicedescription'])) ? "<span class=\"error\">".$errores['servicedescription']."</span><br>" : "";
                 ?>
             </div>
-                <input type="submit" name="bSave" id="bSave" value="S A V E">
+                <input type="submit" name="bSave" id="bSave" value="S E N D">
         </form>
     </main>
     <footer >
