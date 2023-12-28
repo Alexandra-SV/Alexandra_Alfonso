@@ -17,8 +17,7 @@
     $titulo = (isset($_GET['titulo']))?htmlspecialchars($_GET['titulo']):htmlspecialchars($_SESSION['titulo']);
     ($titulo!="")?$_SESSION['titulo']=$titulo:"";
     $servicio= selectRow($pdo,'servicios','titulo', $titulo, $errores);
-    $servicio=$servicio[0];
-    
+        $servicio=$servicio[0];
 //Manejo de formulario    
     if (!isset($_REQUEST['bSave'])){
         include ('../templates/unic_service.php');
@@ -26,13 +25,15 @@
         //sanitizamos
             $descripcion= recoge('servicedescription',true);
         //Validamos
-            cTextarea( $descripcion,"servicedescription",$errores,100,0);
+            cTextarea( $descripcion,"servicedescription",$errores,200,0);
         //Comprobamos que no haya errores para crear el servicio
             if (empty($errores)) {
-                
-
-
-                header("location:form_mainpage.php");
+                $serviceUser=selectRow($pdo,'usuario','id_user', $servicio['id_user'], $errores);
+                    $serviceUser=$serviceUser[0];
+                include '../PHPMailer/PHPMailer_service.php';
+                if(empty($errores))
+                    header("location:form_mainpage.php");
+                else header("location:form_unic_service.php");
             }else
                 include("../templates/unic_service.php");
     }
