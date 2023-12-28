@@ -13,7 +13,7 @@
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'asv.amd.php@gmail.com';
+        $mail->Username = '';
         $mail->Password = 'xwpe elgz mylv gdai';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port = "465";
