@@ -4,7 +4,6 @@
     $timeOut= setTimer('timeout',300);
     include("../libs/bConfiguracion.php");
     include("../modelo/consultas.php");
-     
 //variables a utilizar
     $password;
     $languages;
@@ -23,13 +22,13 @@
 //recojo los lenguajes de la db
     $languagesArray=selectColumn($pdo, "idioma", "idioma", $errores);
 
-    //Compruebo si se ha pulsado el botón de cerrar sesion
+//Compruebo si se ha pulsado el botón de cerrar sesion
     if (isset($_REQUEST['bLogOut'])) {
         session_unset ();
         session_destroy();
         header("location:formInicioSesion.php");
     }
-    //Manejo del formulario
+//Manejo del formulario
     if (!isset($_REQUEST['bSave'])) {
         include ('../templates/usuario.php');
     }else {
@@ -53,7 +52,7 @@
                         $arr=array_merge(...$arr);//... desempaqueta los elementos del array.
                         updateRow($pdo,'usuario',$arr,'id_user',$userValues['id_user'],$errores);   
                     }
-                    if ($languages!="") {//habría que borrar todos los idiomasdel user y volverlos a añadir ??
+                    if ($languages!="") {
                         $userLanguages= selectRow($pdo,'user_idioma','id_user',  $userValues['id_user'], $errores);
                         $userLanguages=array_merge_recursive(...$userLanguages);
                         $newLanguages=[];
@@ -71,8 +70,8 @@
             }else
                 include("../templates/usuario.php");
     }
-    //Apartado de Cookies
-        //Cambia la cookie
+//Apartado de Cookies
+    //Cambia la cookie
         $color = "";
         if(isset($_REQUEST['bChange'])){
             $color = recoge('colorFondo');
@@ -82,14 +81,14 @@
                 header('location:form_usuario.php');
             }
         }
-        //comprueba si la cookie de politica existe y si su valor es valido
-        //si no existe muestra el form para poder aceptar o negar las cookies
+    //comprueba si la cookie de politica existe y si su valor es valido
+    //si no existe muestra el form para poder aceptar o negar las cookies
         if(isset($_COOKIE['politica'])){
             $cookie=htmlspecialchars($_COOKIE['politica']);
             ($cookie != 'si' || $cookie != 'no')?$class="hide":$class="show";
         }else
             $class="";
-        //crea la cookie al clicar el submit de las cookies
+    //crea la cookie al clicar el submit de las cookies
         if(isset($_REQUEST['bPolitic'])){
             $respCookie = recoge('cookie');
             cRadios($respCookie,'politicaCookie',$errores,['si','no'],false);
@@ -98,6 +97,6 @@
                 header('location:form_usuario.php');
             }
         }
-        //Cerrar conexion
-        stopBd($pdo, $errores);
+//Cerrar conexion
+    stopBd($pdo, $errores);
 ?>
