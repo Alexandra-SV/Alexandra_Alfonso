@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include('../modelo/consultas.php');
     include("../libs/bGeneral.php");
     include("../libs/bConfiguracion.php");

@@ -13,8 +13,6 @@
     $email = "";
     $password = "";
     if(!isset($_REQUEST['bEnter'])){
-        if(!isset($_SESSION['access']))
-            $_SESSION['access'] = 0;
         include("../templates/inicioSesion.php");
     }else{ //Clic a iniciar sesion
         //Sanitizar
