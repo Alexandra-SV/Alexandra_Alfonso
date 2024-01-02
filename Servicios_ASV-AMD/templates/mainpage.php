@@ -1,5 +1,4 @@
 <?php
-    session_start();
     setTimer('timeout',300);
     include("../libs/bComponentes.php");
     //Encabezado
@@ -11,6 +10,9 @@
         $css="../css/mainpagePink.css";
     }
     include("../templates/pl_encabezado.php");
+    //Configura usuarios no logueados a 0
+    if(!isset($_SESSION['level']))
+        $_SESSION['level'] = 0;
     //Comporbacion parte privada
     if($_SESSION['level'] != 1 || $_SESSION['ip'] != $_SERVER['REMOTE_ADDR']){
         header("location:formInicioSesion.php");
