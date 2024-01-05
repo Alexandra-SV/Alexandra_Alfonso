@@ -44,7 +44,7 @@
 
         <label for="languages"> Languages</label>
         <br>
-        <?= pintaSelect(selectTable($pdo,  "idioma",  $errores),"languages","id_idioma","idioma");?>
+        <?= pintaSelect($languagesArray,"languages");?>
         <br>
         <?php
             echo (isset($errores['languages'])) ? "<span class=\"error\">".$errores['languages']."</span><br>" : "";

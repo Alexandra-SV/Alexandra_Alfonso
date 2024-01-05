@@ -18,7 +18,7 @@ function getUser(string $tabla, string $columna, string $valor, array &$errores,
     try {
         $resultado = selectRow($pdo, $tabla, $columna, $valor, $errores);
         if($resultado !== false){ //Usuario encontrado
-            return normalArray($resultado); //TODO: QUIEN LO VAYA A USAR COMPROBAR QUE EL NORMALARRAY HACE LO QUE DEBE PORQUE HACE LO QUE QUIERE
+            return normalArray($resultado);
         }
     } catch (PDOEXCEPTION $e) {
         error_log($e->getMessage()."##Código: ".$e->getCode()."  ".microtime().PHP_EOL,3,"../log/logBD.txt");
@@ -50,29 +50,6 @@ function getRowValue(string $tabla, string $columna, string $valor, string $camp
     $errores = "Error al buscar el dato";
     return false;
 }
-
-//TODO: BORRAR METODOS QUE USEN FICHEROS CUANDO SE HAYAN PASADO A USAR BD
-/**
- * Funcion getTituloServicios
- *
- * Devuelve los titulos de los servicios.
- *
- * @return array
- */
-/*Con Ficheros antiguo
-function getTituloServicios(): array{
-    $file = fopen("../ficheros/servicios.txt", "r");
-    $titulos=[];
-        while (!feof($file)){
-            $linea = fgets($file);
-            if ($linea!="") {
-                $service=explode("|",$linea);
-                $titulos[]=$service[0];
-            }
-        }
-        fclose($file);
-    return $titulos;
-}*/
 
 
 //***** Funciones de creación de elementos **** //
@@ -112,7 +89,7 @@ function pintaCheck(array $valores, string $campo){
  * @param array $valores
  * @param string $name
  * @param string $column
- */  
+ */
 function pintaSelect(array $valores,string $name,bool $idNumerico=TRUE){
     echo "<select name=\"".$name."[]\"id=\"$name\" multiple>";
     $i=1;
@@ -126,7 +103,7 @@ function pintaSelect(array $valores,string $name,bool $idNumerico=TRUE){
             foreach ($value as $key => $valor) {
                 echo "<option value=\"$valor\" >". $valor."</option>";
                 $i++;
-            } 
+            }
         }
     }
     echo "</select>";
@@ -177,7 +154,7 @@ function pintaServicios(object $pdo, string $tabla,string $columna,string $valor
         }
         //doy la vuelta al array para imprimirlo del mas nuevo al mas viejo
         $serviciosClean=array_reverse($serviciosClean);
-        foreach ($serviciosClean as $value) {//TODO decide if we show the price even if type is intercambio
+        foreach ($serviciosClean as $value) {
         $printPrecio=($value['tipo']==0)?"<p>".$value['precio']."</p>":"<span></span>";
         $printTipo=($value['tipo']==0)?"Pago":"Intercambio";
         $section=
@@ -197,30 +174,6 @@ function pintaServicios(object $pdo, string $tabla,string $columna,string $valor
         }
     }
 }
-
-/*function pintaServicios($usuario){
-    if (!empty($_SESSION['usuarios'][$usuario]['services'])){
-
-        $servicios=$_SESSION['usuarios'][$usuario]['services'];
-        foreach ($servicios as $servicio) {
-            $cat=implode(" ",$servicio['categoria']);
-            echo "<section id=\"".$servicio['titulo']."\">";
-            echo "<div>";
-            echo "<h2>".$servicio['titulo']."</h2><br>";
-            echo "<p>Category: ".$cat."</p><br>";
-            echo "<p>Type: ".$servicio['tipo']."</p><br>";
-            echo "<p>Price : ".$servicio['precio']." per hour</p>";
-            echo "</div>";
-            if($servicio["imagen"] != 1){
-                echo "<img src=\"".$servicio["imagen"]."\" alt=\"servPicture\">";
-            }else{
-                echo "<img src=\"../img/imgServ/servdefaultdonotdelete.jpg\" alt=\"servPicture\"></a>";
-            }
-            echo "</section>";
-        }
-    }else
-        echo"<span>Sin Servicios</span>";
-}*/
 
 /**
  * Funcion pintaLista
