@@ -14,6 +14,8 @@
     $dateOfBirth = "";
     $languages = "";
     $description = "";
+    //Lenguajes disponibles
+    $languagesArray=selectColumn($pdo, "idioma", "idioma", $errores);
     if(!isset($_REQUEST['bRegister'])){
         include("../templates/registro.php");
     }else{ //Clic a iniciar sesion
@@ -51,10 +53,11 @@
                 //2. Guardar user en la bd con cuenta no activa
                 if(insertRow($pdo, "usuario", $usuario,$errores)){
                     $idUser=$pdo->lastInsertId();
-                    //TODO: Hacer esto opcional porque si lo dejas vacio da error
-                    foreach ($languages as $idioma) {
-                    $idiomas=["id_user"=>$idUser,"id_idioma"=>$idioma];
-                        insertRow($pdo, "user_idioma",$idiomas ,$errores);
+                    if(!empty($languages)){
+                        foreach ($languages as $idioma) {
+                            $idiomas=["id_user"=>$idUser,"id_idioma"=>$idioma];
+                            insertRow($pdo, "user_idioma",$idiomas ,$errores);
+                        }
                     }
                     //3. Guardar token, id_user y validez en bd
                     insertRow($pdo, "tokens", ['token'=>$token, 'validez'=>time()+86400, 'id_user'=>$idUser],$errores);

@@ -167,7 +167,6 @@ function selectRow(object $pdo, string $tabla, string $columna, string $valor, a
  * @return bool
  */
 function insertRow(object $pdo,string $tabla,array $valores,array &$errores):bool{
-    //Forma anon
   if($pdo){
         $stValueColumns="";
         $llaves=array_keys($valores);
@@ -195,90 +194,8 @@ function insertRow(object $pdo,string $tabla,array $valores,array &$errores):boo
         $errores[]="error al conectar con la BBDD";
         return false;
     }
-      /* if($pdo){
-        $stValueColumns="";
-        $llaves=array_keys($valores);
-        $stColumns=implode(",",$llaves); //Nombres de cada columna separados por ,
-        $arr=[];
-        for ($i=0; $i <count($llaves) ; $i++) {
-             $arr[$i]=':'.$llaves[$i]; //Valores a dar de forma :nombre
-        }
-        $stValueColumns=implode(",",$arr);
-        try{
-           $consulta=$pdo->prepare("INSERT INTO $tabla ($stColumns) values($stValueColumns)");
-            if($consulta->execute($valores)) return true; //si se ejecuta el insert devuelve true
-            else return false;
-        }catch(PDOException $e){
-            $errores[]="error al conectar con la BBDD";
-            error_log($e->getMessage().microtime().PHP_EOL,3,"../log/logBd.txt");
-            //guardamos en ·errores el error que queremos mostrar a los usuarios
-        }
-    }else {
-        $errores[]="error al conectar con la BBDD";
-        return false;
-    }
-    //manera directa
-    if ($pdo) {
-        try {
-            $consultaSQL = "INSERT INTO $tabla (nombre, email, pass, f_nacimiento, foto_perfil, descripción, nivel, activo) VALUES (:nombre, :email, :pass, :f_nacimiento, :foto_perfil, :descripción, :nivel, :activo)";
-            $consulta = $pdo->prepare($consultaSQL);
-
-            //bindParam en lugar de bindValue con el tipo de dato
-            $consulta->bindParam(':nombre', $valores['nombre'], PDO::PARAM_STR);
-            $consulta->bindParam(':email', $valores['email'], PDO::PARAM_STR);
-            $consulta->bindParam(':pass', $valores['pass'], PDO::PARAM_STR);
-            $consulta->bindParam(':f_nacimiento', $valores['f_nacimiento'], PDO::PARAM_STR);
-            $consulta->bindParam(':foto_perfil', $valores['foto_perfil'], PDO::PARAM_STR);
-            $consulta->bindParam(':descripción', $valores['descripción'], PDO::PARAM_STR);
-            $consulta->bindParam(':nivel', $valores['nivel'], PDO::PARAM_INT);
-            $consulta->bindParam(':activo', $valores['activo'], PDO::PARAM_INT);
-
-            return $consulta->execute();
-        } catch (PDOException $e) {
-            $errores[] = "Error al conectar con la BBDD";
-            error_log($e->getMessage() . microtime() . PHP_EOL, 3, "../log/logBd.txt");
-            // Guardamos en $errores el error que queremos mostrar a los usuarios
-            return false;
-        }
-    } else {
-        $errores[] = "Error al conectar con la BBDD";
-        return false;
-    }*/
 }
-//TODO: ESTE METODO ME PARECE IGUAL QUE INSERTROW MENOS POR ALGUNAS COSITAS, SI AL FINAL DEL TRABAJO NO LO USAMOS BORRAR
-/**
- * function addInfoColumn
- *
- * Si existe la BBDD añade los valores a la tabla de manera anónima,
- * en caso de algun error, devuelve false y añade
- * el error a un array de errores recursivo
- *
- * @param object $pdo
- * @param string $tabla
- * @param array $valores
- * @param array $errores
- *
- * @return bool
- */
-function addInfoColumn(object $pdo,string $tabla,string $nomCol,array $valores,array &$errores):bool{
-    if($pdo){
-        try{
-            $consulta=$pdo->prepare("INSERT INTO $tabla ($nomCol) values(?)");
-            for ($i=0; $i < count($valores); $i++) {
-                $consulta->bindParam(1,$valores[$i]);
-                if(!$consulta->execute($valores))return false; //si se ejecuta el insert devuelve true, esto dará error, va sin el $valores entre parentesis si es anonimo
-            }
-            return true;
-        }catch(PDOException $e){
-            error_log($e->getMessage() . microtime() . PHP_EOL, 3, "../log/logBd.txt");
-            // Guardamos en $errores el error que queremos mostrar a los usuarios
-            return false;
-        }
-    }else {
-        $errores[]="error al conectar con la BBDD";
-        return false;
-    }
-}
+
 /**
  * function updateRow
  *
@@ -313,7 +230,7 @@ function updateRow(object $pdo,string $tabla,array $valores,string $colId,string
             $consulta->bindValue(count($valores)+1, $id);
             if (!$consulta->execute())return false; // Si ocurre un error en la ejecución, devuelve false
             return true; // Si se ejecuta correctamente, devuelve true
-            
+
         } catch (PDOException $e) {
             error_log($e->getMessage() . microtime() . PHP_EOL, 3, "../log/logBd.txt");
             // Guardamos en $errores el error que queremos mostrar a los usuarios
