@@ -44,11 +44,13 @@
             if (empty($errores)) {
                 $imagen=cFile('imagen',$errores,$extensionesValidas,$dirPerfil,$max_file_size,false);
                 if(empty($errores)){
-                    $none="";
-                    ($password!="")?$arr[]=['pass'=>encriptar($password)]:$none=true;
-                    ($imagen!=1)?$arr[]=['foto_perfil'=>$imagen]:$none=true;
-                    ($description!="" && $description!=$userValues['descripción'])?$arr[]=['descripción'=>$description]:$none=true;
-                    if(!$none){
+                    ($password!="")?$arr[]=['pass'=>encriptar($password)]:false;
+                    if($imagen!=1){
+                        $arr[]=['foto_perfil'=>$imagen];
+                        $_SESSION['imgPerfil']=$imagen;
+                    }
+                    ($description!="" && $description!=$userValues['descripción'])?$arr[]=['descripción'=>$description]:false;
+                    if(count($arr)!= 0){
                         $arr=array_merge(...$arr);//... desempaqueta los elementos del array.
                         updateRow($pdo,'usuario',$arr,'id_user',$userValues['id_user'],$errores);   
                     }

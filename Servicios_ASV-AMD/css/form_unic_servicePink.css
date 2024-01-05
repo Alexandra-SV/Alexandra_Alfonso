@@ -79,7 +79,7 @@ body{
         & .info{
             display: flex;
             max-height: 260px;
-            & img{padding:10px; border-radius: 100%;}
+            & img{padding:10px; border-radius: 100%;max-width: 256px;max-height:256px ;}
             & .text{
                 color: #fff;
                 font-size: 26px;
