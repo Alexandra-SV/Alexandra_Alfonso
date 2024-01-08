@@ -14,7 +14,7 @@
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
         $mail->Username = 'asv.amd.php@gmail.com';
-        $mail->Password = '';
+        $mail->Password = 'icnj nlgj caza snjl';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port = "465";
         //Configuración destinatarios
