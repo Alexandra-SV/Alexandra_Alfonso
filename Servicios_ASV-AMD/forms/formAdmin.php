@@ -1,7 +1,7 @@
 <?php
     session_start();
     include("../libs/bGeneral.php");
-    setTimer('timeout',300);
+    setTimer('timeout',300); //TODO: si true no seguir con el código
     include("../libs/bConfiguracion.php");
     include('../modelo/consultas.php');
     //Iniciar conexion
@@ -11,7 +11,7 @@
     //variables a utilizar
     $valor = '';
     //Comporbacion parte privada
-    if($_SESSION['level'] != 2 || $_SESSION['ip'] != $_SERVER['REMOTE_ADDR']){
+    if($_SESSION['level'] != 2 || $_SESSION['ip'] != $_SERVER['REMOTE_ADDR']){ //TODO: hacer que sea = en vez de !=
         header("location:formInicioSesion.php");
     };
     if (!isset($_REQUEST['bEnviarIdioma']) && !isset($_REQUEST['bEnviarDisponibilidad']) ){
