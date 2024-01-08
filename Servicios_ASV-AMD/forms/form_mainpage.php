@@ -19,7 +19,7 @@
     //si no existe muestra el form para poder aceptar o negar las cookies
         if(isset($_COOKIE['politica'])){
             $cookie=htmlspecialchars($_COOKIE['politica']);
-            ($cookie != 'si' || $cookie != 'no')?$class="hide":$class="";
+            ($cookie == 'si')?$class="hide":$class="";
         }else
             $class="";
     //crea la cookie al clicar el submit de las cookies
