@@ -3,16 +3,43 @@
     include("../libs/bGeneral.php");
     include("../libs/bConfiguracion.php");
     include("../modelo/consultas.php");
+//Manejo de Cookies
+  //Cambia la cookie de fondo
+      $color = "";
+      if(isset($_REQUEST['bChange'])){
+          $color = recoge('colorFondo');
+          cRadios($coloresCookie[$color],'colorFondo',$errores,$coloresCookie,false);
+          if(empty($errores)){
+              setcookie('fondo',$coloresCookie[$color]);
+              header('location:form_unic_service.php');
+          }
+      }
+  //comprueba si la cookie de politica existe y si su valor es valido
+  //si no existe muestra el form para poder aceptar o negar las cookies
+  if(isset($_COOKIE['politica'])){
+      $cookie=htmlspecialchars($_COOKIE['politica']);
+      ($cookie == 'si')?$class="hide":$class="";
+  }else
+      $class="";
+  //crea la cookie al clicar el submit de las cookies
+  if(isset($_REQUEST['bPolitic'])){
+      $respCookie = recoge('cookie');
+      cRadios($respCookie,'politicaCookie',$errores,['si','no'],false);
+      if(empty($errores)){
+          setcookie('politica',$respCookie,time()+1000);
+          header('location:form_unic_service.php');
+      }
+  }
+//Comporbacion parte privada
+      if($_SESSION['level'] != 1 || $_SESSION['ip'] != $_SERVER['REMOTE_ADDR'] || setTimer('timeout',300)){
+          session_unset ();
+          session_destroy();
+          header("location:formInicioSesion.php");
+          exit;
+      };
     try {
     //conectamos con la bd
         $pdo = conectBd($db_hostname,$db_nombre,$db_usuario,$db_clave);
-    //Comporbacion parte privada
-        if($_SESSION['level'] != 1 || $_SESSION['ip'] != $_SERVER['REMOTE_ADDR'] || setTimer('timeout',300)){
-            session_unset ();
-            session_destroy();
-            header("location:formInicioSesion.php");
-            exit;
-        };
     //variables a utilizar
         $descripcion;
         $errores=[];
@@ -46,38 +73,10 @@
         error_log($e->getMessage()."##Código: ".$e->getCode()."  ".microtime().PHP_EOL,3,"../log/logBD.txt");
         echo "Error";
     }
-
 //Compruebo si se ha pulsado el botón de cerrar sesion
     if (isset($_REQUEST['bLogOut'])) {
         session_unset ();
         session_destroy();
         header("location:formInicioSesion.php");
-    }
-//Manejo de Cookies
-//Cambia la cookie de fondo
-    $color = "";
-    if(isset($_REQUEST['bChange'])){
-        $color = recoge('colorFondo');
-        cRadios($coloresCookie[$color],'colorFondo',$errores,$coloresCookie,false);
-        if(empty($errores)){
-            setcookie('fondo',$coloresCookie[$color]);
-            header('location:form_unic_service.php');
-        }
-    }
-//comprueba si la cookie de politica existe y si su valor es valido
-//si no existe muestra el form para poder aceptar o negar las cookies
-    if(isset($_COOKIE['politica'])){
-        $cookie=htmlspecialchars($_COOKIE['politica']);
-        ($cookie != 'si' || $cookie != 'no')?$class="hide":$class="";
-    }else
-        $class="";
-//crea la cookie al clicar el submit de las cookies
-    if(isset($_REQUEST['bPolitic'])){
-        $respCookie = recoge('cookie');
-        cRadios($respCookie,'politicaCookie',$errores,['si','no'],false);
-        if(empty($errores)){
-            setcookie('politica',$respCookie,time()+1000);
-            header('location:form_unic_service.php');
-        }
     }
 ?>
