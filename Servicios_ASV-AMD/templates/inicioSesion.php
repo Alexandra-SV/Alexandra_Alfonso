@@ -6,7 +6,17 @@
 ?>
     <div id="serv">
         <h1>Services</h1>
-        <section id="servicios" ><a href="../templates/redirectServicios.html"><?=pintaServicio( $pdo, "servicios", "titulo",$errores)?></a></section>
+        <section id="servicios" >
+            <a href="../templates/redirectServicios.html">
+                <?php
+                    try {
+                        echo pintaServicio( $pdo, "servicios", "titulo");
+                    } catch (PDOEXCEPTION $e) {
+                        error_log($e->getMessage()."##Código: ".$e->getCode()."  ".microtime().PHP_EOL,3,"../log/logBD.txt");
+                        echo "Error";
+                    }
+                ?>
+            </a></section>
     </div>
     <form action="" method="POST">
         <div id="div-signInUp">

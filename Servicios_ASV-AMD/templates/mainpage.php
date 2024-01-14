@@ -1,5 +1,4 @@
 <?php
-    setTimer('timeout',300);
     include("../libs/bComponentes.php");
     //Encabezado
     $titulo = "Welcome to Services";
@@ -14,15 +13,23 @@
     if(!isset($_SESSION['level']))
         $_SESSION['level'] = 0;
     //Comporbacion parte privada
-    if($_SESSION['level'] != 1 || $_SESSION['ip'] != $_SERVER['REMOTE_ADDR']){
-        header("location:formInicioSesion.php");
+    if($_SESSION['level'] != 1 || $_SESSION['ip'] != $_SERVER['REMOTE_ADDR'] || setTimer('timeout',300)){
+      session_unset ();
+      session_destroy();
+      header("location:formInicioSesion.php");
+      exit;
     };
     //recoger usuario
      $user = $_SESSION['user'];
-     //conectamos con la bd
-    $pdo = conectBd($db_hostname,$db_nombre,$db_usuario,$db_clave);
-    $usuario=selectRow( $pdo, "usuario", "email",$_SESSION['user'],$errores);
-    $user_id=$usuario[0]['id_user'];
+     try {
+      //conectamos con la bd
+      $pdo = conectBd($db_hostname,$db_nombre,$db_usuario,$db_clave);
+      $usuario=selectRow( $pdo, "usuario", "email",$_SESSION['user']);
+      $user_id=$usuario[0]['id_user'];
+      } catch (PDOEXCEPTION $e) {
+          error_log($e->getMessage()."##Código: ".$e->getCode()."  ".microtime().PHP_EOL,3,"../log/logBD.txt");
+          echo "Error";
+      }
 ?>
   <form action="">
     <input type="submit" name="bLogOut" id="bLogOut" value="&#60; Log Out">
@@ -44,7 +51,14 @@
     </form>
   </nav>
   <main>
-    <?=pintaServicios($pdo,"servicios","id_user", $user_id, $errores)?>
+    <?php
+      try {
+        echo pintaServicios($pdo,"servicios","id_user", $user_id);
+      } catch (PDOEXCEPTION $e) {
+          error_log($e->getMessage()."##Código: ".$e->getCode()."  ".microtime().PHP_EOL,3,"../log/logBD.txt");
+          echo "Error";
+      }
+    ?>
   </main>
   <a href="../forms/form_servicios.php" id="bAddService">+ add more services</a>
   <footer class="<?=$class?>">

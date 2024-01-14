@@ -7,28 +7,6 @@
 //***** Funciones get **** //
 
 /**
- * Funcion getUser
- *
- * Devuelve datos del usuario indicado.
- *
- * @param string $email
- * @return array|bool
- */
-function getUser(string $tabla, string $columna, string $valor, array &$errores, object $pdo): string|bool{
-    try {
-        $resultado = selectRow($pdo, $tabla, $columna, $valor, $errores);
-        if($resultado !== false){ //Usuario encontrado
-            return normalArray($resultado);
-        }
-    } catch (PDOEXCEPTION $e) {
-        error_log($e->getMessage()."##Código: ".$e->getCode()."  ".microtime().PHP_EOL,3,"../log/logBD.txt");
-        echo "Error";
-    }
-    $errores = "Error al buscar el usuario";
-    return false;
-}
-
-/**
  * Funcion getRowValue
  *
  * Devuelve dato concreto de la fila.
@@ -38,14 +16,9 @@ function getUser(string $tabla, string $columna, string $valor, array &$errores,
  * @return array|bool
  */
 function getRowValue(string $tabla, string $columna, string $valor, string $campo, array &$errores, object $pdo): string|bool{
-    try {
-        $resultado = selectRow($pdo, $tabla, $columna, $valor, $errores);
-        if($resultado !== false){ //Usuario encontrado
-            return $resultado[0][$campo];
-        }
-    } catch (PDOEXCEPTION $e) {
-        error_log($e->getMessage()."##Código: ".$e->getCode()."  ".microtime().PHP_EOL,3,"../log/logBD.txt");
-        echo "Error";
+    $resultado = selectRow($pdo, $tabla, $columna, $valor);
+    if($resultado !== false){ //Usuario encontrado
+        return $resultado[0][$campo];
     }
     $errores = "Error al buscar el dato";
     return false;
@@ -64,20 +37,6 @@ function getRowValue(string $tabla, string $columna, string $valor, string $camp
 function pintaRadio(array $valores, string $campo){
     for ($i=0; $i < count($valores); $i++) {
         echo "<input type=\"radio\" name=\"$campo\" VALUE=\"$valores[$i]\"> $valores[$i] ";
-    }
-}
-
-/**
- * Funcion pintaCheck
- *
- * Pinta un checkbox en un formulario.
- *
- * @param array $valores
- * @param string $campo
- */
-function pintaCheck(array $valores, string $campo){
-    for ($i=0; $i < count($valores); $i++) {
-        echo "<input type=\"checkbox\" name=\"".$campo."[]\" VALUE=\"$valores[$i]\"> $valores[$i] <br>";
     }
 }
 
@@ -133,17 +92,16 @@ function pintaDesplegable(array $valores,string $name){
  * @param object $pdo
  * @param string $tabla
  * @param string $columna
- * @param array $errores
  *
  */
-function pintaServicio(object $pdo, string $tabla, string $columna, array &$errores){
-        $titulos= selectColumn($pdo,$tabla,$columna,$errores);
-        $titulos=array_reverse($titulos);//imprime del mas nuevo al mas viejo
-            foreach ($titulos as $key=>  $value)
-        echo "<span>$value[$columna]</span><br>";
+function pintaServicio(object $pdo, string $tabla, string $columna){
+    $titulos= selectColumn($pdo,$tabla,$columna);
+    $titulos=array_reverse($titulos);//imprime del mas nuevo al mas viejo
+        foreach ($titulos as $key=>  $value)
+    echo "<span>$value[$columna]</span><br>";
 }
-function pintaServicios(object $pdo, string $tabla,string $columna,string $valor, array &$errores){
-    $arrayServicios=selectRow( $pdo, $tabla, $columna, $valor, $errores, "<>");
+function pintaServicios(object $pdo, string $tabla,string $columna,string $valor){
+    $arrayServicios=selectRow( $pdo, $tabla, $columna, $valor, "<>");
     $serviciosClean=[];
     if($arrayServicios){
         foreach ($arrayServicios as $key => $value) {
@@ -184,21 +142,16 @@ function pintaServicios(object $pdo, string $tabla,string $columna,string $valor
  * @param string $tabla
  *
  */
-function pintaLista(object $pdo, string $tabla, string $columna, array &$errores): string{
-    try {
-        $resultadoSelect = selectColumn($pdo, $tabla, $columna, $errores);
-        if($resultadoSelect){
-            $resultadoSelect = normalArray($resultadoSelect);
-            $resultado ='<ul>';
-            foreach ($resultadoSelect as $key => $value) {
-                $resultado .= '<li>' . ucfirst($value) . '</li>';
-            }
-            $resultado .='</ul>';
-            return $resultado;
+function pintaLista(object $pdo, string $tabla, string $columna): string{
+    $resultadoSelect = selectColumn($pdo, $tabla, $columna);
+    if($resultadoSelect){
+        $resultadoSelect = normalArray($resultadoSelect);
+        $resultado ='<ul>';
+        foreach ($resultadoSelect as $key => $value) {
+            $resultado .= '<li>' . ucfirst($value) . '</li>';
         }
-    } catch (PDOException $e) {
-        error_log($e->getMessage()."##Código: ".$e->getCode()."  ".microtime().PHP_EOL,3,"../log/logBD.txt");
-        echo "Error";
+        $resultado .='</ul>';
+        return $resultado;
     }
 }
 /**
@@ -210,24 +163,19 @@ function pintaLista(object $pdo, string $tabla, string $columna, array &$errores
  * @param string $tabla
  *
  */
-function pintaDesplegableBD(object $pdo, string $tabla, array &$errores): string{
-    try {
-        $resultadoSelect = selectTable($pdo, $tabla, $errores);
-        if($resultadoSelect){
-            $resultadoSelect = normalArray($resultadoSelect);
-            $resultado ="<select name=\"".$tabla."\"id=\"$tabla\"><option value=\"\" disabled selected hidden>$tabla</option>";
-            foreach ($resultadoSelect as $key => $value) {
-                if(is_int($value))
-                    $resultado .= "<option value=\"".$value."\" >";
-                else
-                    $resultado .= ucfirst($value) ."</option>";
-            }
-            $resultado .='</select>';
-            return $resultado;
+function pintaDesplegableBD(object $pdo, string $tabla): string{
+    $resultadoSelect = selectTable($pdo, $tabla);
+    if($resultadoSelect){
+        $resultadoSelect = normalArray($resultadoSelect);
+        $resultado ="<select name=\"".$tabla."\"id=\"$tabla\"><option value=\"\" disabled selected hidden>$tabla</option>";
+        foreach ($resultadoSelect as $key => $value) {
+            if(is_int($value))
+                $resultado .= "<option value=\"".$value."\" >";
+            else
+                $resultado .= ucfirst($value) ."</option>";
         }
-    } catch (PDOException $e) {
-        error_log($e->getMessage()."##Código: ".$e->getCode()."  ".microtime().PHP_EOL,3,"../log/logBD.txt");
-        echo "Error";
+        $resultado .='</select>';
+        return $resultado;
     }
 }
 ?>
