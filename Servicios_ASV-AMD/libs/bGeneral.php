@@ -261,7 +261,7 @@ function cRadio(string $text, string $campo, array &$errores, object $pdo, strin
         $errores[$campo] = "Error en el campo $campo";
         return false;
     }
-    if (!selectRow($pdo,$tabla,$columna,$text,$errores)) {
+    if (!selectRow($pdo,$tabla,$columna,$text)) {
         $errores[$campo] = "Error en el campo $campo";
         return false;
     }
@@ -310,7 +310,7 @@ function cCheck(array $text, string $campo, array &$errores, object $pdo, string
         return false;
     }
     foreach ($text as $valor) {
-        if (!selectRow($pdo,$tabla,$columna,$valor,$errores)) {
+        if (!selectRow($pdo,$tabla,$columna,$valor)) {
             $errores[$campo] = "Error en el campo $campo";
             return false;
         }
@@ -333,20 +333,15 @@ function cCheck(array $text, string $campo, array &$errores, object $pdo, string
 function cUser(string $email, string $password, string $campo, array &$errores, object $pdo): bool{
     $tabla = 'usuario';
     $columna = 'email';
-    try {
-        $resultado = selectRow($pdo, $tabla, $columna, $email, $errores);
-        if(!empty($resultado)){ //Email esta bien porque el select ha sido exitoso
-            //Comprobar password
-            $bdPass = $resultado[0]['pass'];
-            //Encriptar contraseñas de usuarios no registrados desde la web porque no están encriptadas
-            if($bdPass == 'alex' || $bdPass == 'alf'|| $bdPass == 'admin')
-                $bdPass = encriptar($bdPass);
-            if(password_verify($password, $bdPass))
-                return true;
-        }
-    } catch (PDOEXCEPTION $e) {
-        error_log($e->getMessage()."##Código: ".$e->getCode()."  ".microtime().PHP_EOL,3,"../log/logBD.txt");
-        echo "Error";
+    $resultado = selectRow($pdo, $tabla, $columna, $email);
+    if(!empty($resultado)){ //Email esta bien porque el select ha sido exitoso
+        //Comprobar password
+        $bdPass = $resultado[0]['pass'];
+        //Encriptar contraseñas de usuarios no registrados desde la web porque no están encriptadas
+        if($bdPass == 'alex' || $bdPass == 'alf'|| $bdPass == 'admin')
+            $bdPass = encriptar($bdPass);
+        if(password_verify($password, $bdPass))
+            return true;
     }
     $errores[$campo] = "Error en el campo $campo";
     return false;
@@ -469,10 +464,6 @@ function cFile(string $nombre, array &$errores, array $extensionesValidas, strin
     $inact=$time;
     $lifetime=time()-$_SESSION[$timerName];
     if($lifetime>$inact){
-        echo"sesion cerrada por inactividad";
-        session_start();
-        session_unset();
-        session_destroy();
         return true;
     }else $_SESSION[$timerName]=time();
     return false;

@@ -19,17 +19,11 @@
  * @return object|bool
  */
 function conectBd(string $db_hostname,string $db_nombre,string $db_usuario,string $db_clave):object|bool{
-    try{
-        $pdo = new PDO('mysql:host=' . $db_hostname . ';dbname=' . $db_nombre . '', $db_usuario, $db_clave);
-        // Realiza el enlace con la BD en utf-8
-        $pdo->exec("set names utf8");
-        //Accionamos el uso de excepciones
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    }catch (PDOException $e) {
-        $errores[]="Error al conectar la BBDD: ";
-        // En este caso guardamos los errores en un archivo de errores log
-        error_log($e->getMessage().microtime().PHP_EOL,3,"../log/logBd.txt");
-    }
+    $pdo = new PDO('mysql:host=' . $db_hostname . ';dbname=' . $db_nombre . '', $db_usuario, $db_clave);
+    // Realiza el enlace con la BD en utf-8
+    $pdo->exec("set names utf8");
+    //Accionamos el uso de excepciones
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     if($pdo) return $pdo;
     else return false;
 }
@@ -42,24 +36,15 @@ function conectBd(string $db_hostname,string $db_nombre,string $db_usuario,strin
  * el error a un array de errores recursivo
  *
  * @param object $pdo
- * @param array $errores
  *
  * @return bool
  */
-function stopBd(object $pdo,array &$errores):bool{
-    try{
-        if($pdo){
-            $pdo=null;
-            return true;
-        }
-    }catch (PDOException $e) {
-        $errores[]="Error al cerrar la BBDD: ";
-        // En este caso guardamos los errores en un archivo de errores log
-        error_log($e->getMessage().microtime().PHP_EOL,3,"../log/logBd.txt");
-        //guardamos en ·errores el error que queremos mostrar a los usuarios
-        $pdo =false;
+function stopBd(object $pdo):bool{
+    if($pdo){
+        $pdo=null;
+        return true;
     }
-        return false;
+    return false;
 }
 /**
  * function normalArray
@@ -91,17 +76,15 @@ function normalArray(array $arrayBidimensional): array{
  *
  * @param object $pdo
  * @param string $tabla
- * @param array $errores
  *
  * @return array|bool
  */
-function selectTable(object $pdo,string $tabla,array &$errores):array|bool{
+function selectTable(object $pdo,string $tabla):array|bool{
     $consulta = "SELECT * FROM $tabla";
     if($res= $pdo->query($consulta)){
         $resArray = $res->fetchAll(PDO::FETCH_ASSOC);
         return $resArray;
     }else{
-        $errores[]="Error al seleccionar la tabla: ".$tabla;
        return false;
     }
 }
@@ -116,16 +99,14 @@ function selectTable(object $pdo,string $tabla,array &$errores):array|bool{
  * @param object $pdo
  * @param string $tabla
  * @param string $columna
- * @param array $errores
  * @return array|bool
  */
-function selectColumn(object $pdo, string $tabla, string $columna, array $errores): array|bool{
+function selectColumn(object $pdo, string $tabla, string $columna): array|bool{
     $consulta = "SELECT $columna FROM $tabla ";
     if($res= $pdo->query($consulta)){
         $resArray = $res->fetchAll(PDO::FETCH_ASSOC);
         return $resArray;
     }
-    $errores[]="Error al seleccionar la tabla: ".$tabla;
     return false;
 }
 
@@ -138,10 +119,9 @@ function selectColumn(object $pdo, string $tabla, string $columna, array $errore
  * @param string $tabla
  * @param string $columna
  * @param string $valor
- * @param array $errores
  * @return array|bool
  */
-function selectRow(object $pdo, string $tabla, string $columna, string $valor, array &$errores,string $igual="="): array|bool{
+function selectRow(object $pdo, string $tabla, string $columna, string $valor, string $igual="="): array|bool{
     $consulta = "SELECT * FROM $tabla WHERE $columna $igual ?";
     $resultado = $pdo->prepare($consulta);
     $resultado->bindParam(1,$valor);
@@ -149,7 +129,6 @@ function selectRow(object $pdo, string $tabla, string $columna, string $valor, a
         $resArray = $resultado->fetchAll(PDO::FETCH_ASSOC);
         return $resArray;
     }
-    $errores[]="Error al seleccionar la tabla: ".$tabla;
     return false;
 }
 /**
@@ -162,36 +141,28 @@ function selectRow(object $pdo, string $tabla, string $columna, string $valor, a
  * @param object $pdo
  * @param string $tabla
  * @param array $valores
- * @param array $errores
  *
  * @return bool
  */
-function insertRow(object $pdo,string $tabla,array $valores,array &$errores):bool{
+function insertRow(object $pdo,string $tabla,array $valores):bool{
   if($pdo){
-        $stValueColumns="";
-        $llaves=array_keys($valores);
-        $stColumns=implode(",",$llaves); //Nombres de cada columna separados por ,
-        $arr=[];
-        for ($i=0; $i <count($llaves) ; $i++) {
-             $arr[]='?'; //Valores a dar de forma ?
+    $stValueColumns="";
+    $llaves=array_keys($valores);
+    $stColumns=implode(",",$llaves); //Nombres de cada columna separados por ,
+    $arr=[];
+    for ($i=0; $i <count($llaves) ; $i++) {
+            $arr[]='?'; //Valores a dar de forma ?
+    }
+    $stValueColumns=implode(",",$arr);
+        $consulta=$pdo->prepare("INSERT INTO $tabla ($stColumns) values($stValueColumns)");
+        $i = 1;
+        foreach ($valores as $key => $value) {
+            $consulta->bindValue($i,$value);
+            $i++;
         }
-        $stValueColumns=implode(",",$arr);
-        try{
-           $consulta=$pdo->prepare("INSERT INTO $tabla ($stColumns) values($stValueColumns)");
-           $i = 1;
-           foreach ($valores as $key => $value) {
-                $consulta->bindValue($i,$value);
-                $i++;
-           }
-            if($consulta->execute()) return true; //si se ejecuta el insert devuelve true
-            else return false;
-        }catch(PDOException $e){
-            $errores[]="error al conectar con la BBDD";
-            error_log($e->getMessage().microtime().PHP_EOL,3,"../log/logBd.txt");
-            //guardamos en ·errores el error que queremos mostrar a los usuarios
-        }
+        if($consulta->execute()) return true; //si se ejecuta el insert devuelve true
+        else return false;
     }else {
-        $errores[]="error al conectar con la BBDD";
         return false;
     }
 }
@@ -208,36 +179,27 @@ function insertRow(object $pdo,string $tabla,array $valores,array &$errores):boo
  * @param array $valores
  * @param string $colId
  * @param string $id
- * @param array $errores
  *
  * @return bool
  */
-function updateRow(object $pdo,string $tabla,array $valores,string $colId,string $id,array &$errores):bool{
+function updateRow(object $pdo,string $tabla,array $valores,string $colId,string $id):bool{
     if ($pdo) {
-        try {
-            $strActualizar = "";
-            foreach ($valores as $key => $value) {
-                $strActualizar .= "$key=?, ";
-            }
-            $strActualizar = rtrim($strActualizar, ', ');
-            $consulta = $pdo->prepare("UPDATE $tabla SET $strActualizar WHERE $colId = ?");
-            // Vincular valores con marcadores de posición
-            $i=1;
-            foreach ($valores as $key => $value) {
-                $consulta->bindValue($i, $value);
-                $i++;
-            }
-            $consulta->bindValue(count($valores)+1, $id);
-            if (!$consulta->execute())return false; // Si ocurre un error en la ejecución, devuelve false
-            return true; // Si se ejecuta correctamente, devuelve true
-
-        } catch (PDOException $e) {
-            error_log($e->getMessage() . microtime() . PHP_EOL, 3, "../log/logBd.txt");
-            // Guardamos en $errores el error que queremos mostrar a los usuarios
-            return false;
+        $strActualizar = "";
+        foreach ($valores as $key => $value) {
+            $strActualizar .= "$key=?, ";
         }
+        $strActualizar = rtrim($strActualizar, ', ');
+        $consulta = $pdo->prepare("UPDATE $tabla SET $strActualizar WHERE $colId = ?");
+        // Vincular valores con marcadores de posición
+        $i=1;
+        foreach ($valores as $key => $value) {
+            $consulta->bindValue($i, $value);
+            $i++;
+        }
+        $consulta->bindValue(count($valores)+1, $id);
+        if (!$consulta->execute())return false; // Si ocurre un error en la ejecución, devuelve false
+        return true; // Si se ejecuta correctamente, devuelve true
     } else {
-        $errores[] = "Error al conectar con la BBDD";
         return false;
     }
 }
@@ -254,24 +216,18 @@ function updateRow(object $pdo,string $tabla,array $valores,string $colId,string
  * @param array $valores
  * @param string $colId
  * @param string $id
- * @param array $errores
  *
  * @return bool
  */
-function deleteRow(object $pdo, string $tabla, string $columna, string $valor, array &$errores): bool{
+function deleteRow(object $pdo, string $tabla, string $columna, string $valor): bool{
     $consulta = "DELETE FROM $tabla WHERE $columna=?";
-    try {
-        $resultado = $pdo->prepare($consulta);
-        $resultado->bindParam(1,$valor);
-        // Comprobamos cuantas filas se han borrado
-        if ($resultado->execute()){
-            $cuenta = $resultado->rowCount();
-            if ($cuenta)
-                return true;
-        }
-    } catch (PDOException $e) {
-        error_log($e->getMessage().microtime().PHP_EOL,3,"../log/logBd.txt");
-        $errores[] = $e->getMessage();
+    $resultado = $pdo->prepare($consulta);
+    $resultado->bindParam(1,$valor);
+    // Comprobamos cuantas filas se han borrado
+    if ($resultado->execute()){
+        $cuenta = $resultado->rowCount();
+        if ($cuenta)
+            return true;
     }
     return false;
 }

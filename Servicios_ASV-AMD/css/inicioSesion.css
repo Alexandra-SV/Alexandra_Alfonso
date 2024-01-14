@@ -4,7 +4,7 @@
 body{
     display: grid;
     grid-template-rows: 100px 450px;
-    grid-template-columns: 17% 65% 260px;
+    grid-template-columns: 1fr 2fr 1fr;
     grid-template-areas:
         ". . form"
         ". serv ."
@@ -19,6 +19,7 @@ body{
 form{
     margin-left: 20px;
     grid-area: form;
+    justify-self: end;
 }
 #bSignIn, a, #bEnter{
     border: none;

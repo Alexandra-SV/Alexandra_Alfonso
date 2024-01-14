@@ -8,11 +8,6 @@ try {
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     //Leemos el fichero que contiene el sql
         $sqlBD = file_get_contents("evaluable_7W.sql");
-
-    //Para resetear autoincremental de una tabla:
-        //$pdo->exec("USE evaluable_7w");
-        //$sqlBD = "ALTER TABLE $tabla AUTO_INCREMENT = 1;";
-
     //Ejecutamos la consulta
         $pdo->exec($sqlBD);
         echo ("La BD ha sido creada");

@@ -15,13 +15,27 @@
       <div class="textoLista">
         <h2>Idiomas</h2>
         <div class="listaIdiomas">
-        <?= pintaLista($pdo, 'idioma', 'idioma', $errores); ?></div>
+        <?php
+          try {
+            echo pintaLista($pdo, 'idioma', 'idioma');
+          } catch (PDOEXCEPTION $e) {
+              error_log($e->getMessage()."##Código: ".$e->getCode()."  ".microtime().PHP_EOL,3,"../log/logBD.txt");
+              echo "Error";
+          }
+        ?></div>
       </div>
       <form action="" id='formIdiomas'>
         <label for="insertaIdioma">Insertar</label>
         <input type="text" name='insertaIdioma' id='insertaIdioma' size='10'>
         <label for="idioma">Eliminar</label>
-        <?=pintaDesplegableBD($pdo, 'idioma', $errores); ?>
+        <?php
+          try {
+            echo pintaDesplegableBD($pdo, 'idioma');
+          } catch (PDOEXCEPTION $e) {
+              error_log($e->getMessage()."##Código: ".$e->getCode()."  ".microtime().PHP_EOL,3,"../log/logBD.txt");
+              echo "Error";
+          }
+        ?>
         <input type="submit" value="Enviar" name='bEnviarIdioma'>
       </form>
     </div>
@@ -29,13 +43,27 @@
       <div class="textoLista">
         <h2>Disponibilidad</h2>
         <div class="listaDisponibilidad">
-        <?= pintaLista($pdo, 'disponibilidad', 'disponibilidad', $errores); ?></div>
+        <?php
+          try {
+            echo pintaLista($pdo, 'disponibilidad', 'disponibilidad');
+          } catch (PDOEXCEPTION $e) {
+              error_log($e->getMessage()."##Código: ".$e->getCode()."  ".microtime().PHP_EOL,3,"../log/logBD.txt");
+              echo "Error";
+          }
+        ?></div>
       </div>
     <form action="" id='formDisponibilidad'>
       <label for="insertaDisponibilidad">Insertar</label>
       <input type="text" name='insertaDisponibilidad' id='insertaDisponibilidad' size='10'>
       <label for="disponibilidad">Eliminar</label>
-      <?=pintaDesplegableBD($pdo, 'disponibilidad', $errores); ?>
+        <?php
+          try {
+            echo pintaDesplegableBD($pdo, 'disponibilidad');
+          } catch (PDOEXCEPTION $e) {
+              error_log($e->getMessage()."##Código: ".$e->getCode()."  ".microtime().PHP_EOL,3,"../log/logBD.txt");
+              echo "Error";
+          }
+        ?>
         <input type="submit" value="Enviar" name='bEnviarDisponibilidad'>
     </form>
     </div>
@@ -43,6 +71,11 @@
 <?
   //Pie
   include("../templates/pl_pie.html");
-  //Cerrar conexion
-  stopBd($pdo, $errores);
+  try {
+    //Cerrar conexion
+    stopBd($pdo);
+  } catch (PDOEXCEPTION $e) {
+      error_log($e->getMessage()."##Código: ".$e->getCode()."  ".microtime().PHP_EOL,3,"../log/logBD.txt");
+      echo "Error";
+  }
 ?>
