@@ -13,6 +13,17 @@
     $descripcion;
     $imagen;
     $errores=[];
+//Manejo de Cookies
+    //Cambia la cookie de fondo
+    $color = "";
+    if(isset($_REQUEST['bChange'])){
+        $color = recoge('colorFondo');
+        cRadios($coloresCookie[$color],'colorFondo',$errores,$coloresCookie,false);
+        if(empty($errores)){
+            setcookie('fondo',$coloresCookie[$color]);
+            header('location:form_servicios.php');
+        }
+    }
     //comprueba si la cookie de politica existe y si su valor es valido
     //si no existe muestra el form para poder aceptar o negar las cookies
     if(isset($_COOKIE['politica'])){
@@ -58,7 +69,7 @@
                 $descripcion= recoge('servicedescription',true);
             //Validamos
                 cTexto( $titulo,"titulo",$errores,50,3);
-                cRadios( $tipo,"tipo",$type,$errores);
+                cRadios( $tipo,"tipo",$errores,$type);
                 cTexto( $ubicacion,"ubicacion",$errores,50);
                 cCheck( $disponibilidad,"disponibilidad",$errores, $pdo,"disponibilidad","id_disponibilidad");
                 cNum( $precio,"precioH",$errores);
@@ -97,16 +108,6 @@
     } catch (PDOEXCEPTION $e) {
         error_log($e->getMessage()."##Código: ".$e->getCode()."  ".microtime().PHP_EOL,3,"../log/logBD.txt");
         echo "Error";
-    }
-//Cambia la cookie
-    $color = "";
-    if(isset($_REQUEST['bChange'])){
-        $color = recoge('colorFondo');
-        cRadios($coloresCookie[$color],'colorFondo',$errores,$coloresCookie,false);
-        if(empty($errores)){
-            setcookie('fondo',$coloresCookie[$color]);
-            header('location:form_servicios.php');
-        }
     }
 //Compruebo si se ha pulsado el botón de cerrar sesion
     if (isset($_REQUEST['bLogOut'])) {
