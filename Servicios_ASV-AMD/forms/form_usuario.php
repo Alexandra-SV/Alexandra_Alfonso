@@ -9,7 +9,7 @@
     $description;
     $errores=[];
 //Apartado de Cookies
-    //Cambia la cookie
+    //Cambia la cookie de fondo
         $color = "";
         if(isset($_REQUEST['bChange'])){
             $color = recoge('colorFondo');

@@ -56,6 +56,8 @@
                 header('location:formAdmin.php');
             }
         }
+        //Cerrar conexion
+        stopBd($pdo);
     } catch (PDOEXCEPTION $e) {
         error_log($e->getMessage()."##Código: ".$e->getCode()."  ".microtime().PHP_EOL,3,"../log/logBD.txt");
         echo "Error";
